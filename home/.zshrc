@@ -32,6 +32,13 @@ POWERLEVEL9K_SHORTEN_DELIMITER=".."
 # Drop the return code from 'status' and always show it.
 POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
+# Use the awesome version of SourceCodePro font.
+POWERLEVEL9K_MODE='awesome-patched'
+# Remove the extraneous Git icons (it's always Git).
+POWERLEVEL9K_VCS_GIT_ICON=""
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON=""
+# Remove the duration icon, keep things compact.
+POWERLEVEL9K_EXECUTION_TIME_ICON=""
 
 #
 # ZSH configuration with Antigen.
