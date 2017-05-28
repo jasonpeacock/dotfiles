@@ -1,6 +1,7 @@
 "set autoindent             " Always enable auto-indenting.
 "set clipboard=unnamed      " Use system clipboard.
 "set conceallevel=1         " Don't hind characters.
+set cursorcolumn           " Highlight the current column.
 set cursorline             " Highlight the current line.
 set encoding=utf8          " Set standard file encoding.
 set noerrorbells           " Be quiet.
