@@ -39,6 +39,10 @@ POWERLEVEL9K_VCS_GIT_ICON=""
 POWERLEVEL9K_VCS_GIT_GITHUB_ICON=""
 # Remove the duration icon, keep things compact.
 POWERLEVEL9K_EXECUTION_TIME_ICON=""
+# Remove the folder icons, keep things compact.
+POWERLEVEL9K_FOLDER_ICON=""
+POWERLEVEL9K_HOME_ICON=""
+POWERLEVEL9K_HOME_SUB_ICON=""
 
 #
 # ZSH configuration with Antigen.
@@ -76,10 +80,6 @@ fi
 
 # Add local apps to the path.
 export PATH="$PATH:$HOME/bin"
-# If a command takes >10 CPU seconds, automatically print the time it took.
-export REPORTTIME=10
-# Format the output of the time command to be a little more human friendly.
-export TIMEFMT=" Elapsed: %*E User: %U Kernel: %*S"
 
 #
 # Aliases.
