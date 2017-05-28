@@ -24,6 +24,7 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('ntpeters/vim-better-whitespace')         " Show & strip trailing whitespace.
   call dein#add('Yggdroot/indentLine')                    " Show indenting levels.
   call dein#add('w0rp/ale')                               " Async linting.
+  call dein#add('bkad/CamelCaseMotion')                   " Apply motion commands to CamelCase text.
 
   " Required:
   call dein#end()
@@ -56,8 +57,10 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " Use Ag for sear
 " vim-better-whitespace
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes to skip stripping of whitespace.
 
-" ale
+" ale - this is how to disable it.
 "let g:ale_line_on_text_changed = 'never'       " Only lint when saving a file (never|normal).
 "let g:ale_line_on_enter = 0                    " Don't lint when opening a file.
 "let g:ale_lint_on_save = 0                     " Don't lint when saving a file.
 
+" camelcasemotion
+call camelcasemotion#CreateMotionMappings('<leader>')

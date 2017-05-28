@@ -9,11 +9,7 @@ augroup configgroup
     " Allow word wrapping for some filetypes.
     autocmd FileType markdown setlocal wrap
 
-    autocmd FileType java setlocal noexpandtab
-    autocmd FileType java setlocal list
-    autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-    autocmd FileType java setlocal formatprg=par\ -w80\ -T4
-
+    " Ruby style is 2-space indenting.
     autocmd FileType ruby setlocal tabstop=2
     autocmd FileType ruby setlocal shiftwidth=2
     autocmd FileType ruby setlocal softtabstop=2
@@ -21,13 +17,10 @@ augroup configgroup
 
     autocmd FileType python setlocal commentstring=#\ %s
 
-    autocmd BufEnter *.sh setlocal tabstop=2
-    autocmd BufEnter *.sh setlocal shiftwidth=2
-    autocmd BufEnter *.sh setlocal softtabstop=2
-
     " Map unknown files to known filetypes.
     autocmd BufEnter *.cls setlocal filetype=java
     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+    autocmd BufEnter *.launch setlocal filetype=xml " ROS .launch files are XML
 
     " Makefiles need to keep their tabs.
     autocmd BufEnter Makefile setlocal noexpandtab
