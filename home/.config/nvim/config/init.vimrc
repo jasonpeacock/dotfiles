@@ -5,10 +5,10 @@
 "set nowrap                 " Stop word wrapping.
 "set scrolloff=1            " Space above cursor from screen edge.
 "set sidescrolloff=5        " Space beside cursor from screen edge.
-set cursorcolumn           " Highlight the current column.
-set cursorline             " Highlight the current line.
+"set cursorcolumn           " Highlight the current column.
+"set cursorline             " Highlight the current line.
 set encoding=utf8          " Set standard file encoding.
-set lazyredraw             " Redraw only when needed, speeds up macros.
+"set lazyredraw             " Redraw only when needed, speeds up macros.
 set mouse=a                " Enable the mouse.
 set nobackup               " Don't keep a backup file
 set noerrorbells           " Be quiet.

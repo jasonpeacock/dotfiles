@@ -58,9 +58,12 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " Use Ag for sear
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes to skip stripping of whitespace.
 
 " ale - this is how to disable it.
-"let g:ale_line_on_text_changed = 'never'       " Only lint when saving a file (never|normal).
-"let g:ale_line_on_enter = 0                    " Don't lint when opening a file.
+"let g:ale_lint_on_text_changed = 'never'       " Only lint when saving a file (never|normal).
+"let g:ale_lint_on_enter = 0                    " Don't lint when opening a file.
 "let g:ale_lint_on_save = 0                     " Don't lint when saving a file.
+let g:ale_sign_error = '>>'                     " Error sigil in gutter.
+let g:ale_sign_warning = '--'                   " Warning sigil in gutter.
+let g:ale_sign_column_always = 1                " Always show the gutter.
 
 " camelcasemotion
 call camelcasemotion#CreateMotionMappings('<leader>')

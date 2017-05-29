@@ -19,3 +19,7 @@ nnoremap <leader>u :GundoToggle<CR>
 
 " Toggle 'rking/ag.vim'
 nnoremap <leader>a :Ag
+
+" Navigate between Ale warnings & errors.
+"nmap <silent> <C-K> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-J> <Plug>(ale_next_wrap)

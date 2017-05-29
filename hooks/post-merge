@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+#
+# A Git hook to merge host-specific configuration into configuration files,
+# supporting multiple, separate updates of the same configuration.
+#
+# NOTE: The <hostname> is only the first part, e.g. "foo" of "foo.bar.com".
+#
+# Given a directory of host-specific configurations:
+#
+# mycastle/hosts/<hostname>/some/path/config.key
+# mycastle/hosts/<hostname>/some/path/config.key
+#
+# The <hostname>'s configuration will be applied to the matching configuration
+# in the home/ directory:
+#
+# mycastle/home/some/path/config
+#
+# Where the ".key" extension is used to match the anchor within the configuration
+# file to be updated; the new configuration is added after the anchor:
+#
+# config:
+#     foo
+#     bar
+#     # configuration.<hostname>.key
+#     foobar
+#
+# config.key
+#     blahblahblah
+#
+# config (updated):
+#     foo
+#     bar
+#     # configuration.<hostname>.key
+#     blahblahblah
+#     foobar
+#
+# If the anchor should be removed (e.g. the configuration file does not support
+# comments), then prepending "XXX." to the anchor will remove it after update:
+#
+# config:
+#     foo
+#     bar
+#     # XXX.configuration.<hostname>.key
+#     foobar
+#
+# config.key
+#     blahblahblah
+#
+# config (updated):
+#     foo
+#     bar
+#     blahblahblah
+#     foobar
+#
+
+# Load git specific env variables - most importantly, GIT_DIR.
+# shellcheck disable=SC1090
+source "$(git --exec-path)/git-sh-setup"
+
+# The first part of the hostname is used to find the configuration files for that host.
+HOSTNAME=$(hostname | sed 's/\..*$//')
+
+# Where to find the hostname-based configurations.
+CONFIG_DIR_BASE="${GIT_DIR}/../hosts/${HOSTNAME}"
+
+# Where to find the target configurations.
+TARGET_DIR_BASE="${GIT_DIR}/../home"
+
+# The anchors for inserting configuration.
+ANCHOR_BASE="configuration"
+REMOVE_ANCHOR_BASE="XXX.${ANCHOR_BASE}"
+
+BACKUP_FILE_EXT=".orig"
+SED_CMD="sed -i${BACKUP_FILE_EXT}"
+
+echo "Hostname is [${HOSTNAME}], applying host-specific configurations..."
+configs=$(find "${CONFIG_DIR_BASE}" -type f -print)
+for config in ${configs} ; do
+    # Discard everything except the last '.' delimited section.
+    config_id="${config##*.}"
+
+    anchor="${ANCHOR_BASE}.${HOSTNAME}.${config_id}"
+
+    # Replace the config's CONFIG_DIR_BASE with TARGET_DIR_BASE to generate the target filename.
+    target="${TARGET_DIR_BASE}${config#${CONFIG_DIR_BASE}}"
+
+    # Discard the last '.' delimited section, which was the config ID.
+    target="${target%.*}"
+
+    if ! grep -q "${anchor}" "${target}" ; then
+        echo -e "Skipping [${config}], no anchors found in"
+        echo -e "\t[${target}]"
+        continue
+    fi
+
+    echo -e "Inserting [${config}] into"
+    echo -e "\t[${target}]"
+
+    # Insert the configuration after the matching anchor.
+    ${SED_CMD} "/${anchor}/r ${config}" "${target}"
+
+    # Remove the backup file (OS X doesn't permit -i w/o backup files).
+    rm "${target}${BACKUP_FILE_EXT}"
+done
+
+echo -e "\nRemoving undesirable anchors from all files..."
+targets=$(grep -R -S -l "${REMOVE_ANCHOR_BASE}" "${TARGET_DIR_BASE}")
+for target in ${targets} ; do
+    echo "Updating [${target}]"
+
+    ${SED_CMD} "/${REMOVE_ANCHOR_BASE}/d" "${target}"
+
+    # Remove the backup file (OS X doesn't permit -i w/o backup files).
+    rm "${target}${BACKUP_FILE_EXT}"
+done
