@@ -8,10 +8,12 @@ Clone, install, and use the dotfiles, including installing & running the git hoo
 git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 homeshick clone jasonpeacock/dotfiles
+homeshick cd dotfiles
 cd .git/hooks
 ln -s ../../git-hooks/post-merge
 cd ../..
 .git/hooks/post-merge
+homeshick link dotfiles
 source $HOME/.zshrc
 ```
 
@@ -24,17 +26,9 @@ git remote set-url origin git@github.com:jasonpeacock/dotfiles.git
 git remote show origin
 ```
 
-### Host specific configuration
+## Host specific configuration
 
-
-
-## Host Sync
-
-Already configured in the `.zshrc` to check on new shells, but can also be done manually:
-
-```
-homeshick refresh
-```
+*TBA*
 
 # Applications
 
@@ -57,3 +51,9 @@ brew install reattach-to-user-namespace
 ```
 
 * Run `prefix + I` to install plugins.
+
+## [shellcheck](https://www.shellcheck.net/)
+
+* Install it.
+
+

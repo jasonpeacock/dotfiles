@@ -10,17 +10,17 @@
 #
 # Given a directory of host-specific configurations:
 #
-# mycastle/overrides/<hostname>/some/path/config.key
-# mycastle/overrides/<hostname>/some/path/config.key
+# mycastle/overrides/hosts/<hostname>/some/path/config.key
+# mycastle/overrides/hosts/<hostname>/some/path/config.key
 #
 # The <hostname>'s configuration will be applied to the matching configuration
 # in the overrides/default directory:
 #
 # mycastle/overrides/default/path/config
 #
-# Then copied to the equivalent path in the home directory:
+# Then copied to the equivalent path in the overrides/generated directory:
 #
-# mycastle/home/some/path/config
+# mycastle/overrides/generated/some/path/config
 #
 # Where the ".key" extension is used to match the anchor within the configuration
 # file to be updated; the new configuration is added after the anchor:
@@ -68,13 +68,13 @@ source "$(git --exec-path)/git-sh-setup"
 HOSTNAME=$(hostname | sed 's/\..*$//')
 
 # Where to find the hostname-based configurations.
-CONFIG_DIR_BASE="${GIT_DIR}/../overrides/${HOSTNAME}"
+CONFIG_DIR_BASE="${GIT_DIR}/../overrides/hosts/${HOSTNAME}"
 
 # Where to find the default configurations.
 DEFAULT_DIR_BASE="${GIT_DIR}/../overrides/default"
 
 # Where to save the final configurations.
-TARGET_DIR_BASE="${GIT_DIR}/../home"
+TARGET_DIR_BASE="${GIT_DIR}/../overrides/generated"
 
 # The anchors for inserting configuration.
 ANCHOR_BASE="configuration"
