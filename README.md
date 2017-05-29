@@ -8,6 +8,10 @@ Clone, install, and use the dotfiles, including installing & running the git hoo
 git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 homeshick clone jasonpeacock/dotfiles
+cd .git/hooks
+ln -s ../../git-hooks/post-merge
+cd ../..
+.git/hooks/post-merge
 source $HOME/.zshrc
 ```
 
@@ -20,18 +24,9 @@ git remote set-url origin git@github.com:jasonpeacock/dotfiles.git
 git remote show origin
 ```
 
-### Host specific configuration?
+### Host specific configuration
 
-Not yet...the git hook works, and it updates the configuration used, but that's also a
-change tracked in git - how to avoid accidentally committing it?!
 
-```
-homeshick cd dotfiles
-cd .git/hooks
-ln -s ../../hooks/post-merge
-cd ../..
-.git/hooks/post-merge
-```
 
 ## Host Sync
 

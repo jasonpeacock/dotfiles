@@ -3,15 +3,22 @@
 # A Git hook to merge host-specific configuration into configuration files,
 # supporting multiple, separate updates of the same configuration.
 #
-# NOTE: The <hostname> is only the first part, e.g. "foo" of "foo.bar.com".
+# NOTES:
+#     * The <hostname> is only the first part, e.g. "foo" of "foo.bar.com".
+#     * Files in home/ that are customized should use .gitignore to avoid committing
+#       them.
 #
 # Given a directory of host-specific configurations:
 #
-# mycastle/hosts/<hostname>/some/path/config.key
-# mycastle/hosts/<hostname>/some/path/config.key
+# mycastle/overrides/<hostname>/some/path/config.key
+# mycastle/overrides/<hostname>/some/path/config.key
 #
 # The <hostname>'s configuration will be applied to the matching configuration
-# in the home/ directory:
+# in the overrides/default directory:
+#
+# mycastle/overrides/default/path/config
+#
+# Then copied to the equivalent path in the home directory:
 #
 # mycastle/home/some/path/config
 #
@@ -61,9 +68,12 @@ source "$(git --exec-path)/git-sh-setup"
 HOSTNAME=$(hostname | sed 's/\..*$//')
 
 # Where to find the hostname-based configurations.
-CONFIG_DIR_BASE="${GIT_DIR}/../hosts/${HOSTNAME}"
+CONFIG_DIR_BASE="${GIT_DIR}/../overrides/${HOSTNAME}"
 
-# Where to find the target configurations.
+# Where to find the default configurations.
+DEFAULT_DIR_BASE="${GIT_DIR}/../overrides/default"
+
+# Where to save the final configurations.
 TARGET_DIR_BASE="${GIT_DIR}/../home"
 
 # The anchors for inserting configuration.
@@ -73,7 +83,25 @@ REMOVE_ANCHOR_BASE="XXX.${ANCHOR_BASE}"
 BACKUP_FILE_EXT=".orig"
 SED_CMD="sed -i${BACKUP_FILE_EXT}"
 
-echo "Hostname is [${HOSTNAME}], applying host-specific configurations..."
+# Copy the default configurations into their target locations to be updated with
+# any host configurations.
+echo -e "\nInstalling default configurations..."
+defaults=$(find "${DEFAULT_DIR_BASE}" -type f -print)
+for default in ${defaults} ; do
+    # Replace the default's DEFAULT_DIR_BASE with TARGET_DIR_BASE to generate the
+    # target filename.
+    target="${TARGET_DIR_BASE}${default#${DEFAULT_DIR_BASE}}"
+
+    echo -e "Copying default [${default}] to"
+    echo -e "\t[$target]"
+
+    # Discard the last '/' delimited section, which was filename.
+    path="${target%/*}"
+
+    mkdir -p "${path}" && cp "${default}" "${target}"
+done
+
+echo -e "\nHostname is [${HOSTNAME}], applying host-specific configurations..."
 configs=$(find "${CONFIG_DIR_BASE}" -type f -print)
 for config in ${configs} ; do
     # Discard everything except the last '.' delimited section.
@@ -81,7 +109,8 @@ for config in ${configs} ; do
 
     anchor="${ANCHOR_BASE}.${HOSTNAME}.${config_id}"
 
-    # Replace the config's CONFIG_DIR_BASE with TARGET_DIR_BASE to generate the target filename.
+    # Replace the config's CONFIG_DIR_BASE with TARGET_DIR_BASE to generate the
+    # target filename.
     target="${TARGET_DIR_BASE}${config#${CONFIG_DIR_BASE}}"
 
     # Discard the last '.' delimited section, which was the config ID.
@@ -104,10 +133,13 @@ for config in ${configs} ; do
 done
 
 echo -e "\nRemoving undesirable anchors from all files..."
-targets=$(grep -R -S -l "${REMOVE_ANCHOR_BASE}" "${TARGET_DIR_BASE}")
+targets=$(find "${DEFAULT_DIR_BASE}" -type f -print)
 for target in ${targets} ; do
-    echo "Updating [${target}]"
+    # Replace the default's DEFAULT_DIR_BASE with TARGET_DIR_BASE to generate the
+    # target filename.
+    target="${TARGET_DIR_BASE}${target#${DEFAULT_DIR_BASE}}"
 
+    echo "Updating [${target}]"
     ${SED_CMD} "/${REMOVE_ANCHOR_BASE}/d" "${target}"
 
     # Remove the backup file (OS X doesn't permit -i w/o backup files).

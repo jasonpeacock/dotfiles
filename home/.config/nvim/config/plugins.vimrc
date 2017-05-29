@@ -10,9 +10,7 @@ set runtimepath+=~/.local/share/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.local/share/dein')
   call dein#begin('~/.local/share/dein')
 
-  " Don't managed dein with dein, it's a submodule of homeshick/dotfiles
-  " instead.
-  "call dein#add('~/.local/share/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.local/share/dein/repos/github.com/Shougo/dein.vim')
 
   call dein#add('altercation/vim-colors-solarized')       " Solarized color theme.
   call dein#add('vim-airline/vim-airline')                " VIM status bar themes support.
@@ -22,7 +20,7 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('rking/ag.vim')                           " The Silver Searcher!
   call dein#add('kien/ctrlp.vim')                         " Fuzzy file searching.
   call dein#add('ntpeters/vim-better-whitespace')         " Show & strip trailing whitespace.
-  call dein#add('Yggdroot/indentLine')                    " Show indenting levels.
+"  call dein#add('Yggdroot/indentLine')                    " Show indenting levels.
   call dein#add('w0rp/ale')                               " Async linting.
   call dein#add('bkad/CamelCaseMotion')                   " Apply motion commands to CamelCase text.
 
