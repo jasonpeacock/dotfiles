@@ -2,23 +2,38 @@
 
 ## New Host Setup
 
-Clone, install, and use the dotfiles, including installing & running the git hook!
+Clone the Homeshick repo, and then retrieve the `dotfile` castle:
 
 ```
 git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 homeshick clone jasonpeacock/dotfiles
+```
+
+Setup git hooks to apply host overrides & secrets:
+
+```
 homeshick cd dotfiles
 cd .git/hooks
-ln -s ../../git-hooks/post-merge
+mkdir post-merge.d && cd post-merge.d
+ln -s ../../../git-hooks/apply-host-overrides 001-apply-host-overrides
+ln -s ../../../git-hooks/decrypt-host-secrets 002-decrypt-host-secrets
+cd ..
+ln -s ../../git-hooks/git-hook-multiplexer post-merge
 cd ../..
 .git/hooks/post-merge
+```
+
+Link all the files & finally source the new environment:
+
+```
+cd ~
 homeshick link dotfiles
 source $HOME/.zshrc
 ```
 
 Homeshick by default uses the HTTPS URL for cloning, change to use SSH instead b/c
-Github 2FA is enabled and HTTPS won't support pushes:
+Github 2FA is enabled and HTTPS won't support pushes back to the repo:
 
 ```
 homeshick cd dotfiles
@@ -26,9 +41,24 @@ git remote set-url origin git@github.com:jasonpeacock/dotfiles.git
 git remote show origin
 ```
 
-## Host specific configuration
+# Host specific configuration
+
+## Overrides
 
 *TBA*
+
+## Secrets
+
+For files that shouldn't be viewable in a public repo, they can be encrypted using the host's SSH key.
+
+```
+homeshick cd dotfiles
+./git-hooks/encrypt-host-secrets /path/to/file path/to/install
+mkdir -p home/path/to/install
+cd home/path/to/install
+ln -s ../../../../secrets/generated/path/to/install/file
+git add -A
+```
 
 # Applications
 

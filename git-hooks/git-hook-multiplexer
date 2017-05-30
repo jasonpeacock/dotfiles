@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# Use the script's symlink name to find the <name>.d/ subdir & execute all
+# scripts within that directory.
+
+set -o errexit
+set -o errtrace
+set -o nounset
+set -o pipefail
+
+FILENAME="${BASH_SOURCE[0]}"
+DIR="$(cd "${FILENAME%/*}" && pwd)"
+
+# Discard the path.
+COMMIT_TYPE="${0##*/}"
+
+if [ "${DIR##*/}" == hooks ]; then
+    hooks="$(find "${DIR}/${COMMIT_TYPE}.d" -type l -print | sort)"
+else
+    exit 1
+fi
+
+for hook in ${hooks}; do
+    echo -e "*** Running ${COMMIT_TYPE} hook [${hook}]\n"
+    ${hook}
+    echo -e "\n"
+done
+
+exit 0
