@@ -22,7 +22,9 @@ fi
 
 for hook in ${hooks}; do
     echo -e "*** Running ${COMMIT_TYPE} hook [${hook}]\n"
+    set +e
     ${hook}
+    set -e
     echo -e "\n"
 done
 
