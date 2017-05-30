@@ -45,6 +45,11 @@ POWERLEVEL9K_HOME_ICON=""
 POWERLEVEL9K_HOME_SUB_ICON=""
 
 #
+# Customize zsh-autosuggestion
+#
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+
+#
 # ZSH configuration with Antigen.
 #
 source $HOME/.zsh/antigen/antigen.zsh
