@@ -91,7 +91,7 @@ export PATH="$PATH:$HOME/bin"
 # Aliases.
 #
 alias bc='bc -l -q $HOME/.bc'
-alias checkpoint='git status && git add -A && git commit -m "checkpoint"'
+alias checkpoint='git status && git add -A && git commit -m "checkpoint" --no-verify'
 alias grep='grep --color=auto'
 alias less='less -R -n'
 alias scp='/usr/bin/scp -C'

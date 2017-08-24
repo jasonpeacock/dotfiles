@@ -62,6 +62,8 @@ let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes 
 let g:ale_sign_error = '>>'                     " Error sigil in gutter.
 let g:ale_sign_warning = '--'                   " Warning sigil in gutter.
 let g:ale_sign_column_always = 1                " Always show the gutter.
+let g:ale_python_flake8_executable = 'python 3' " Use Python3 linter:
+let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
 
 " camelcasemotion
 call camelcasemotion#CreateMotionMappings('<leader>')
