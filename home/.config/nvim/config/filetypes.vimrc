@@ -7,12 +7,15 @@ augroup configgroup
     autocmd BufEnter * EnableStripWhitespaceOnSave
 
     " Allow word wrapping for some filetypes.
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown setlocal conceallevel=0
 
     " Bash style is 2-space indenting.
     autocmd FileType sh setlocal tabstop=2
     autocmd FileType sh setlocal shiftwidth=2
     autocmd FileType sh setlocal softtabstop=2
+    autocmd FileType sh setlocal commentstring=#\ %s
 
     " Ruby style is 2-space indenting.
     autocmd FileType ruby setlocal tabstop=2

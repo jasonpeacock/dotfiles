@@ -7,7 +7,7 @@
 "set cursorcolumn           " Highlight the current column.
 "set cursorline             " Highlight the current line.
 "set lazyredraw             " Redraw only when needed, speeds up macros.
-set conceallevel=0         " Don't hind characters.
+"set conceallevel=0         " Don't hide characters.
 set encoding=utf8          " Set standard file encoding.
 set mouse=a                " Enable the mouse.
 set nobackup               " Don't keep a backup file
