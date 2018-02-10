@@ -14,6 +14,7 @@ if dein#load_state('~/.local/share/dein')
 
   call dein#add('altercation/vim-colors-solarized')       " Solarized color theme.
   call dein#add('bkad/CamelCaseMotion')                   " Apply motion commands to CamelCase text.
+  call dein#add('ElmCast/elm-vim')                        " Elm plugin for Vim
   call dein#add('euclio/vim-markdown-composer')           " An asynchronous markdown preview plugin for Vim and Neovim.
   call dein#add('joereynolds/place.vim')                  " Enter pieces of text without moving.
   call dein#add('ntpeters/vim-better-whitespace')         " Show & strip trailing whitespace.
@@ -21,6 +22,7 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('sjl/gundo.vim')                          " Visualize the undo tree.
   call dein#add('tpope/vim-abolish')                      " Easily search for, substitute, and abbreviate multiple variants of a word.
   call dein#add('tpope/vim-commentary')                   " Comment stuff out.
+  call dein#add('tpope/vim-eunuch')                       " helpers for Unix.
   call dein#add('tpope/vim-repeat')                       " Enable repeating supported plugin maps with '.'
   call dein#add('tpope/vim-sleuth')                       " Heuristically set buffer options.
   call dein#add('tpope/vim-surround')                     " Quoting/parenthesizing made simple.
@@ -65,3 +67,15 @@ let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/bl
 
 " camelcasemotion
 call camelcasemotion#CreateMotionMappings('<leader>')
+
+" elm-vim
+let g:elm_jump_to_error = 0
+let g:elm_make_output_file = "elm.js"
+let g:elm_make_show_warnings = 0
+let g:elm_syntastic_show_warnings = 0
+let g:elm_browser_command = ""
+let g:elm_detailed_complete = 0
+let g:elm_format_autosave = 1
+let g:elm_format_fail_silently = 0
+let g:elm_setup_keybindings = 1
+
