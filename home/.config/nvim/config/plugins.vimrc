@@ -56,7 +56,7 @@ set background=dark
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes to skip stripping of whitespace.
 
 " ale - this is how to disable it.
-"let g:ale_lint_on_text_changed = 'always'       " When to lint if text changes (always (default)|insert|normal|never).
+"let g:ale_lint_on_text_changed = 'always'        " When to lint if text changes (always (default)|insert|normal|never).
 "let g:ale_lint_on_enter = 0                    " Don't lint when opening a file.
 "let g:ale_lint_on_save = 0                     " Don't lint when saving a file.
 let g:ale_sign_error = '>>'                     " Error sigil in gutter.
@@ -64,6 +64,8 @@ let g:ale_sign_warning = '--'                   " Warning sigil in gutter.
 let g:ale_sign_column_always = 1                " Always show the gutter.
 let g:ale_python_flake8_executable = 'python 3' " Use Python3 linter:
 let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
+let g:ale_sh_shell_default_shell = 'bash'       " We use non-standard #! for Bash, assume all shell files are Bash.
+let g:ale_sh_shellcheck_options = '-s bash -e SC1008' " Force shellcheck to always assume Bash, and ignore warning about unsupported #!.
 
 " camelcasemotion
 call camelcasemotion#CreateMotionMappings('<leader>')
