@@ -59,7 +59,7 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle python
 antigen bundle command-not-found
-antigen bundle zsh-users/zsh-autosuggestions
+#antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
