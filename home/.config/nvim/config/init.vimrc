@@ -19,6 +19,13 @@ set wmh=0                  " Set smallest possible window when minimizing a spli
 set number                 " Turn on line numbers.
 set relativenumber         " Show the line numbers as relative.
 
+set spell                  " Enable spell check.
+set spellcapcheck=         " Disable capitalization check.
+
+" Fix behavior to continue comments on new lines, default is: tcqj
+" :help fo-table
+set formatoptions=tcrq
+
 " Enable wildmenu support, which autocompletes commmands.
 set wildmenu
 set wildmode=list:longest,full " list all options, match to the longest

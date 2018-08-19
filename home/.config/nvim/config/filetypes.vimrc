@@ -29,6 +29,7 @@ augroup configgroup
     autocmd BufEnter *.cls setlocal filetype=java
     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
     autocmd BufEnter *.launch setlocal filetype=xml " ROS .launch files are XML
+    autocmd BufEnter *.bats set filetype=sh
 
     " Makefiles need to keep their tabs.
     autocmd BufEnter Makefile setlocal noexpandtab
