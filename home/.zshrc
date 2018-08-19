@@ -99,6 +99,7 @@ alias tbase='tmux attach -t base || tmux new -s base'
 alias vi='nvim -o'
 alias work='cd $HOME/workplace'
 alias http='python3 -m http.server'
+alias tree='tree -C'
 
 #
 # Jump Marks
