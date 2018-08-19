@@ -85,7 +85,7 @@ else
 fi
 
 # Add local apps to the path.
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:/usr/local/sbin"
 
 #
 # Aliases.
