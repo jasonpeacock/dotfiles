@@ -15,6 +15,16 @@ fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 homeshick --quiet refresh
 
 #
+# Load host-specific configuration.
+#
+THIS_BOX=`hostname | sed 's/\..*$//'`
+if [ -f $HOME/.zsh/$THIS_BOX.zshrc ] ; then
+	. $HOME/.zsh/$THIS_BOX.zshrc
+else
+	echo "*** No host-specific file found! Expected: \"$HOME/.zsh/$THIS_BOX.zshrc\" ***"
+fi
+
+#
 # Customize the Powerlevel9k theme.
 # https://github.com/bhilburn/powerlevel9k
 #
@@ -68,21 +78,12 @@ if [[ $CURRENT_OS == 'OS X' ]]; then
 	antigen bundle brew-cask
 	antigen bundle osx
 elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # Do nothing.
 fi
 
 antigen theme bhilburn/powerlevel9k
 
 antigen apply
-
-#
-# Load host-specific configuration.
-#
-THIS_BOX=`hostname | sed 's/\..*$//'`
-if [ -f $HOME/.zsh/$THIS_BOX.zshrc ] ; then
-	. $HOME/.zsh/$THIS_BOX.zshrc
-else
-	echo "*** No host-specific file found! Expected: \"$HOME/.zsh/$THIS_BOX.zshrc\" ***"
-fi
 
 # Add local apps to the path.
 export PATH="$PATH:$HOME/bin:/usr/local/sbin"
@@ -129,4 +130,3 @@ function _completemarks {
 
 compctl -K _completemarks jump
 compctl -K _completemarks unmark
-
