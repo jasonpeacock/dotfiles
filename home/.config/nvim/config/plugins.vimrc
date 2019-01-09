@@ -29,6 +29,7 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('vim-airline/vim-airline')                " VIM status bar themes support.
   call dein#add('vim-airline/vim-airline-themes')         " VIM status bar themes.
   call dein#add('w0rp/ale')                               " Async linting.
+  call dein#add('RRethy/vim-illuminate')                  " Highlight matching words under cursor automatically.
 
   " Required:
   call dein#end()
@@ -73,3 +74,5 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 " Disable vim-sleuth
 let g:sleuth_automatic = 0
 
+hi illuminatedWord cterm=underline gui=underline
+"hi link illuminatedWord Visual
