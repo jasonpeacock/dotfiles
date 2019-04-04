@@ -35,7 +35,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status context_joined)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs command_execution_time)
 # Default 'context' is "%n@%m", drop the username (%n) and always show it.
 POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
-POWERLEVEL9K_CONTEXT_TEMPLATE="%m"
+POWERLEVEL9K_CONTEXT_TEMPLATE="${HOST_NICKNAME:-%m}"
 # Shorten the 'dir'.
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_SHORTEN_DELIMITER=".."
@@ -66,10 +66,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 source $HOME/.zsh/antigen/antigen.zsh
 
 antigen use oh-my-zsh
+antigen bundle command-not-found
+antigen bundle docker
 antigen bundle git
 antigen bundle python
-antigen bundle command-not-found
-#antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
@@ -77,7 +78,7 @@ if [[ $CURRENT_OS == 'OS X' ]]; then
 	antigen bundle brew
 	antigen bundle brew-cask
 	antigen bundle osx
-elif [[ $CURRENT_OS == 'Linux' ]]; then
+#elif [[ $CURRENT_OS == 'Linux' ]]; then
     # Do nothing.
 fi
 
@@ -102,32 +103,3 @@ alias work='cd $HOME/workplace'
 alias http='python3 -m http.server'
 alias tree='tree -C'
 alias black='black -l 100'
-
-#
-# Jump Marks
-# http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
-#
-export MARKPATH=$HOME/.marks
-
-function jump {
-	cd -P "$MARKPATH/$1" 2>/dev/null && cd `echo $PWD | sed 's/\/rhel5pdi//'` || echo "No such mark: $1"
-}
-
-function mark {
-	mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
-}
-
-function unmark {
-	rm -i "$MARKPATH/$1"
-}
-
-function marks {
-	ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
-}
-
-function _completemarks {
-	reply=($(ls $MARKPATH))
-}
-
-compctl -K _completemarks jump
-compctl -K _completemarks unmark
