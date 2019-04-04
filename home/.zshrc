@@ -101,6 +101,7 @@ alias vi='nvim -o'
 alias work='cd $HOME/workplace'
 alias http='python3 -m http.server'
 alias tree='tree -C'
+alias black='black -l 100'
 
 #
 # Jump Marks

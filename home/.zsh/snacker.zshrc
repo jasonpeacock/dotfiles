@@ -18,3 +18,6 @@ export HOMEBREW_GITHUB_API_TOKEN="$(<"$HOME/.certs/homebrew-snacker.github_api_t
 
 # added by travis gem
 [ -f /Users/jasonpeacock/.travis/travis.sh ] && source /Users/jasonpeacock/.travis/travis.sh
+
+# Enable `brew cleanup` automatically.
+export HOMEBREW_INSTALL_CLEANUP=1
