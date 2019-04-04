@@ -25,12 +25,10 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('tpope/vim-commentary')                   " Comment stuff out.
   call dein#add('tpope/vim-eunuch')                       " helpers for Unix.
   call dein#add('tpope/vim-repeat')                       " Enable repeating supported plugin maps with '.'
-  call dein#add('tpope/vim-sleuth')                       " Heuristically set buffer options.
   call dein#add('tpope/vim-surround')                     " Quoting/parenthesizing made simple.
   call dein#add('vim-airline/vim-airline')                " VIM status bar themes support.
   call dein#add('vim-airline/vim-airline-themes')         " VIM status bar themes.
   call dein#add('w0rp/ale')                               " Async linting.
-  call dein#add('RRethy/vim-illuminate')                  " Highlight matching words under cursor automatically.
 
   " Required:
   call dein#end()
@@ -58,9 +56,10 @@ set background=dark
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes to skip stripping of whitespace.
 
 " ale - this is how to disable it.
-"let g:ale_lint_on_text_changed = 'always'        " When to lint if text changes (always (default)|insert|normal|never).
+"let g:ale_lint_on_text_changed = 'always'       " When to lint if text changes (always (default)|insert|normal|never).
 "let g:ale_lint_on_enter = 0                    " Don't lint when opening a file.
 "let g:ale_lint_on_save = 0                     " Don't lint when saving a file.
+let g:ale_fix_on_save = 1                       " Apply fixers (formatters) to files on save.
 let g:ale_sign_error = '>>'                     " Error sigil in gutter.
 let g:ale_sign_warning = '--'                   " Warning sigil in gutter.
 let g:ale_sign_column_always = 1                " Always show the gutter.
@@ -68,15 +67,26 @@ let g:ale_python_flake8_executable = 'python3'  " Use Python3 linter:
 let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
 let g:ale_sh_shell_default_shell = 'bash'       " We use non-standard #! for Bash, assume all shell files are Bash.
 let g:ale_sh_shellcheck_options = '-s bash -e SC1008' " Force shellcheck to always assume Bash, and ignore warning about unsupported #!.
+let g:ale_sh_shfmt_options = "-i 2 -ci -sr -kp" " Make `shfmt` pretty.
+let g:ale_python_black_options = "-l 100"       " Make `black` pretty.
+let g:ale_rust_cargo_use_clippy = 1
+let g:ale_rust_rls_toolchain = "stable"
+
+let g:ale_linters = {
+\ 'rust': ['rls', 'cargo'],
+\}
+
+let g:ale_fixers = {
+\ 'python': ['black'],
+\ 'rust': ['rustfmt'],
+\ 'sh': ['shfmt'],
+\}
+
+highlight ALEWarning ctermfg=13
+highlight ALEError ctermfg=5
 
 " camelcasemotion
 call camelcasemotion#CreateMotionMappings('<leader>')
-
-" Disable vim-sleuth
-let g:sleuth_automatic = 0
-
-hi illuminatedWord cterm=underline gui=underline
-"hi link illuminatedWord Visual
 
 " Elm-vim
 let g:elm_jump_to_error = 0
