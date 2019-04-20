@@ -63,12 +63,13 @@ let g:ale_fix_on_save = 1                       " Apply fixers (formatters) to f
 let g:ale_sign_error = '>>'                     " Error sigil in gutter.
 let g:ale_sign_warning = '--'                   " Warning sigil in gutter.
 let g:ale_sign_column_always = 1                " Always show the gutter.
-let g:ale_python_flake8_executable = 'python3'  " Use Python3 linter:
-let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
+let g:ale_python_flake8_executable = 'flake8'   " Use Python3 linter:
+"let g:ale_python_flake8_executable = 'python3'  " Use Python3 linter:
+"let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
 let g:ale_sh_shell_default_shell = 'bash'       " We use non-standard #! for Bash, assume all shell files are Bash.
 let g:ale_sh_shellcheck_options = '-s bash -e SC1008' " Force shellcheck to always assume Bash, and ignore warning about unsupported #!.
 let g:ale_sh_shfmt_options = "-i 2 -ci -sr -kp" " Make `shfmt` pretty.
-let g:ale_python_black_options = "-l 100"       " Make `black` pretty.
+let g:ale_python_black_options = "-l 120"       " Make `black` pretty.
 let g:ale_rust_cargo_use_clippy = 1
 let g:ale_rust_rls_toolchain = "stable"
 
