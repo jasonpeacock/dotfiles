@@ -7,22 +7,22 @@
 # .zlogout : when the shell exits
 
 #
+# Load host-specific configuration.
+#
+THIS_BOX=`hostname | sed 's/\..*$//'`
+if [ -f $HOME/.zsh/$THIS_BOX.zshrc ] ; then
+    . $HOME/.zsh/$THIS_BOX.zshrc
+else
+    echo "*** No host-specific file found! Expected: \"$HOME/.zsh/$THIS_BOX.zshrc\" ***"
+fi
+
+#
 # Dotfile management with homeshick.
 #
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 # Check everything is up-to-date.
 homeshick --quiet refresh
-
-#
-# Load host-specific configuration.
-#
-THIS_BOX=`hostname | sed 's/\..*$//'`
-if [ -f $HOME/.zsh/$THIS_BOX.zshrc ] ; then
-	. $HOME/.zsh/$THIS_BOX.zshrc
-else
-	echo "*** No host-specific file found! Expected: \"$HOME/.zsh/$THIS_BOX.zshrc\" ***"
-fi
 
 #
 # Customize the Powerlevel9k theme.
@@ -63,7 +63,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 #
 # ZSH configuration with Antigen.
 #
-source $HOME/.zsh/antigen/antigen.zsh
+source "$HOME/.zsh/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 antigen bundle command-not-found
@@ -74,17 +74,25 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
+# Set nix-shell default shell to be Zsh:
+# https://github.com/chisui/zsh-nix-shell
+antigen bundle chisui/zsh-nix-shell
+
 if [[ $CURRENT_OS == 'OS X' ]]; then
-	antigen bundle brew
-	antigen bundle brew-cask
-	antigen bundle osx
+    antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle osx
 #elif [[ $CURRENT_OS == 'Linux' ]]; then
     # Do nothing.
 fi
 
-antigen theme bhilburn/powerlevel9k
+# Load new `powerlevel10k` theme outside of `antigen` as it fails
+# when loaded as a plugin.
+#antigen theme bhilburn/powerlevel9k
 
 antigen apply
+
+source "$HOME/.config/powerlevel10k/powerlevel10k.zsh-theme"
 
 # Add local apps to the path.
 export PATH="$PATH:$HOME/bin:/usr/local/sbin"
@@ -92,14 +100,16 @@ export PATH="$PATH:$HOME/bin:/usr/local/sbin"
 #
 # Aliases.
 #
-alias bc='bc -l -q $HOME/.bc'
+alias bc='bc -l -q "$HOME/.bc"'
 alias checkpoint='git status && git add -A && git commit -m "checkpoint" --no-verify'
 alias grep='grep --color=auto'
 alias less='less -R -n'
 alias scp='/usr/bin/scp -C'
 alias tbase='tmux attach -t base || tmux new -s base'
 alias vi='nvim -o'
-alias work='cd $HOME/workplace'
+alias work='cd "$HOME/workplace"'
 alias http='python3 -m http.server'
 alias tree='tree -C'
 alias black='black -l 120'
+
+export PATH=$HOME/.toolbox/bin:$PATH
