@@ -11,6 +11,12 @@ augroup configgroup
     autocmd FileType markdown setlocal wrap
     autocmd FileType markdown setlocal conceallevel=0
 
+    " YAML style is 2-space indenting.
+    autocmd FileType yaml setlocal tabstop=2
+    autocmd FileType yaml setlocal shiftwidth=2
+    autocmd FileType yaml setlocal softtabstop=2
+    autocmd FileType yaml setlocal commentstring=#\ %s
+
     " Bash style is 2-space indenting.
     autocmd FileType sh setlocal tabstop=2
     autocmd FileType sh setlocal shiftwidth=2
@@ -34,5 +40,3 @@ augroup configgroup
     " Makefiles need to keep their tabs.
     autocmd BufEnter Makefile setlocal noexpandtab
 augroup END
-
-

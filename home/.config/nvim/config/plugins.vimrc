@@ -46,7 +46,10 @@ endif
 " END dein
 
 " vim-airline
+let g:airline_powerline_fonts = 1
 let g:airline_theme = "bubblegum"
+"let g:airline_theme = "solarized"
+"let g:airline_solarized_bg='dark'
 
 " vim-colors-solarized
 colorscheme solarized
@@ -54,6 +57,10 @@ set background=dark
 
 " vim-better-whitespace
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes to skip stripping of whitespace.
+let g:strip_whitelines_at_eof=1
+let g:show_spaces_that_precede_tabs=1
+let g:strip_whitespace_confirm=0
+let g:strip_whitespace_on_save = 1
 
 " ale - this is how to disable it.
 "let g:ale_lint_on_text_changed = 'always'       " When to lint if text changes (always (default)|insert|normal|never).
@@ -63,9 +70,11 @@ let g:ale_fix_on_save = 1                       " Apply fixers (formatters) to f
 let g:ale_sign_error = '>>'                     " Error sigil in gutter.
 let g:ale_sign_warning = '--'                   " Warning sigil in gutter.
 let g:ale_sign_column_always = 1                " Always show the gutter.
-"let g:ale_python_flake8_executable = 'flake8'   " Use Python3 linter:
-let g:ale_python_flake8_executable = 'python3'  " Use Python3 linter:
-let g:ale_python_flake8_options = '-m flake8'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
+"let g:ale_ruby_rubocop_options = ''            " https://rubocop.readthedocs.io/en/latest/configuration/
+let g:ale_python_flake8_executable = 'flake8'   " Use Python3 linter:
+let g:ale_python_flake8_options = '--max-line-length 120'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
+"let g:ale_python_flake8_executable = 'python3'  " Use Python3 linter:
+"let g:ale_python_flake8_options = '-m flake8 --max-line-length 120'   " https://github.com/w0rp/ale/blob/master/doc/ale-python.txt
 let g:ale_sh_shell_default_shell = 'bash'       " We use non-standard #! for Bash, assume all shell files are Bash.
 let g:ale_sh_shellcheck_options = '-s bash -e SC1008' " Force shellcheck to always assume Bash, and ignore warning about unsupported #!.
 let g:ale_sh_shfmt_options = "-i 2 -ci -sr -kp" " Make `shfmt` pretty.

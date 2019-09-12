@@ -10,6 +10,7 @@ with pkgs;
 # Defines a shell.
 mkShell {
     buildInputs = [
+        awscli
         bat
         docker
         git
@@ -17,8 +18,10 @@ mkShell {
         jq
         neovim
         nix
+        plantuml
         python3
         python37Packages.pip
+        python37Packages.setuptools
         ripgrep
         rubocop
         ruby
@@ -28,7 +31,7 @@ mkShell {
         zsh
     ];
 
+    # Fix font chars not recognized due to locale issues.
     # https://github.com/NixOS/nix/issues/599
     LOCALE_ARCHIVE=/usr/lib/locale/locale-archive;
 }
-
