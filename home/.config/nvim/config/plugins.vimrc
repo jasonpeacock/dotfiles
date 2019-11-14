@@ -13,11 +13,13 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('~/.local/share/dein/repos/github.com/Shougo/dein.vim')
 
   call dein#add('altercation/vim-colors-solarized')       " Solarized color theme.
+  call dein#add('aklt/plantuml-syntax')                   " PlantUml syntax.
   call dein#add('bkad/CamelCaseMotion')                   " Apply motion commands to CamelCase text.
   call dein#add('cespare/vim-toml')                       " TOML filetype support.
   call dein#add('elmcast/elm-vim')                        " Elm language support.
   call dein#add('euclio/vim-markdown-composer')           " An asynchronous markdown preview plugin for Vim and Neovim.
   call dein#add('joereynolds/place.vim')                  " Enter pieces of text without moving.
+  call dein#add('LnL7/vim-nix')                           " Nix filetype support
   call dein#add('ntpeters/vim-better-whitespace')         " Show & strip trailing whitespace.
   call dein#add('rust-lang/rust.vim')                     " Support Rust language syntax.
   call dein#add('sjl/gundo.vim')                          " Visualize the undo tree.

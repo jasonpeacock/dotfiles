@@ -1,23 +1,17 @@
 # vim:ft=sh
 
-THIS_HOST=snacker
+# Load Nix
+# shellcheck disable=SC1090
+#export PATH="$HOME/.nix-profile:$PATH"
 
 # add host-specific /bin
-export PATH="$PATH:$HOME/.$THIS_HOST-bin"
-
 # Rust
-export PATH="$PATH:$HOME/.cargo/bin"
+# XXX export PATH="$PATH:$HOME/.cargo/bin"
+# XXX export PATH="$HOME/workplace/artifact/target/env/rust/cargo/bin:$PATH"
 
-# Homebrew
-export PATH=/usr/local/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-
-# Github description: Homebrew-snacker
-# shellcheck disable=SC2155
-export HOMEBREW_GITHUB_API_TOKEN="$(<"$HOME/.certs/homebrew-snacker.github_api_token")"
+# OLD? Homebrew
+#export PATH=/usr/local/bin:$PATH
+#export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # added by travis gem
-[ -f /Users/jasonpeacock/.travis/travis.sh ] && source /Users/jasonpeacock/.travis/travis.sh
-
-# Enable `brew cleanup` automatically.
-export HOMEBREW_INSTALL_CLEANUP=1
+# XXX [ -f /Users/jasonpeacock/.travis/travis.sh ] && source /Users/jasonpeacock/.travis/travis.sh

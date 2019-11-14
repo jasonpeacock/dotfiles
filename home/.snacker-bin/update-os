@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -o errexit -o nounset -o pipefail
+
+summary=""
+
+if rustup update; then
+  summary+="[INFO]\tUpdated 'rust'\n" >&2
+else
+  summary+="[ERROR]\tFailed to update 'rust'\n" >&2
+fi
+
+if nix upgrade-nix && nix-channel --update && nix-env --upgrade && nix-collect-garbage; then
+  summary+="[INFO]\tUpdated 'nix'\n" >&2
+else
+  summary+="[ERROR]\tFailed to update 'nix'\n" >&2
+fi
+
+echo -e "${summary}" >&2

@@ -9,12 +9,17 @@
 #
 # Load host-specific configuration.
 #
-THIS_BOX=`hostname | sed 's/\..*$//'`
-if [ -f $HOME/.zsh/$THIS_BOX.zshrc ] ; then
-    . $HOME/.zsh/$THIS_BOX.zshrc
+THIS_HOST=`hostname | sed 's/\..*$//'`
+if [ -f $HOME/.zsh/$THIS_HOST.zshrc ] ; then
+    . $HOME/.zsh/$THIS_HOST.zshrc
+    export PATH="$PATH:$HOME/.$THIS_HOST-bin"
 else
     echo "*** No host-specific file found! Expected: \"$HOME/.zsh/$THIS_BOX.zshrc\" ***"
 fi
+
+source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
+source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 #
 # Dotfile management with homeshick.
@@ -55,12 +60,6 @@ POWERLEVEL9K_HOME_ICON=""
 POWERLEVEL9K_HOME_SUB_ICON=""
 
 #
-# Customize zsh-autosuggestion
-#
-# 10 = dark grey
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
-
-#
 # ZSH configuration with Antigen.
 #
 source "$HOME/.zsh/antigen/antigen.zsh"
@@ -73,14 +72,13 @@ antigen bundle python
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
+#antigen bundle spwhitt/nix-zsh-completions
 
 # Set nix-shell default shell to be Zsh:
 # https://github.com/chisui/zsh-nix-shell
-antigen bundle chisui/zsh-nix-shell
+#antigen bundle chisui/zsh-nix-shell
 
 if [[ $CURRENT_OS == 'OS X' ]]; then
-    antigen bundle brew
-    antigen bundle brew-cask
     antigen bundle osx
 #elif [[ $CURRENT_OS == 'Linux' ]]; then
     # Do nothing.
@@ -94,8 +92,14 @@ antigen apply
 
 source "$HOME/.config/powerlevel10k/powerlevel10k.zsh-theme"
 
+#
+# Customize zsh-autosuggestion
+#
+# 10 = dark grey
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10"
+
 # Add local apps to the path.
-export PATH="$PATH:$HOME/bin:/usr/local/sbin"
+# XXX export PATH="$PATH:$HOME/bin:/usr/local/sbin"
 
 #
 # Aliases.
@@ -111,5 +115,12 @@ alias work='cd "$HOME/workplace"'
 alias http='python3 -m http.server'
 alias tree='tree -C'
 alias black='black -l 120'
+alias bat='bat --style plain --theme TwoDark'
 
-export PATH=$HOME/.toolbox/bin:$PATH
+export PAGER="bat --style=plain --theme TwoDark"
+
+# XXX export PATH=$HOME/.toolbox/bin:$PATH
+
+# XXX Fzf support
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#export FZF_DEFAULT_COMMAND='rg --files'

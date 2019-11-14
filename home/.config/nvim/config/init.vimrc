@@ -60,3 +60,7 @@ noremap Y y$
 
 " Restore cursor style on exit.
 au VimLeave * set guicursor=a:hor25-blinkon0
+
+" Use fzf
+set rtp+=/usr/local/opt/fzf
+
