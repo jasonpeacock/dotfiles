@@ -1,2 +1,2 @@
 # XXX.configuration.snacker.git
-# XXX.configuration.work.git
+# XXX.configuration.186590d351d9.git
