@@ -14,13 +14,13 @@
     pkgs.fd
     pkgs.fswatch
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
-    #pkgs.gitAndTools.git-big-picture
     pkgs.gitAndTools.git-extras
     pkgs.gitAndTools.lefthook
     pkgs.gitAndTools.tig
     pkgs.html-tidy
     pkgs.htop
     pkgs.hyperfine
+    pkgs.gnupg
     pkgs.jq
     pkgs.neovim
     pkgs.pandoc
@@ -49,6 +49,9 @@
     userEmail = "jason@jasonpeacock.com";
     ignores = [".DS_Store"];
     lfs.enable = true;
+    aliases = {
+      graph = "log --graph --oneline --all --decorate --topo-order";
+    };
     extraConfig = {
       core = {
         editor = "nvim";
@@ -56,6 +59,12 @@
       };
       push = {
         followtags = true;
+      };
+      pull = {
+        rebase = "preserve";
+      };
+      rerere = {
+        enabled = true;
       };
     };
   };
@@ -68,7 +77,7 @@
     defaultCommand = "fd --type f";
     defaultOptions = [ "--height 40%" "--border" ];
     fileWidgetCommand = "fd --type f";
-    fileWidgetOptions = [ "--preview 'head {}'" ];
+    fileWidgetOptions = [ "--preview 'bat --style=plain --theme TwoDark {}'" ];
     historyWidgetOptions = [ "--sort" "--exact" ];
   };
 
@@ -202,16 +211,6 @@ homeshick --quiet refresh
       bat="bat --style plain --theme TwoDark";
     };
     plugins = [
-      {
-        name = "enhancd";
-        file = "init.sh";
-        src = pkgs.fetchFromGitHub {
-          owner = "b4b4r07";
-          repo = "enhancd";
-          rev = "v2.2.4";
-          sha256 = "1smskx9vkx78yhwspjq2c5r5swh9fc5xxa40ib4753f00wk4dwpp";
-        };
-      }
       {
         name = "zsh-syntax-highlighting";
         src = pkgs.fetchFromGitHub {
