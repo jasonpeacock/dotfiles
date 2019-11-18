@@ -1,11 +1,13 @@
 { pkgs, ... }:
 
+with import "./git/host.nix";
+
 {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.git;
-    userName = "Jason Peacock";
-    userEmail = "jason@jasonpeacock.com";
+    userName = gitUserName;
+    userEmail = gitUserEmail;
     ignores = [".DS_Store"];
     lfs.enable = true;
     aliases = {
