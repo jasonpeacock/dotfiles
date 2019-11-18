@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-with import "./git/host.nix";
+with import ./git/host.nix;
 
 {
   programs.git = {
