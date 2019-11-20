@@ -6,6 +6,7 @@
     ./git.nix
     ./neovim.nix
     ./ssh.nix
+    ./tmux.nix
     ./zsh.nix
   ];
 
@@ -33,17 +34,17 @@
     pandoc
     plantuml
     python3
-    reattach-to-user-namespace
     ripgrep
     shellcheck
     shfmt
     thefuck
-    tmux
     travis
     tree
     watch
     wget
     yq
+    reattach-to-user-namespace
+  #] ++ stdenv.lib.optional stdenv.isDarwin [
   ];
 
   # Let Home Manager install and manage itself.

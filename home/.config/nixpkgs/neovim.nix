@@ -34,6 +34,5 @@
       vim-surround
       vim-toml
     ];
-
   };
 }
