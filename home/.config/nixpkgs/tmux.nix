@@ -5,9 +5,10 @@
     enable = true;
 
     baseIndex = 1;
-    keyMode = "vi";
     customPaneNavigationAndResize = true;
+    keyMode = "vi";
     newSession = true;
+    secureSocket = false;
     shortcut = "space";
     terminal = "screen-256color";
 

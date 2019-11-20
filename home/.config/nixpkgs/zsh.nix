@@ -44,9 +44,7 @@
     };
     sessionVariables = {};
     # .zshenv
-    envExtra = "
-export PAGER=\"bat --style=plain --theme TwoDark\"
-    ";
+    envExtra = "";
     # .zshrc
     initExtra = "
 source \"$HOME/.config/powerlevel10k/powerlevel10k.zsh-theme\"
@@ -152,7 +150,6 @@ homeshick --quiet refresh
       http="python3 -m http.server";
       tree="tree -C";
       black="black -l 120";
-      bat="bat --style plain --theme TwoDark";
     };
     plugins = [
       {

@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./bat.nix
     ./fzf.nix
     ./git.nix
     ./neovim.nix
@@ -14,7 +15,6 @@
     #pandoc-sidenote
     #platformio
     asciinema
-    bat
     curl
     elmPackages.elm
     entr
