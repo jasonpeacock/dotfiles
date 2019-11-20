@@ -12,15 +12,18 @@
     terminal = "screen-256color";
 
     plugins = with pkgs.tmuxPlugins; [
-      sensible
+      cpu
       {
         plugin = tmux-colors-solarized;
         extraConfig = "set -g @colors-solarized '256'";
       }
       pain-control
+      prefix-highlight
     ];
 
     extraConfig = "
+set -g status-right '#{prefix_highlight} #{cpu_percentage} | %a %h-%d %H:%M '
+
 # Set ability to capture on start and restore on exit window data when running an application
 setw -g alternate-screen on
 

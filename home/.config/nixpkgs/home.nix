@@ -43,8 +43,10 @@
     watch
     wget
     yq
+  ] ++ stdenv.lib.optionals stdenv.isLinux [
+    sysstat
+  ] ++ stdenv.lib.optionals stdenv.isDarwin [
     reattach-to-user-namespace
-  #] ++ stdenv.lib.optional stdenv.isDarwin [
   ];
 
   # Let Home Manager install and manage itself.
