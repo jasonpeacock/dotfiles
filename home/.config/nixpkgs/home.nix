@@ -3,8 +3,11 @@
 {
   imports = [
     ./bat.nix
+    ./direnv.nix
     ./fzf.nix
     ./git.nix
+    ./gnupg.nix
+    ./lsd.nix
     ./neovim.nix
     ./ssh.nix
     ./tmux.nix
@@ -18,7 +21,6 @@
     curl
     elmPackages.elm
     entr
-    exa
     exercism
     fd
     fswatch
@@ -29,7 +31,6 @@
     html-tidy
     htop
     hyperfine
-    gnupg
     jq
     pandoc
     plantuml
