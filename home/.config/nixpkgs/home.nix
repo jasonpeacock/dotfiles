@@ -19,27 +19,23 @@
     #platformio
     asciinema
     curl
-    elmPackages.elm
     entr
-    exercism
     fd
     fswatch
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
     gitAndTools.git-extras
     gitAndTools.lefthook
     gitAndTools.tig
-    html-tidy
     htop
     hyperfine
     jq
-    pandoc
     plantuml
     python3
     ripgrep
+    rsync
     shellcheck
     shfmt
     thefuck
-    travis
     tree
     watch
     wget
