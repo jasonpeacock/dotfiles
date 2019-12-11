@@ -18,6 +18,7 @@
     #pandoc-sidenote
     #platformio
     asciinema
+    awscli
     curl
     entr
     fd

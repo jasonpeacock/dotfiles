@@ -144,7 +144,6 @@ homeshick --quiet refresh
       work="cd \"$HOME/workplace\"";
       http="python3 -m http.server";
       tree="tree -C";
-      black="black -l 120";
     };
     plugins = [
       {

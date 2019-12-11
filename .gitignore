@@ -1,2 +1,3 @@
 /overrides/generated/*
 /secrets/generated/*
+*.swp
