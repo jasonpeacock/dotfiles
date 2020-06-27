@@ -10,7 +10,7 @@
     newSession = true;
     secureSocket = false;
     shortcut = "space";
-    terminal = "screen-256color";
+    terminal = "xterm-256color";
 
     plugins = with pkgs.tmuxPlugins; [
       cpu

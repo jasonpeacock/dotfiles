@@ -18,7 +18,7 @@
     #pandoc-sidenote
     #platformio
     asciinema
-    awscli
+    #awscli
     curl
     entr
     fd
@@ -31,9 +31,18 @@
     hyperfine
     jq
     plantuml
-    python3
+    python37
+    python37Packages.black
+    python37Packages.flake8
+    python37Packages.flake8-blind-except
+    python37Packages.flake8-import-order
+    python37Packages.lxml
+    python37Packages.mypy
+    python37Packages.pep8-naming
+    pypi2nix
     ripgrep
     rsync
+    ruby
     shellcheck
     shfmt
     thefuck

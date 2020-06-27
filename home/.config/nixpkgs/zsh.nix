@@ -84,6 +84,9 @@ source \"$HOME/.homesick/repos/homeshick/homeshick.sh\"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 # Check everything is up-to-date.
 homeshick --quiet refresh
+
+# Custom Zsh completions
+fpath=($HOME/.zsh/completions $fpath)
     ";
     # .zlogin
     loginExtra = "";
@@ -96,7 +99,7 @@ homeshick --quiet refresh
       # Customize the Powerlevel9k theme.
       # https://github.com/bhilburn/powerlevel9k
       POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
-      POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=["status" "context_joined"];
+      POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=["status" "aws" "background_jobs" "context_joined"];
       POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=["dir" "vcs" "command_execution_time"];
       # Default 'context' is "%n@%m", drop the username (%n) and always show it.
       POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true;

@@ -118,8 +118,8 @@ let g:ale_fixers = {
 \ 'sh': ['shfmt'],
 \}
 
-highlight ALEWarning ctermfg=13
-highlight ALEError ctermfg=5
+"highlight ALEWarning ctermfg=13
+"highlight ALEError ctermfg=5
 
 " camelcasemotion
 let g:camelcasemotion_key = '<leader>'
