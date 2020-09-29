@@ -19,6 +19,8 @@
     #platformio
     asciinema
     #awscli
+    cmake
+    cookiecutter
     curl
     entr
     fd

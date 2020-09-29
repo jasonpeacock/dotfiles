@@ -35,6 +35,11 @@ with import ./git/host.nix;
       rerere = {
         enabled = true;
       };
+      delta = {
+        line-numbers = true;
+        dark = true;
+        syntax-theme = "ansi-dark";
+      };
     };
   };
 }
