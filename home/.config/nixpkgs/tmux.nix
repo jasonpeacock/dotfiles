@@ -16,7 +16,7 @@
       cpu
       {
         plugin = tmux-colors-solarized;
-        extraConfig = "set -g @colors-solarized '256'";
+        extraConfig = "set -g @colors-solarized 'light'";
       }
       pain-control
       prefix-highlight
@@ -51,7 +51,7 @@ set -g -a terminal-overrides ',*:Ss=\\E[%p1%d q:Se=\\E[2 q'
 # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
 set -sg escape-time 10
 
-set -g pane-active-border-style fg=yellow
+set -g pane-active-border-style fg=blue
     ";
   };
 }

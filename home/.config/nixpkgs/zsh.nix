@@ -98,6 +98,7 @@ fpath=($HOME/.zsh/completions $fpath)
     localVariables = {
       # Customize the Powerlevel9k theme.
       # https://github.com/bhilburn/powerlevel9k
+      POWERLEVEL9K_COLOR_SCHEME="light";
       POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=["status" "aws" "background_jobs" "context_joined"];
       POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=["dir" "vcs" "command_execution_time"];
@@ -142,7 +143,6 @@ fpath=($HOME/.zsh/completions $fpath)
       grep="grep --color=auto";
       less="less -R -n";
       scp="scp -C";
-      tbase="tmux attach -t base || tmux new -s base";
       vi="nvim -o";
       work="cd \"$HOME/workplace\"";
       http="python3 -m http.server";

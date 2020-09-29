@@ -6,7 +6,7 @@
     enable = true;
     config = {
 #      pager = "less -FR";
-      theme = "TwoDark";
+      theme = "Solarized (light)";
       style = "plain";
     };
   };

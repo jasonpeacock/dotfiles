@@ -12,7 +12,7 @@
     defaultOptions = [ "--height 40%" "--border" ];
 
     fileWidgetCommand = "fd --type f";
-    fileWidgetOptions = [ "--preview 'bat --style=plain --theme TwoDark {}'" ];
+    fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Solarized (light)\' {}'" ];
 
     historyWidgetOptions = [ "--sort" "--exact" ];
   };
