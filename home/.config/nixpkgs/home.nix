@@ -41,6 +41,7 @@
     python37Packages.lxml
     python37Packages.mypy
     python37Packages.pep8-naming
+    python37Packages.yapf
     pypi2nix
     ripgrep
     rsync
