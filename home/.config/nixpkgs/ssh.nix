@@ -11,6 +11,10 @@
         hostname = "jasonpeacock.com";
         user = "syzyby";
       };
+      "cloud" = {
+        #hostname = "dev-dsk-jpeacock-2c-601aaa4a.us-west-2.amazon.com";
+        hostname = "jpeacock-cloud.aka.corp.amazon.com";
+      };
       "bus-hitl-dut-rpi-jpeacock" = {
         user = "pi";
         proxyCommand = "sh -c \"aws --profile hitl-devices-administrator ssm start-session --target mi-00fd9556945d67d6a --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
