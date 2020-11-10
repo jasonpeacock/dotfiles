@@ -83,7 +83,10 @@ fi
 source \"$HOME/.homesick/repos/homeshick/homeshick.sh\"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 # Check everything is up-to-date.
-homeshick --quiet refresh
+# TODO stop checking, it slows down the initial terminal
+# launching. Do something smarter - wrap it in a weekly
+# check against a timestamp file?
+# homeshick --quiet refresh
 
 # Custom Zsh completions
 fpath=($HOME/.zsh/completions $fpath)
