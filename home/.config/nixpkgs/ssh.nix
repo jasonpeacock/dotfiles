@@ -7,6 +7,11 @@
 
     compression = true;
     matchBlocks = {
+      "bloggg" = {
+        hostname = "35.167.77.210";
+        user = "ec2-user";
+        identityFile = "~/.ssh/LightsailDefaultKey-us-west-2.pem";
+      };
       "jasonpeacock" = {
         hostname = "jasonpeacock.com";
         user = "syzyby";

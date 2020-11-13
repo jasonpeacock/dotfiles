@@ -52,7 +52,7 @@
     tree
     watch
     wget
-    yq
+    # yq
   ] ++ stdenv.lib.optionals stdenv.isLinux [
     sysstat
   ] ++ stdenv.lib.optionals stdenv.isDarwin [
