@@ -4,6 +4,17 @@
   programs.ssh = {
     enable = true;
     serverAliveInterval = 60;
+    forwardAgent = true;
+
+    extraOptionOverrides = {
+      "IgnoreUnknown" = "GSSAPIKeyExchange";
+    };
+
+    extraConfig = "
+GSSAPIKeyExchange yes
+GSSAPIAuthentication yes
+GSSAPIDelegateCredentials yes
+    ";
 
     compression = true;
     matchBlocks = {
