@@ -117,8 +117,8 @@ let g:ale_fixers = {
 \ 'sh': ['shfmt'],
 \}
 
-"highlight ALEWarning ctermfg=13
-"highlight ALEError ctermfg=5
+highlight ALEWarning ctermfg=13
+highlight ALEError ctermfg=5
 
 " camelcasemotion
 let g:camelcasemotion_key = '<leader>'
@@ -153,7 +153,7 @@ set showmatch              " Show matching brackets.
 set undolevels=100         " Adjust system undo levels.
 set wmh=0                  " Set smallest possible window when minimizing a split window.
 set number                 " Turn on line numbers.
-set relativenumber         " Show the line numbers as relative.
+"set relativenumber         " Show the line numbers as relative.
 
 "set spell                  " Enable spell check.
 "set spellcapcheck=         " Disable capitalization check.
@@ -171,6 +171,8 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+" Round all shifts to be a multiple of `shiftwidth`.
+set shiftround
 
 " Support folding.
 set foldenable             " Enable folding.

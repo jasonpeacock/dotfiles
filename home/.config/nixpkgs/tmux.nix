@@ -25,6 +25,9 @@
     extraConfig = "
 set -g status-right '#{prefix_highlight} #{cpu_percentage} | %a %h-%d %H:%M '
 
+# Make the scrollback buffer much larger than the default (default: 2000)
+set -g history-limit 10000
+
 # Set ability to capture on start and restore on exit window data when running an application
 setw -g alternate-screen on
 

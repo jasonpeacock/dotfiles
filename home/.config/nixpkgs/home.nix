@@ -22,6 +22,8 @@
     cmake
     cookiecutter
     curl
+    docker
+    docker-compose
     entr
     fd
     fswatch
@@ -38,6 +40,7 @@
     python37Packages.flake8
     python37Packages.flake8-blind-except
     python37Packages.flake8-import-order
+    python37Packages.jsonschema
     python37Packages.lxml
     python37Packages.mypy
     python37Packages.pep8-naming
