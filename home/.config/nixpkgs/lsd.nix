@@ -2,7 +2,7 @@
 
 {
   programs.lsd = {
-    enable = true;
+    enable = false;
     enableAliases = true;
   };
 }

@@ -15,10 +15,10 @@
   ];
 
   home.packages = with pkgs; [
-    #pandoc-sidenote
     #platformio
     asciinema
     #awscli
+    cargo
     cmake
     cookiecutter
     curl
@@ -31,6 +31,7 @@
     gitAndTools.git-extras
     gitAndTools.lefthook
     gitAndTools.tig
+    gping
     htop
     hyperfine
     jq
@@ -49,13 +50,16 @@
     ripgrep
     rsync
     ruby
+    rust-analyzer
+    rustfmt
     shellcheck
     shfmt
     thefuck
     tree
+    vivid
     watch
     wget
-    # yq
+    yq
   ] ++ stdenv.lib.optionals stdenv.isLinux [
     sysstat
   ] ++ stdenv.lib.optionals stdenv.isDarwin [
