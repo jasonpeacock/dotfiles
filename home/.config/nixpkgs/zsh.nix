@@ -131,7 +131,7 @@ fpath=($HOME/.zsh/completions $fpath)
 
       # Customize zsh-autosuggestion
       # 10 = dark grey
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10";
+      # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10";
 
       # Configure OhMyZsh `tmux` plugin.
       # https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#tmux
@@ -142,6 +142,8 @@ fpath=($HOME/.zsh/completions $fpath)
       ZSH_TMUX_FIXTERM=true;
       ZSH_TMUX_FIXTERM_WITH_256COLOR="screen-256color";
       ZSH_TMUX_FIXTERM_WITHOUT_256COLOR="screen";
+
+      EDITOR="nvim";
     };
     shellAliases = {
       bc="bc -l -q \"\$HOME/.bc\"";

@@ -106,6 +106,14 @@ let g:ale_sh_shellcheck_options = '-s bash -e SC1008' " Force shellcheck to alwa
 let g:ale_sh_shfmt_options = "-i 2 -ci -sr -kp" " Make `shfmt` pretty.
 let g:ale_rust_cargo_use_clippy = 1
 let g:ale_rust_rls_toolchain = "stable"
+" Make the errors more legible
+let g:ale_echo_msg_format = "[%linter%] %s"
+"let g:ale_cursor_detail = 1
+"let g:ale_echo_cursor = 1
+"let g:ale_close_preview_on_insert = 1
+"let g:ale_echo_delay = 10  " Default is 10ms
+let g:ale_python_mypy_ignore_invalid_syntax = 1 " Speed things up by ignore Mypy syntax errors
+let g:ale_python_mypy_show_notes = 1
 
 " \ 'rust': ['analyzer', 'rls', 'cargo'],
 let g:ale_linters = {

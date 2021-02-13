@@ -18,6 +18,7 @@
     #platformio
     asciinema
     #awscli
+    capnproto
     cargo
     cmake
     cookiecutter
@@ -31,6 +32,7 @@
     gitAndTools.git-extras
     gitAndTools.lefthook
     gitAndTools.tig
+    git-remote-codecommit
     gping
     htop
     hyperfine
