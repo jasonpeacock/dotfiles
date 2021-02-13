@@ -1,0 +1,119 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+# success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+symbol = "➜"
+error_symbol = "[✗](bold red)"
+use_symbol_for_status = true
+
+# Disable the package module, hiding it from the prompt completely
+# [package]
+# disabled = true
+
+# From:
+# https://starship.rs/presets/#nerd-font-symbols
+[aws]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[cmd_duration]
+min_time = 100
+style = "dimmed white"
+# disabled = true
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " "
+truncation_length = 4
+truncate_to_repo = true
+style = "blue"
+
+[docker]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[git_commit]
+commit_hash_length = 8
+
+[git_status]
+# staged.value = "++"
+# staged.style = "green"
+# staged_count.enabled = true
+# staged_count.style = "green"
+show_sync_count = true
+conflicted_count.enabled = true
+deleted_count.enabled = true
+modified_count.enabled = true
+stashed_count.enabled = true
+staged_count.enabled = true
+renamed_count.enabled = true
+untracked_count.enabled = true
+
+[golang]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[hostname]
+ssh_only = false
+prefix = "⟪"
+suffix = "⟫"
+trim_at = ".ant.amazon.com"
+# disabled = true
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "

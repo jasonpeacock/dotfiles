@@ -54,6 +54,7 @@
     rustfmt
     shellcheck
     shfmt
+    starship
     thefuck
     tree
     vivid

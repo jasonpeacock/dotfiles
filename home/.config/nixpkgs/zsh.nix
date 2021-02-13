@@ -42,7 +42,8 @@
     envExtra = "";
     # .zshrc
     initExtra = "
-source \"$HOME/.config/powerlevel10k/powerlevel10k.zsh-theme\"
+# source \"$HOME/.config/powerlevel10k/powerlevel10k.zsh-theme\"
+eval \"$(starship init zsh)\"
 
 nixify() {
   if [ ! -e ./.envrc ]; then
