@@ -30,8 +30,8 @@ window:
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
   dimensions:
-    columns: 266
-    lines: 79
+    columns: 304
+    lines: 93
 
   # Window position (changes require restart)
   #
@@ -111,12 +111,13 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: SauceCodePro Nerd Font
-    family: JetBrainsMono Nerd Font
+    family: SauceCodePro Nerd Font
+    # family: JetBrainsMono Nerd Font
+    # family: GoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    # style: Regular
     style: Regular
+    # style: Book
 
   # Bold font face
   bold:
@@ -124,7 +125,9 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: JetBrainsMono Nerd Font
+    family: SauceCodePro Nerd Font
+    # family: JetBrainsMono Nerd Font
+    # family: GoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -135,7 +138,9 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: JetBrainsMono Nerd Font
+    family: SauceCodePro Nerd Font
+    # family: JetBrainsMono Nerd Font
+    # family: GoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -146,7 +151,9 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: JetBrainsMono Nerd Font
+    family: SauceCodePro Nerd Font
+    # family: JetBrainsMono Nerd Font
+    # family: GoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
