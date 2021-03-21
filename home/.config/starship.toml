@@ -1,12 +1,5 @@
 # Don't print a new line at the start of the prompt
-add_newline = false
-
-# Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
-# success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-symbol = "➜"
-error_symbol = "[✗](bold red)"
-use_symbol_for_status = true
+add_newline = true
 
 # Disable the package module, hiding it from the prompt completely
 # [package]
@@ -20,10 +13,15 @@ symbol = " "
 [conda]
 symbol = " "
 
+[character]
+symbol = "➜"
+error_symbol = "[✗](bold red)"
+use_symbol_for_status = true
+
 [cmd_duration]
-min_time = 100
+min_time = 1000
 style = "dimmed white"
-# disabled = true
+disabled = false
 
 [dart]
 symbol = " "
@@ -45,23 +43,27 @@ symbol = " "
 
 [git_branch]
 symbol = " "
+always_show_remote = true
+disabled = false
+tag_disabled = false
 
 [git_commit]
 commit_hash_length = 8
+disabled = false
 
 [git_status]
 # staged.value = "++"
 # staged.style = "green"
 # staged_count.enabled = true
 # staged_count.style = "green"
-show_sync_count = true
-conflicted_count.enabled = true
-deleted_count.enabled = true
-modified_count.enabled = true
-stashed_count.enabled = true
-staged_count.enabled = true
-renamed_count.enabled = true
-untracked_count.enabled = true
+# show_sync_count = true
+# conflicted_count.enabled = true
+# deleted_count.enabled = true
+# modified_count.enabled = true
+# stashed_count.enabled = true
+# staged_count.enabled = true
+# renamed_count.enabled = true
+# untracked_count.enabled = true
 
 [golang]
 symbol = " "
@@ -71,10 +73,7 @@ symbol = " "
 
 [hostname]
 ssh_only = false
-# prefix = "⟪"
-# suffix = "⟫"
-trim_at = ".ant.amazon.com"
-# disabled = true
+disabled = true
 
 [hg_branch]
 symbol = " "
@@ -117,3 +116,6 @@ symbol = " "
 
 [swift]
 symbol = "ﯣ "
+
+[username]
+disabled = true

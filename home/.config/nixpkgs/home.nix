@@ -36,6 +36,7 @@
     gping
     htop
     hyperfine
+    influxdb
     jq
     plantuml
     python37
