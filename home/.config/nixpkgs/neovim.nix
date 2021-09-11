@@ -8,7 +8,6 @@
     vimAlias = false;
 
     withNodeJs = false;
-    withPython = false;
     withPython3 = true;
     withRuby = true;
 

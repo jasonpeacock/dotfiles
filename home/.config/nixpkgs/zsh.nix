@@ -28,13 +28,11 @@
         "fd"
         "git"
         "git-extras"
-        "jira"
         "python"
         "ripgrep"
         "rust"
         "tig"
         "tmux"
-        "thefuck"
       ];
     };
     sessionVariables = {};
@@ -73,7 +71,7 @@ source \"$HOME/.nix-profile/etc/profile.d/nix.sh\"
 THIS_HOST=`hostname | sed 's/\\..*$//'`
 if [ -f $HOME/.zsh/$THIS_HOST.zshrc ] ; then
     . $HOME/.zsh/$THIS_HOST.zshrc
-    export PATH=\"$PATH:$HOME/.$THIS_HOST-bin\"
+    export PATH=\"$PATH:$HOME/.$THIS_HOST-bin:$HOME/.cargo/bin\"
 else
     echo \"*** No host-specific file found! Expected [$HOME/.zsh/$THIS_BOX.zshrc] ***\"
 fi
@@ -147,6 +145,7 @@ fpath=($HOME/.zsh/completions $fpath)
     };
     shellAliases = {
       bc="bc -l -q \"\$HOME/.bc\"";
+      sync="git checkout mainline && git fetch --prune && git pull";
       checkpoint="git status && git add -A && git commit -m \"checkpoint\" --no-verify";
       grep="grep --color=auto";
       less="less -R -n";

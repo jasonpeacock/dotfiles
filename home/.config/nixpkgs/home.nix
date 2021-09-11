@@ -1,5 +1,22 @@
 { config, pkgs, ... }:
 
+let
+  mach-nix = import (
+    builtins.fetchGit {
+      url = "https://github.com/DavHau/mach-nix/";
+      ref = "2.0.0";
+    }
+  );
+
+  python39Custom = mach-nix.mkPython {
+    python = pkgs.python39;
+    requirements = ''
+      pycapnp
+      pyyaml
+    '';
+  };
+in
+
 {
   imports = [
     ./bat.nix
@@ -17,8 +34,7 @@
   home.packages = with pkgs; [
     #platformio
     asciinema
-    #awscli
-    capnproto
+    can-utils
     cargo
     cmake
     cookiecutter
@@ -39,34 +55,35 @@
     influxdb
     jq
     plantuml
-    python37
-    python37Packages.black
-    python37Packages.flake8
-    python37Packages.flake8-blind-except
-    python37Packages.flake8-import-order
-    python37Packages.jsonschema
-    python37Packages.lxml
-    python37Packages.mypy
-    python37Packages.pep8-naming
-    python37Packages.yapf
-    pypi2nix
+    poetry
+    python39Custom
+    python39Packages.black
+    python39Packages.flake8
+    python39Packages.flake8-blind-except
+    python39Packages.flake8-import-order
+    python39Packages.jsonschema
+    python39Packages.lxml
+    python39Packages.mypy
+    python39Packages.pep8-naming
+    python39Packages.yapf
     ripgrep
     rsync
     ruby
+    rustc
     rust-analyzer
     rustfmt
     shellcheck
     shfmt
+    srecord
     starship
-    thefuck
     tree
     vivid
     watch
     wget
     yq
-  ] ++ stdenv.lib.optionals stdenv.isLinux [
+  ] ++ lib.optionals stdenv.isLinux [
     sysstat
-  ] ++ stdenv.lib.optionals stdenv.isDarwin [
+  ] ++ lib.optionals stdenv.isDarwin [
     reattach-to-user-namespace
   ];
 
