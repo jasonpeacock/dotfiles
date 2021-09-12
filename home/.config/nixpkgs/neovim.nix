@@ -9,7 +9,7 @@
 
     withNodeJs = false;
     withPython3 = true;
-    withRuby = true;
+    withRuby = false;
 
     extraConfig = builtins.readFile neovim/neovimrc;
 
