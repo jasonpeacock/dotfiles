@@ -34,7 +34,6 @@ in
   home.packages = with pkgs; [
     #platformio
     asciinema
-    can-utils
     cargo
     cmake
     cookiecutter
@@ -82,6 +81,7 @@ in
     wget
     yq
   ] ++ lib.optionals stdenv.isLinux [
+    can-utils
     sysstat
   ] ++ lib.optionals stdenv.isDarwin [
     reattach-to-user-namespace
