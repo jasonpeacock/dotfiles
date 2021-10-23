@@ -3,20 +3,25 @@
 {
   programs.ssh = {
     enable = true;
-    serverAliveInterval = 60;
+
+    compression = true;
     forwardAgent = true;
+    serverAliveInterval = 60;
+    serverAliveCountMax = 60;
 
     extraOptionOverrides = {
       "IgnoreUnknown" = "GSSAPIKeyExchange";
     };
 
     extraConfig = "
+CheckHostIP no
+TCPKeepAlive yes
+IPQoS=throughput
 GSSAPIKeyExchange yes
 GSSAPIAuthentication yes
 GSSAPIDelegateCredentials yes
     ";
 
-    compression = true;
     matchBlocks = {
       "bloggg" = {
         hostname = "35.167.77.210";

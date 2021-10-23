@@ -48,7 +48,6 @@ in
     gitAndTools.lefthook
     gitAndTools.tig
     git-remote-codecommit
-    gping
     htop
     hyperfine
     influxdb
@@ -83,6 +82,7 @@ in
   ] ++ lib.optionals stdenv.isLinux [
     can-utils
     sysstat
+    gping # fails to build on OSX
   ] ++ lib.optionals stdenv.isDarwin [
     reattach-to-user-namespace
   ];
