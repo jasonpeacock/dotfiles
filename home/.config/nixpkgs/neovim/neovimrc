@@ -74,12 +74,13 @@ syntax enable
 
 " vim-airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "solarized"
+let g:airline_theme = "dracula"
 "let g:airline_solarized_bg='dark'
 
 " vim-colors-solarized
-colorscheme solarized
-set background=light
+colorscheme dracula
+set background=dark
+
 
 " vim-better-whitespace
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit'] " Filetypes to skip stripping of whitespace.

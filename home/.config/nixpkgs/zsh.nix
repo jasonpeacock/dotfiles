@@ -87,7 +87,7 @@ fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 # check against a timestamp file?
 # homeshick --quiet refresh
 
-export LS_COLORS=\"$(vivid generate solarized-light)\"
+#export LS_COLORS=\"$(vivid generate solarized-light)\"
 
 # Custom Zsh completions
 fpath=($HOME/.zsh/completions $fpath)
@@ -102,7 +102,7 @@ fpath=($HOME/.zsh/completions $fpath)
     localVariables = {
       # Customize the Powerlevel9k theme.
       # https://github.com/bhilburn/powerlevel9k
-      POWERLEVEL9K_COLOR_SCHEME="light";
+      POWERLEVEL9K_COLOR_SCHEME="dracula";
       POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=["status" "aws" "background_jobs" "context_joined"];
       POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=["dir" "vcs" "command_execution_time"];
