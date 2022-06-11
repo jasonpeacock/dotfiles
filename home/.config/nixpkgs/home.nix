@@ -4,7 +4,7 @@ let
   mach-nix = import (
     builtins.fetchGit {
       url = "https://github.com/DavHau/mach-nix/";
-      ref = "2.0.0";
+      ref = "refs/tags/2.0.0";
     }
   );
 
@@ -34,13 +34,14 @@ in
   home.packages = with pkgs; [
     #platformio
     asciinema
-    cargo
     cmake
     cookiecutter
     curl
     docker
     docker-compose
     entr
+    exa
+    exercism
     fd
     fswatch
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
@@ -50,7 +51,6 @@ in
     git-remote-codecommit
     htop
     hyperfine
-    influxdb
     jq
     plantuml
     poetry
@@ -67,14 +67,10 @@ in
     ripgrep
     rsync
     ruby
-    rustc
     rust-analyzer
-    rustfmt
     shellcheck
     shfmt
-    srecord
     starship
-    tree
     vivid
     watch
     wget

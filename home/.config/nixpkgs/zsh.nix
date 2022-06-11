@@ -20,7 +20,6 @@
       enable = true;
       plugins = [
         "aws"
-        "cargo"
         "catimg"
         "colored-man-pages"
         "docker"
@@ -153,7 +152,8 @@ fpath=($HOME/.zsh/completions $fpath)
       vi="nvim -o";
       work="cd \"$HOME/workplace\"";
       http="python3 -m http.server";
-      tree="tree -C";
+      tree="exa --tree --icons --git";
+      ls="exa --icons --git";
     };
     plugins = [
       {

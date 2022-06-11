@@ -27,6 +27,7 @@
       vim-colors-solarized
       vim-commentary
       vim-eunuch
+      vim-gitgutter
       vim-markdown
       vim-nix
       vim-repeat

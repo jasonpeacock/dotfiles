@@ -159,6 +159,7 @@ set nobackup               " Don't keep a backup file
 set noerrorbells           " Be quiet.
 set noswapfile             " Don't use swap files.
 set showmatch              " Show matching brackets.
+set updatetime=100         " Write to swap file faster, and makes vim-gitgutter more responsive
 set undolevels=100         " Adjust system undo levels.
 set wmh=0                  " Set smallest possible window when minimizing a split window.
 set number                 " Turn on line numbers.
