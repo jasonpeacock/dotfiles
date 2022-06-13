@@ -39,8 +39,7 @@
     envExtra = "";
     # .zshrc
     initExtra = "
-source \"$HOME/.config/powerlevel10k/powerlevel10k.zsh-theme\"
-# eval \"$(starship init zsh)\"
+eval \"$(starship init zsh)\"
 
 nixify() {
   if [ ! -e ./.envrc ]; then
@@ -99,33 +98,6 @@ fpath=($HOME/.zsh/completions $fpath)
     profileExtra = "";
     # .zshrc
     localVariables = {
-      # Customize the Powerlevel9k theme.
-      # https://github.com/bhilburn/powerlevel9k
-      POWERLEVEL9K_COLOR_SCHEME="light";
-      POWERLEVEL9K_PROMPT_ADD_NEWLINE=true;
-      POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=["status" "aws" "background_jobs" "context_joined"];
-      POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=["dir" "vcs" "command_execution_time"];
-      # Default 'context' is "%n@%m", drop the username (%n) and always show it.
-      POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true;
-      POWERLEVEL9K_CONTEXT_TEMPLATE="\${HOST_NICKNAME:-%m}";
-      # Shorten the 'dir'.
-      POWERLEVEL9K_SHORTEN_DIR_LENGTH=3;
-      POWERLEVEL9K_SHORTEN_DELIMITER="..";
-      # Drop the return code from 'status' and always show it.
-      POWERLEVEL9K_STATUS_VERBOSE=false;
-      POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true;
-      # Use the awesome version of SourceCodePro font.
-      #POWERLEVEL9K_MODE='awesome-patched'
-      # Remove the extraneous Git icons (it's always Git).
-      POWERLEVEL9K_VCS_GIT_ICON="";
-      POWERLEVEL9K_VCS_GIT_GITHUB_ICON="";
-      # Remove the duration icon, keep things compact.
-      POWERLEVEL9K_EXECUTION_TIME_ICON="";
-      # Remove the folder icons, keep things compact.
-      POWERLEVEL9K_FOLDER_ICON="";
-      POWERLEVEL9K_HOME_ICON="";
-      POWERLEVEL9K_HOME_SUB_ICON="";
-
       # Customize zsh-autosuggestion
       # 10 = dark grey
       # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10";

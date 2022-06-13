@@ -1,121 +1,98 @@
-# Don't print a new line at the start of the prompt
+# Inserts a blank line between shell prompts
 add_newline = true
 
-# Disable the package module, hiding it from the prompt completely
-# [package]
-# disabled = true
+format = """$time$fill$all"""
+[fill]
+symbol = " "
 
-# From:
+# Symbols are all from:
 # https://starship.rs/presets/#nerd-font-symbols
+
 [aws]
 symbol = " "
 
-[conda]
-symbol = " "
+# All builds are generally done in Docker containers and do not
+# use the locally installed compilers, so showing its version
+# won't help.
+[c]
+disabled = true
+[cmake]
+disabled = true
 
 [character]
-symbol = "➜"
-error_symbol = "[✗](bold red)"
-use_symbol_for_status = true
+success_symbol = "[➜](green)"
+error_symbol = "[✗](red)"
 
 [cmd_duration]
-min_time = 1000
-style = "dimmed white"
-disabled = false
-
-[dart]
-symbol = " "
+min_time = 1_000
 
 [directory]
 read_only = " "
 truncation_length = 4
-truncate_to_repo = true
-style = "blue"
+truncate_to_repo = false
+truncation_symbol = ".../"
 
-[docker]
+[docker_context]
 symbol = " "
 
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
 [git_branch]
-symbol = " "
-always_show_remote = true
-disabled = false
-tag_disabled = false
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+truncation_length = 20
 
 [git_commit]
 commit_hash_length = 8
+
+[git_metrics]
 disabled = false
 
 [git_status]
-# staged.value = "++"
-# staged.style = "green"
-# staged_count.enabled = true
-# staged_count.style = "green"
-# show_sync_count = true
-# conflicted_count.enabled = true
-# deleted_count.enabled = true
-# modified_count.enabled = true
-# stashed_count.enabled = true
-# staged_count.enabled = true
-# renamed_count.enabled = true
-# untracked_count.enabled = true
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
 
 [golang]
 symbol = " "
-
-[haskell]
-symbol = " "
+format = 'via [$symbol]($style)'
 
 [hostname]
 ssh_only = false
-disabled = true
-
-[hg_branch]
-symbol = " "
 
 [java]
 symbol = " "
 
-[julia]
-symbol = " "
-
 [memory_usage]
 symbol = " "
-
-[nim]
-symbol = " "
 
 [nix_shell]
 symbol = " "
 
 [nodejs]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [package]
 symbol = " "
 
 [perl]
 symbol = " "
-
-[php]
-symbol = " "
+format = 'via [$symbol]($style)'
 
 [python]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [ruby]
 symbol = " "
+format = 'via [$symbol]($style)'
 
 [rust]
 symbol = " "
+format = 'via [$symbol]($style)'
 
-[swift]
-symbol = "ﯣ "
+[time]
+format = "[$time]($style) "
+time_format = "%F %R"
+disabled = false
 
 [username]
 disabled = true
