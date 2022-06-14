@@ -49,6 +49,8 @@ in
     gitAndTools.lefthook
     gitAndTools.tig
     git-remote-codecommit
+    glow
+    gping
     htop
     hyperfine
     jq
@@ -70,6 +72,7 @@ in
     rust-analyzer
     shellcheck
     shfmt
+    socat
     starship
     vivid
     watch

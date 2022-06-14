@@ -116,8 +116,6 @@ fpath=($HOME/.zsh/completions $fpath)
     };
     shellAliases = {
       bc="bc -l -q \"\$HOME/.bc\"";
-      sync="git checkout mainline && git fetch --prune && git pull";
-      checkpoint="git status && git add -A && git commit -m \"checkpoint\" --no-verify";
       grep="grep --color=auto";
       less="less -R -n";
       scp="scp -C";
