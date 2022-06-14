@@ -23,7 +23,7 @@ with import ./git/host.nix;
       core = {
         editor = "nvim";
         # This conflicts with `delta` diff highlighter.
-        # pager = "bat --style=plain --theme 'Solarized (light)'";
+        # pager = "bat --style=plain --theme 'Dracula'";
       };
       push = {
         followtags = true;
@@ -37,7 +37,7 @@ with import ./git/host.nix;
       };
       delta = {
         line-numbers = true;
-        syntax-theme = "Solarized (light)";
+        syntax-theme = "Dracula";
       };
     };
   };

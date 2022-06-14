@@ -25,7 +25,6 @@
       vim-airline
       vim-airline-themes
       vim-better-whitespace
-      vim-colors-solarized
       vim-commentary
       vim-eunuch
       vim-gitgutter
