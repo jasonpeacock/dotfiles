@@ -85,7 +85,7 @@ fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 # check against a timestamp file?
 # homeshick --quiet refresh
 
-export LS_COLORS=\"$(vivid generate solarized-light)\"
+export LS_COLORS=\"$(vivid generate dracula)\"
 
 # Custom Zsh completions
 fpath=($HOME/.zsh/completions $fpath)

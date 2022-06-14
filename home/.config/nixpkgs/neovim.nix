@@ -16,6 +16,7 @@
     plugins = with pkgs.vimPlugins; [
       ale
       camelcasemotion
+      dracula-vim
       elm-vim
       gundo
       plantuml-syntax
