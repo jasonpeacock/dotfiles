@@ -54,6 +54,7 @@ in
     htop
     hyperfine
     jq
+    netcat-gnu
     plantuml
     poetry
     python39Custom

@@ -35,6 +35,13 @@ GSSAPIDelegateCredentials yes
       "cloud" = {
         #hostname = "dev-dsk-jpeacock-2c-601aaa4a.us-west-2.amazon.com";
         hostname = "jpeacock-cloud.aka.corp.amazon.com";
+        remoteForwards = [
+          {
+            bind.port = 2224;
+            host.address = "127.0.0.1";
+            host.port = 2224;
+          }
+        ];
       };
       "vlcnhil01" = {
         user = "tech";
