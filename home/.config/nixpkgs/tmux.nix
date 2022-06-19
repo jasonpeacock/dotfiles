@@ -22,6 +22,7 @@
           set -g @dracula-show-flags true
           set -g @dracula-show-left-icon window
           set -g @dracula-show-timezone true
+          set -g @dracula-military-time true
           set -g @dracula-border-contrast true
           set -g @dracula-plugins \"cpu-usage time\"
         ";
