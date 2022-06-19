@@ -11,28 +11,25 @@
     secureSocket = false;
     shortcut = "space";
     terminal = "xterm-256color";
+    historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
-      cpu
       {
         plugin = dracula;
         extraConfig = "
           set -g @dracula-show-battery false
           set -g @dracula-show-powerline true
-          set -g @dracula-refresh-rate 10
-          set -g @dracula-plugins \"time\"
+          set -g @dracula-show-flags true
+          set -g @dracula-show-left-icon window
+          set -g @dracula-show-timezone true
+          set -g @dracula-border-contrast true
+          set -g @dracula-plugins \"cpu-usage time\"
         ";
       }
       pain-control
-      prefix-highlight
     ];
 
     extraConfig = "
-set -g status-right '#{prefix_highlight} #{cpu_percentage} | %a %h-%d %H:%M '
-
-# Make the scrollback buffer much larger than the default (default: 2000)
-set -g history-limit 10000
-
 # Set ability to capture on start and restore on exit window data when running an application
 setw -g alternate-screen on
 
@@ -59,7 +56,8 @@ set -g -a terminal-overrides ',*:Ss=\\E[%p1%d q:Se=\\E[2 q'
 # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed
 set -sg escape-time 10
 
-set -g pane-active-border-style fg=yellow
+# Override the theme color.
+# set -g pane-active-border-style fg=yellow
     ";
   };
 }

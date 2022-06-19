@@ -5,6 +5,8 @@
     enable = true;
     enableFishIntegration = true;
 
+    tmux.enableShellIntegration = true;
+
     changeDirWidgetCommand = "fd --type d";
     changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
 

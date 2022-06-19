@@ -80,13 +80,14 @@ ${pkgs.direnv}/bin/direnv allow
     shellAliases = {
       bc="bc -l -q \"\$HOME/.bc\"";
       grep="grep --color=auto";
+      http="python3 -m http.server";
       less="less -R -n";
+      ls="exa --icons --git";
       scp="scp -C";
+      tmux="tmux new -As0";
+      tree="exa --tree --icons --git";
       vi="nvim -o";
       work="cd \"$HOME/workplace\"";
-      http="python3 -m http.server";
-      tree="exa --tree --icons --git";
-      ls="exa --icons --git";
     };
     plugins = [
       # Bring in `fenv` for sourcing files from other shells (like Zsh).
