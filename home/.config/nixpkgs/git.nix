@@ -36,6 +36,10 @@ with import ./git/host.nix;
         enabled = true;
       };
       delta = {
+        dark = true;
+        # Not sure why this isn't working - the terminal really is true color,
+        # but it's showing too dark when rendered via Git.
+        true-color = "never";
         line-numbers = true;
         syntax-theme = "Dracula";
       };

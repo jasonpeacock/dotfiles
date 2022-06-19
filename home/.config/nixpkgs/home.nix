@@ -21,6 +21,7 @@ in
   imports = [
     ./bat.nix
     ./direnv.nix
+    ./fish.nix
     ./fzf.nix
     ./git.nix
     ./gnupg.nix
@@ -28,7 +29,6 @@ in
     ./neovim.nix
     ./ssh.nix
     ./tmux.nix
-    ./zsh.nix
   ];
 
   home.packages = with pkgs; [
