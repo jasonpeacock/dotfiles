@@ -20,7 +20,7 @@ if test -f $HOME/.config/host-init/$THIS_HOST.fish
     source $HOME/.config/host-init/$THIS_HOST.fish
     fish_add_path $HOME/.$THIS_HOST-bin
 else
-    echo >&2 \"*** No host-specific file found! Expected [$HOME/.config/host-init/$THIS_BOX.fish] ***\"
+    echo >&2 "No host-specific file found! Expected [$HOME/.config/host-init/$THIS_HOST.fish]"
 end
 
 # Dotfile management with homeshick.
