@@ -19,6 +19,7 @@ in
 
 {
   imports = [
+    ./atuin.nix
     ./bat.nix
     ./direnv.nix
     ./fish.nix
@@ -40,7 +41,6 @@ in
     docker
     docker-compose
     entr
-    exa
     exercism
     fd
     fswatch
@@ -51,9 +51,7 @@ in
     git-remote-codecommit
     glow
     gping
-    htop
     hyperfine
-    jq
     netcat-gnu
     plantuml
     poetry
@@ -75,6 +73,7 @@ in
     shfmt
     socat
     starship
+    thefuck
     vivid
     watch
     wget
@@ -89,4 +88,10 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # These packages have lightweight config, not worth having
+  # their own configuration files.
+  programs.exa.enable = true;
+  programs.htop.enable = true;
+  programs.jq.enable = true;
 }

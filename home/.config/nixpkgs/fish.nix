@@ -3,44 +3,12 @@
 {
   programs.fish = {
     enable = true;
-    # shellInit = builtins.readFile "./fish/shellInit.fish";
-    shellInit = "
-    ";
-    # loginShellInit = builtins.readFile "./fish/loginShellInit.fish";
-    loginShellInit = "
-# Source Nix setup script
-fenv source $HOME/.nix-profile/etc/profile.d/nix.sh
-
-# Set directory colors from `ls` to Dracula theme
-set -gx LS_COLORS (vivid generate dracula)
-
-# Use Neovim as the default $EDITOR.
-set -gx EDITOR \"nvim\"
-
-#
-# Load host-specific configuration.
-#
-set THIS_HOST (hostname | sed 's/\\..*$//')
-if test -f $HOME/.zsh/$THIS_HOST.zshrc
-    fenv source $HOME/.zsh/$THIS_HOST.zshrc
-    fish_add_path $HOME/.$THIS_HOST-bin
-    fish_add_path $HOME/.cargo/bin
-else
-    echo \"*** No host-specific file found! Expected [$HOME/.zsh/$THIS_BOX.zshrc] ***\"
-end
-
-#
-# Dotfile management with homeshick.
-#
-if test -d $HOME/.homesick
-  source $HOME/.homesick/repos/homeshick/homeshick.fish
-  source $HOME/.homesick/repos/homeshick/completions/homeshick.fish
-end
-    ";
-    # interactiveShellInit = builtins.readFile "./fish/interactiveShellInit.fish";
+    # shellInit = builtins.readFile fish/shellInit.fish;
+    loginShellInit = builtins.readFile fish/loginShellInit.fish;
+    # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
 starship init fish | source
-
+thefuck --alias | source
     ";
     functions = {
       # Initialize directory to run a local nix-shell.
@@ -75,6 +43,50 @@ end
 
 echo \"layout python3\" > .envrc
 ${pkgs.direnv}/bin/direnv allow
+      ";
+
+      # Emulate !! and !$ from Bash
+      # https://github.com/fish-shell/fish-shell/wiki/Bash-Style-Command-Substitution-and-Chaining-(!!-!$)
+      bind_bang = "
+switch (commandline -t)
+case \"!\"
+  commandline -t -- $history[1]
+  commandline -f repaint
+case \"*\"
+  commandline -i !
+end
+    ";
+
+      bind_dollar = "
+switch (commandline -t)
+# Variation on the original, vanilla \"!\" case
+# ===========================================
+#
+# If the `!$` is preceded by text, search backward for tokens that
+# contain that text as a substring. E.g., if we'd previously run
+#
+#   git checkout -b a_feature_branch
+#   git checkout main
+#
+# then the `fea!$` in the following would be replaced with
+# `a_feature_branch`
+#
+#   git branch -d fea!$
+#
+# and our command line would look like
+#
+#   git branch -d a_feature_branch
+#
+case \"*!\"
+  commandline -f backward-delete-char history-token-search-backward
+case \"*\"
+  commandline -i '$'
+end
+      ";
+
+      fish_user_key_bindings = "
+bind ! bind_bang
+bind '$' bind_dollar
       ";
     };
     shellAliases = {

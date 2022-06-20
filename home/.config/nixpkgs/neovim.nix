@@ -27,6 +27,7 @@
       vim-better-whitespace
       vim-commentary
       vim-eunuch
+      vim-fish
       vim-gitgutter
       vim-markdown
       vim-nix
