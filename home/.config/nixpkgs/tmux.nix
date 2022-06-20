@@ -19,8 +19,7 @@
         extraConfig = "
           set -g @dracula-show-battery false
           set -g @dracula-show-powerline true
-          set -g @dracula-show-flags true
-          set -g @dracula-show-left-icon window
+          set -g @dracula-show-flags false
           set -g @dracula-show-timezone true
           set -g @dracula-military-time true
           set -g @dracula-border-contrast true
