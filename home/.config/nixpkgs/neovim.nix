@@ -23,20 +23,21 @@ ${builtins.readFile neovim/init.vim}";
       dracula-vim
       gitsigns-nvim
       gundo
+      nvim-treesitter
       plantuml-syntax
-      rust-vim
+      # rust-vim
       vim-abolish
       vim-airline
       vim-airline-themes
       vim-better-whitespace
       vim-commentary
       vim-eunuch
-      vim-fish
+      # vim-fish
       vim-markdown
-      vim-nix
+      # vim-nix
       vim-repeat
       vim-surround
-      vim-toml
+      # vim-toml
     ];
   };
 }

@@ -4,7 +4,7 @@
 vim.g.mapleader = "<SPACE>"
 
 --vim.opt.autoindent = true             -- Always enable auto-indenting.
---vim.opt.clipboard=unnamed = true      -- Use system clipboard.
+--vim.opt.clipboard-unnamed = true      -- Use system clipboard.
 --vim.opt.laststatus = 2                -- Always have a status bar.
 --vim.opt.wrap = false                  -- Stop word wrapping.
 --vim.opt.scrolloff = 1                 -- Space above cursor from screen edge.
@@ -48,8 +48,10 @@ vim.opt.shiftround = true
 vim.opt.foldenable = true             -- Enable folding.
 --vim.opt.foldcolumn = 2                -- Reserve space for the fold.
 vim.opt.foldlevelstart = 99           -- All folds are open by default.
-vim.opt.foldmethod = "indent"           -- Use indenting to determine folds.
+--vim.opt.foldmethod = "indent"           -- Use indenting to determine folds.
 --vim.opt.foldmethod = syntax           -- Use syntax rules to determine folds.
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Searching.
 vim.opt.hlsearch = true               -- Use search highlighting.
@@ -82,6 +84,52 @@ vim.g.strip_whitespace_on_save = 1
 
 -- gitsigns-nvim
 require('gitsigns').setup()
+
+-- nvim-treesitter
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = {
+    "bash",
+    "c",
+    "cmake",
+    "cpp",
+    "css",
+    "dockerfile",
+    "fish",
+    "html",
+    "json",
+    "lua",
+    "make",
+    "markdown",
+    "nix",
+    "python",
+    "rust",
+    "tlaplus",
+    "toml",
+    "vim",
+    "yaml",
+  },
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  }
+}
 
 -- camelcasemotion
 vim.g.camelcasemotion_key = "<leader>"
@@ -132,7 +180,7 @@ augroup END
 ]])
 
 vim.cmd("filetype plugin indent on")
-vim.cmd("syntax enable")
+-- vim.cmd("syntax enable")
 
 -- Restore cursor style on exit.
 vim.cmd("au VimLeave * set guicursor=a:hor25-blinkon0")
