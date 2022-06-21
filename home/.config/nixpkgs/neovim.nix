@@ -21,6 +21,7 @@ ${builtins.readFile neovim/init.vim}";
       ale
       camelcasemotion
       dracula-vim
+      gitsigns-nvim
       gundo
       plantuml-syntax
       rust-vim
@@ -31,7 +32,6 @@ ${builtins.readFile neovim/init.vim}";
       vim-commentary
       vim-eunuch
       vim-fish
-      vim-gitgutter
       vim-markdown
       vim-nix
       vim-repeat

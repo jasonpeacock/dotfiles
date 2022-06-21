@@ -80,6 +80,9 @@ vim.g.show_spaces_that_precede_tabs = 1
 vim.g.strip_whitespace_confirm = 0
 vim.g.strip_whitespace_on_save = 1
 
+-- gitsigns-nvim
+require('gitsigns').setup()
+
 -- camelcasemotion
 vim.g.camelcasemotion_key = "<leader>"
 
@@ -154,3 +157,7 @@ vim.keymap.set("v", "X", '"_X', {desc = "Delete (D) without updating the buffer"
 
 -- Toggle 'slf/gundo.vim'
 vim.keymap.set("n", "<leader>u", ":GundoToggle<CR>", {desc = "Toggle 'Gundo' plugin"})
+
+-- Move up/down over wrapped lines in a nice manner.
+vim.keymap.set("", "j", "(v:count == 0 ? 'gj' : 'j')", {expr = true, silent = true})
+vim.keymap.set("", "k", "(v:count == 0 ? 'gk' : 'k')", {expr = true, silent = true})

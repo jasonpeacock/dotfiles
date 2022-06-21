@@ -1,8 +1,4 @@
 " Vim configuration for Neovim
-"
-" Move up/down over wrapped lines in a nice manner.
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " ale - this is how to disable it.
 "let g:ale_lint_on_text_changed = 'always'       " When to lint if text changes (always (default)|insert|normal|never).
