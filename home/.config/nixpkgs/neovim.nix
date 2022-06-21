@@ -11,13 +11,16 @@
     withPython3 = true;
     withRuby = false;
 
-    extraConfig = builtins.readFile neovim/neovimrc;
+    extraConfig = "lua <<EOF
+${builtins.readFile neovim/init.lua}
+EOF
+
+${builtins.readFile neovim/init.vim}";
 
     plugins = with pkgs.vimPlugins; [
       ale
       camelcasemotion
       dracula-vim
-      elm-vim
       gundo
       plantuml-syntax
       rust-vim
