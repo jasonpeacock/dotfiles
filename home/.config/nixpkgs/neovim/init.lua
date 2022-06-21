@@ -1,7 +1,7 @@
 -- Lua configuration for Neovim
 
 -- Use spacebar for leader key, instead of '\'.
-vim.g.mapleader = "<SPACE>"
+vim.g.mapleader = " "
 
 --vim.opt.autoindent = true             -- Always enable auto-indenting.
 --vim.opt.clipboard-unnamed = true      -- Use system clipboard.
