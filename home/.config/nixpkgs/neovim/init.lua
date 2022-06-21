@@ -32,7 +32,7 @@ vim.opt.number = true                 -- Turn on line numbers.
 -- :help fo-table
 vim.opt.formatoptions = "tcrq"
 
--- Enable wildmenu support, which autocompletes commmands.
+-- Enable wildmenu support, which autocompletes commands.
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:longest,full"  -- list all options, match to the longest
 
@@ -87,95 +87,145 @@ require('gitsigns').setup()
 
 -- nvim-treesitter
 require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = {
-    "bash",
-    "c",
-    "cmake",
-    "cpp",
-    "css",
-    "dockerfile",
-    "fish",
-    "html",
-    "json",
-    "lua",
-    "make",
-    "markdown",
-    "nix",
-    "python",
-    "rust",
-    "tlaplus",
-    "toml",
-    "vim",
-    "yaml",
-  },
-  highlight = {
-    enable = true,
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+    -- Grammars are installed via `neovim.nix` so that they
+    -- are compiled correctly for Nix. Otherwise you get an
+    -- error from dlopen about not being able to find stdlibc.6.so
+    highlight = {
+        enable = true,
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
     },
-  },
-  indent = {
-    enable = true
-  }
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+        },
+    },
+    indent = {
+        enable = true
+    }
 }
+
+-- null-ls-nvim
+require("null-ls").setup({
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+    sources = {
+        require("null-ls").builtins.code_actions.gitsigns,        -- git
+        require("null-ls").builtins.code_actions.proselint,       -- english
+        require("null-ls").builtins.code_actions.refactoring,     -- generic code
+        require("null-ls").builtins.code_actions.shellcheck,      -- bash
+        require("null-ls").builtins.code_actions.statix,          -- nix
+        -- require("null-ls").builtins.code_actions.xo,              -- javascript/typescript
+        require("null-ls").builtins.code_actions.eslint_d,        -- javascript/typescript
+        require("null-ls").builtins.formatting.alejandra,         -- nix
+        require("null-ls").builtins.formatting.black,             -- python
+        require("null-ls").builtins.formatting.buf,               -- protocol buffers
+        require("null-ls").builtins.formatting.clang_format,      -- C/C++
+        require("null-ls").builtins.formatting.cmake_format,      -- cmake
+        require("null-ls").builtins.formatting.codespell,         -- spelling in code
+        require("null-ls").builtins.formatting.eslint_d,          -- javascript/typescript
+        require("null-ls").builtins.formatting.fish_indent,       -- fish
+        require("null-ls").builtins.formatting.isort,             -- python
+        require("null-ls").builtins.formatting.jq,                -- json
+        require("null-ls").builtins.formatting.lua_format,        -- lua
+        require("null-ls").builtins.formatting.markdownlint,      -- markdown
+        -- require("null-ls").builtins.formatting.mdformat,          -- markdown
+        require("null-ls").builtins.formatting.nixfmt,            -- nix
+        require("null-ls").builtins.formatting.nixpkgs_fmt,       -- nix
+        -- require("null-ls").builtins.formatting.protolint,         -- protocol buffers
+        -- require("null-ls").builtins.formatting.remark,            -- markdown
+        require("null-ls").builtins.formatting.rubocop,           -- ruby
+        require("null-ls").builtins.formatting.rustfmt,           -- rust
+        require("null-ls").builtins.formatting.shellharden,       -- bash
+        require("null-ls").builtins.formatting.shfmt,             -- bash
+        require("null-ls").builtins.formatting.tidy,              -- html
+        require("null-ls").builtins.diagnostics.eslint_d,         -- javascript/typescript
+        require("null-ls").builtins.diagnostics.alex,             -- english
+        require("null-ls").builtins.diagnostics.buf,              -- protocol buffers
+        --XXX require("null-ls").builtins.diagnostics.cfn_lint,         -- cloud formation templates
+        require("null-ls").builtins.diagnostics.checkmake,        -- make
+        require("null-ls").builtins.diagnostics.codespell,        -- english
+        require("null-ls").builtins.diagnostics.cppcheck,         -- C/C++
+        -- require("null-ls").builtins.diagnostics.cspell,           -- spelling in code
+        require("null-ls").builtins.diagnostics.deadnix,          -- nix
+        require("null-ls").builtins.diagnostics.fish,             -- fish
+        require("null-ls").builtins.diagnostics.flake8,           -- python
+        require("null-ls").builtins.diagnostics.gitlint,          -- git commit messages
+        require("null-ls").builtins.diagnostics.hadolint,         -- dockerfile
+        require("null-ls").builtins.diagnostics.jsonlint,         -- json
+        require("null-ls").builtins.diagnostics.markdownlint,     -- markdown
+        -- require("null-ls").builtins.diagnostics.mdl,              -- markdown
+        -- require("null-ls").builtins.diagnostics.misspell,         -- spelling in code
+        require("null-ls").builtins.diagnostics.mypy,             -- python
+        require("null-ls").builtins.diagnostics.proselint,        -- english
+        -- require("null-ls").builtins.diagnostics.protolint,        -- protocol buffers
+        require("null-ls").builtins.diagnostics.pydocstyle,       -- python
+        require("null-ls").builtins.diagnostics.pyproject_flake8, -- python
+        require("null-ls").builtins.diagnostics.rubocop,          -- ruby
+        require("null-ls").builtins.diagnostics.selene,           -- lua
+        require("null-ls").builtins.diagnostics.shellcheck,       -- bash
+        require("null-ls").builtins.diagnostics.statix,           -- nix
+        require("null-ls").builtins.diagnostics.tidy,             -- html
+        require("null-ls").builtins.diagnostics.vulture,          -- python
+        -- require("null-ls").builtins.diagnostics.write_good,       -- english
+        -- require("null-ls").builtins.diagnostics.xo,               -- javascript/typescript
+        require("null-ls").builtins.diagnostics.yamllint,         -- yaml
+        require("null-ls").builtins.completion.spell,             -- spell
+        require("null-ls").builtins.completion.tags,              -- tags
+    },
+})
 
 -- camelcasemotion
 vim.g.camelcasemotion_key = "<leader>"
 
 vim.cmd([[
 augroup configgroup
-    autocmd!
-    autocmd VimEnter * highlight clear SignColumn
+autocmd!
+autocmd VimEnter * highlight clear SignColumn
 
-    " Strip trailing whitespace from all files. See the configuration in
-    " plugins.vimrc for a blacklist of filetypes.
-    autocmd BufEnter * EnableStripWhitespaceOnSave
+" Strip trailing whitespace from all files. See the configuration in
+" plugins.vimrc for a blacklist of filetypes.
+autocmd BufEnter * EnableStripWhitespaceOnSave
 
-    " Allow word wrapping for some filetypes.
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-    autocmd FileType markdown setlocal wrap
-    autocmd FileType markdown setlocal conceallevel=0
+" Allow word wrapping for some filetypes.
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd FileType markdown setlocal wrap
+autocmd FileType markdown setlocal conceallevel=0
 
-    " YAML style is 2-space indenting.
-    autocmd FileType yaml setlocal tabstop=2
-    autocmd FileType yaml setlocal shiftwidth=2
-    autocmd FileType yaml setlocal softtabstop=2
-    autocmd FileType yaml setlocal commentstring=#\ %s
+" YAML style is 2-space indenting.
+autocmd FileType yaml setlocal tabstop=2
+autocmd FileType yaml setlocal shiftwidth=2
+autocmd FileType yaml setlocal softtabstop=2
+autocmd FileType yaml setlocal commentstring=#\ %s
 
-    " Bash style is 2-space indenting.
-    autocmd FileType sh setlocal tabstop=2
-    autocmd FileType sh setlocal shiftwidth=2
-    autocmd FileType sh setlocal softtabstop=2
-    autocmd FileType sh setlocal commentstring=#\ %s
+" Bash style is 2-space indenting.
+autocmd FileType sh setlocal tabstop=2
+autocmd FileType sh setlocal shiftwidth=2
+autocmd FileType sh setlocal softtabstop=2
+autocmd FileType sh setlocal commentstring=#\ %s
 
-    " Ruby style is 2-space indenting.
-    autocmd FileType ruby setlocal tabstop=2
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal commentstring=#\ %s
+" Ruby style is 2-space indenting.
+autocmd FileType ruby setlocal tabstop=2
+autocmd FileType ruby setlocal shiftwidth=2
+autocmd FileType ruby setlocal softtabstop=2
+autocmd FileType ruby setlocal commentstring=#\ %s
 
-    autocmd FileType python setlocal commentstring=#\ %s
+autocmd FileType python setlocal commentstring=#\ %s
 
-    " Map unknown files to known filetypes.
-    autocmd BufEnter *.cls setlocal filetype=java
-    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-    autocmd BufEnter *.launch setlocal filetype=xml " ROS .launch files are XML
-    autocmd BufEnter *.bats set filetype=sh
+" Map unknown files to known filetypes.
+autocmd BufEnter *.cls setlocal filetype=java
+autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+autocmd BufEnter *.launch setlocal filetype=xml " ROS .launch files are XML
+autocmd BufEnter *.bats set filetype=sh
 
-    " Makefiles need to keep their tabs.
-    autocmd BufEnter Makefile setlocal noexpandtab
+" Makefiles need to keep their tabs.
+autocmd BufEnter Makefile setlocal noexpandtab
 augroup END
 ]])
 

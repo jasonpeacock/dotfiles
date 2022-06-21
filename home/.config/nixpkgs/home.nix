@@ -32,6 +32,12 @@ in
     ./tmux.nix
   ];
 
+  # These packages have lightweight config, not worth having
+  # their own configuration files.
+  programs.exa.enable = true;
+  programs.htop.enable = true;
+  programs.jq.enable = true;
+
   home.packages = with pkgs; [
     #platformio
     asciinema
@@ -56,28 +62,56 @@ in
     plantuml
     poetry
     python39Custom
+    ripgrep
+    rsync
+    ruby
+    socat
+    thefuck
+    watch
+    wget
+    yq
+
+    # Prompt/shell-theme tools
+    starship
+    vivid
+
+    # Formatters/linters
+    alejandra
+    buf
+    checkmake
+    cppcheck
+    deadnix
+    gitlint
+    hadolint
+    nixfmt
+    nodePackages.alex
+    nodePackages.eslint_d
+    nodePackages.jsonlint
+    nodePackages.markdownlint-cli
+    proselint
     python39Packages.black
+    python39Packages.codespell
     python39Packages.flake8
     python39Packages.flake8-blind-except
+    python39Packages.flake8-docstrings
     python39Packages.flake8-import-order
     python39Packages.jsonschema
     python39Packages.lxml
     python39Packages.mypy
     python39Packages.pep8-naming
+    python39Packages.pydocstyle
+    python39Packages.vulture
+    python39Packages.yamllint
     python39Packages.yapf
-    ripgrep
-    rsync
-    ruby
+    rubocop
     rust-analyzer
+    rustfmt
+    selene
     shellcheck
+    shellharden
     shfmt
-    socat
-    starship
-    thefuck
-    vivid
-    watch
-    wget
-    yq
+    statix
+    html-tidy
   ] ++ lib.optionals stdenv.isLinux [
     can-utils
     sysstat
@@ -88,10 +122,4 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # These packages have lightweight config, not worth having
-  # their own configuration files.
-  programs.exa.enable = true;
-  programs.htop.enable = true;
-  programs.jq.enable = true;
 }
