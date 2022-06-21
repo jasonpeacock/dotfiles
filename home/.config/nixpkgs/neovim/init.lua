@@ -1,5 +1,7 @@
 -- Lua configuration for Neovim
 
+--# selene: allow(undefined_variable, unscoped_variables)
+
 -- Use spacebar for leader key, instead of '\'.
 vim.g.mapleader = " "
 
@@ -63,7 +65,7 @@ vim.opt.smartcase = true              -- Ignore case unless case is used.
 -- https://github.com/dracula/vim/issues/96
 -- let g:dracula_colorterm = 0
 
--- Use GUI-based colors even when run withing a terminal,
+-- Use GUI-based colors even when run within a terminal,
 -- this pushes VIM to support truecolors and fixes the
 -- grey background in the Dracula theme
 vim.opt.termguicolors = true
@@ -115,13 +117,13 @@ require'nvim-treesitter.configs'.setup {
 -- null-ls-nvim
 require("null-ls").setup({
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
     sources = {
         require("null-ls").builtins.code_actions.gitsigns,        -- git
         require("null-ls").builtins.code_actions.proselint,       -- english
         require("null-ls").builtins.code_actions.refactoring,     -- generic code
         require("null-ls").builtins.code_actions.shellcheck,      -- bash
         require("null-ls").builtins.code_actions.statix,          -- nix
-        -- require("null-ls").builtins.code_actions.xo,              -- javascript/typescript
         require("null-ls").builtins.code_actions.eslint_d,        -- javascript/typescript
         require("null-ls").builtins.formatting.alejandra,         -- nix
         require("null-ls").builtins.formatting.black,             -- python
@@ -135,15 +137,14 @@ require("null-ls").setup({
         require("null-ls").builtins.formatting.jq,                -- json
         require("null-ls").builtins.formatting.lua_format,        -- lua
         require("null-ls").builtins.formatting.markdownlint,      -- markdown
-        -- require("null-ls").builtins.formatting.mdformat,          -- markdown
         require("null-ls").builtins.formatting.nixfmt,            -- nix
         require("null-ls").builtins.formatting.nixpkgs_fmt,       -- nix
-        -- require("null-ls").builtins.formatting.protolint,         -- protocol buffers
-        -- require("null-ls").builtins.formatting.remark,            -- markdown
         require("null-ls").builtins.formatting.rubocop,           -- ruby
         require("null-ls").builtins.formatting.rustfmt,           -- rust
         require("null-ls").builtins.formatting.shellharden,       -- bash
-        require("null-ls").builtins.formatting.shfmt,             -- bash
+        require("null-ls").builtins.formatting.shfmt.with({       -- bash
+             extra_args = {"-i", "2", "-ci", "-sr", "-kp"}  -- Make shfmt pretty.
+        }),
         require("null-ls").builtins.formatting.tidy,              -- html
         require("null-ls").builtins.diagnostics.eslint_d,         -- javascript/typescript
         require("null-ls").builtins.diagnostics.alex,             -- english
@@ -152,29 +153,28 @@ require("null-ls").setup({
         require("null-ls").builtins.diagnostics.checkmake,        -- make
         require("null-ls").builtins.diagnostics.codespell,        -- english
         require("null-ls").builtins.diagnostics.cppcheck,         -- C/C++
-        -- require("null-ls").builtins.diagnostics.cspell,           -- spelling in code
         require("null-ls").builtins.diagnostics.deadnix,          -- nix
         require("null-ls").builtins.diagnostics.fish,             -- fish
-        require("null-ls").builtins.diagnostics.flake8,           -- python
+        require("null-ls").builtins.diagnostics.flake8.with({     -- python
+             extra_args = {"--max-line-length", "88"}  -- Match the line-length of Black.
+         }),
         require("null-ls").builtins.diagnostics.gitlint,          -- git commit messages
         require("null-ls").builtins.diagnostics.hadolint,         -- dockerfile
         require("null-ls").builtins.diagnostics.jsonlint,         -- json
         require("null-ls").builtins.diagnostics.markdownlint,     -- markdown
-        -- require("null-ls").builtins.diagnostics.mdl,              -- markdown
-        -- require("null-ls").builtins.diagnostics.misspell,         -- spelling in code
         require("null-ls").builtins.diagnostics.mypy,             -- python
         require("null-ls").builtins.diagnostics.proselint,        -- english
-        -- require("null-ls").builtins.diagnostics.protolint,        -- protocol buffers
         require("null-ls").builtins.diagnostics.pydocstyle,       -- python
         require("null-ls").builtins.diagnostics.pyproject_flake8, -- python
         require("null-ls").builtins.diagnostics.rubocop,          -- ruby
         require("null-ls").builtins.diagnostics.selene,           -- lua
-        require("null-ls").builtins.diagnostics.shellcheck,       -- bash
+        require("null-ls").builtins.diagnostics.shellcheck.with({ -- bash
+             extra_args = {"-s", "bash", "-e", "SC1008"}  -- Force shellcheck to always assume Bash,
+                                                          -- and ignore warning about unsupported #!.
+        }),
         require("null-ls").builtins.diagnostics.statix,           -- nix
         require("null-ls").builtins.diagnostics.tidy,             -- html
         require("null-ls").builtins.diagnostics.vulture,          -- python
-        -- require("null-ls").builtins.diagnostics.write_good,       -- english
-        -- require("null-ls").builtins.diagnostics.xo,               -- javascript/typescript
         require("null-ls").builtins.diagnostics.yamllint,         -- yaml
         require("null-ls").builtins.completion.spell,             -- spell
         require("null-ls").builtins.completion.tags,              -- tags
@@ -238,7 +238,7 @@ vim.cmd("au VimLeave * set guicursor=a:hor25-blinkon0")
 -- Make Y yank everything from the cursor to the end of the line. This makes Y
 -- act more like C or D because by default, Y yanks the current line (i.e. the
 -- same as yy).
-vim.keymap.set("", "Y", "y$", {desc = "Yank from curser to the end of the line"})
+vim.keymap.set("", "Y", "y$", {desc = "Yank from cursor to the end of the line"})
 
 -- Turn off the search highlight.
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>", {desc = "Turn off the search highlight"})
