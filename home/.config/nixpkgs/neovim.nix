@@ -19,12 +19,24 @@ EOF
 # ${builtins.readFile neovim/init.vim}";
 
     plugins = with pkgs.vimPlugins; [
-      # ale
       camelcasemotion
+      cmp-buffer
+      cmp-calc
+      cmp-cmdline
+      #cmp-dictionary
+      #cmp-git
+      cmp_luasnip
+      cmp-nvim-lsp
+      cmp-path
+      #cmp-conventionalcommits
       dracula-vim
+      friendly-snippets
       gitsigns-nvim
       gundo
+      luasnip
       null-ls-nvim
+      nvim-cmp
+      nvim-lspconfig
       # (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       (nvim-treesitter.withPlugins (
         plugins: with plugins; [
@@ -49,19 +61,14 @@ EOF
           tree-sitter-yaml
         ]))
       plantuml-syntax
-      # rust-vim
       vim-abolish
       vim-airline
       vim-airline-themes
       vim-better-whitespace
       vim-commentary
       vim-eunuch
-      # vim-fish
-      # vim-markdown
-      # vim-nix
       vim-repeat
       vim-surround
-      # vim-toml
     ];
   };
 }
