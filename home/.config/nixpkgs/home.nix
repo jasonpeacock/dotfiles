@@ -38,6 +38,10 @@ in
   programs.htop.enable = true;
   programs.jq.enable = true;
 
+  home.stateVersion = "22.11";
+  home.username = builtins.getEnv "USER";
+  home.homeDirectory = builtins.getEnv "HOME";
+
   home.packages = with pkgs; [
     #platformio
     asciinema

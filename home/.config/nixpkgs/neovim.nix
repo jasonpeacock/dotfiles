@@ -16,19 +16,17 @@ ${builtins.readFile neovim/init.lua}
 EOF
 ";
 
-# ${builtins.readFile neovim/init.vim}";
-
     plugins = with pkgs.vimPlugins; [
       camelcasemotion
       cmp-buffer
       cmp-calc
       cmp-cmdline
-      #cmp-dictionary
-      #cmp-git
+      cmp-dictionary
+      cmp-git
       cmp_luasnip
       cmp-nvim-lsp
       cmp-path
-      #cmp-conventionalcommits
+      cmp-conventionalcommits
       dracula-vim
       friendly-snippets
       gitsigns-nvim
@@ -61,6 +59,7 @@ EOF
           tree-sitter-yaml
         ]))
       plantuml-syntax
+      plenary-nvim
       vim-abolish
       vim-airline
       vim-airline-themes
