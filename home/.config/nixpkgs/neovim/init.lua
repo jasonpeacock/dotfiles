@@ -84,6 +84,13 @@ vim.g.show_spaces_that_precede_tabs = 1
 vim.g.strip_whitespace_confirm = 0
 vim.g.strip_whitespace_on_save = 1
 
+-- indent-blankline-nvim
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
 -- gitsigns-nvim
 require('gitsigns').setup()
 

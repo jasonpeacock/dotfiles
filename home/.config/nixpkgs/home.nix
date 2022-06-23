@@ -71,6 +71,7 @@ in
     ruby
     socat
     thefuck
+    universal-ctags
     watch
     wget
     yq

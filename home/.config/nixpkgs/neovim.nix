@@ -31,6 +31,7 @@ EOF
       friendly-snippets
       gitsigns-nvim
       gundo
+      indent-blankline-nvim
       luasnip
       null-ls-nvim
       nvim-cmp
@@ -60,6 +61,7 @@ EOF
         ]))
       plantuml-syntax
       plenary-nvim
+      tagbar
       vim-abolish
       vim-airline
       vim-airline-themes
