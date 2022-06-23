@@ -186,9 +186,17 @@ require("null-ls").setup({
         -- require("null-ls").builtins.formatting.isort,
         require("null-ls").builtins.diagnostics.flake8.with({
              --only_local = vim.fn.expand "~/.nix-profile/bin",
-             extra_args = {"--max-line-length", "88"}  -- Match the line-length of Black.
+             extra_args = {
+                "--max-line-length", "88",   -- Match the line-length of Black.
+                "--ignore", "E203,W503"}     -- Avoid conflict with Black.
          }),
-        require("null-ls").builtins.diagnostics.mypy,
+        require("null-ls").builtins.diagnostics.mypy.with({
+            extra_args = {
+                "--follow-imports", "silent",
+                "--warn-unreachable",
+                "--strict",
+            }
+        }),
         require("null-ls").builtins.diagnostics.pydocstyle,
         -- require("null-ls").builtins.diagnostics.vulture,
         -- Not currently available via Nix
