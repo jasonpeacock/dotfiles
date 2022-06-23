@@ -5,14 +5,14 @@
 -- Use spacebar for leader key, instead of '\'.
 vim.g.mapleader = " "
 
---vim.opt.autoindent = true             -- Always enable auto-indenting.
+vim.opt.autoindent = true             -- Always enable auto-indenting.
 --vim.opt.clipboard-unnamed = true      -- Use system clipboard.
 --vim.opt.laststatus = 2                -- Always have a status bar.
 --vim.opt.wrap = false                  -- Stop word wrapping.
 --vim.opt.scrolloff = 1                 -- Space above cursor from screen edge.
 --vim.opt.sidescrolloff = 5             -- Space beside cursor from screen edge.
 --vim.opt.cursorcolumn = true           -- Highlight the current column.
---vim.opt.cursorline = true             -- Highlight the current line.
+-- vim.opt.cursorline = true             -- Highlight the current line.
 --vim.opt.lazyredraw = true             -- Redraw only when needed, speeds up macros.
 --vim.opt.conceallevel = 0              -- Don't hide characters.
 vim.opt.encoding = "utf8"             -- Set standard file encoding.
@@ -27,8 +27,8 @@ vim.opt.wmh = 0                       -- Set smallest possible window when minim
 vim.opt.number = true                 -- Turn on line numbers.
 --vim.opt.relativenumber = true         -- Show the line numbers as relative.
 
---vim.opt.spell = true                  -- Enable spell check.
---vim.opt.spellcapcheck = true          -- Disable capitalization check.
+-- vim.opt.spell = true                  -- Enable spell check.
+-- vim.opt.spelllang = { "en_us" }       -- Use US English spelling.
 
 -- Fix behavior to continue comments on new lines, default is: tcqj
 -- :help fo-table
@@ -122,71 +122,139 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- null-ls-nvim
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                    vim.lsp.buf.formatting_sync()
+                end,
+            })
+        end
+    end,
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
     sources = {
-        require("null-ls").builtins.code_actions.gitsigns,        -- git
-        require("null-ls").builtins.code_actions.proselint,       -- english
-        require("null-ls").builtins.code_actions.refactoring,     -- generic code
-        require("null-ls").builtins.code_actions.shellcheck,      -- bash
-        require("null-ls").builtins.code_actions.statix,          -- nix
-        require("null-ls").builtins.code_actions.eslint_d,        -- javascript/typescript
-        require("null-ls").builtins.formatting.alejandra,         -- nix
-        require("null-ls").builtins.formatting.black,             -- python
-        require("null-ls").builtins.formatting.buf,               -- protocol buffers
-        require("null-ls").builtins.formatting.clang_format,      -- C/C++
-        require("null-ls").builtins.formatting.cmake_format,      -- cmake
-        require("null-ls").builtins.formatting.codespell,         -- spelling in code
-        require("null-ls").builtins.formatting.eslint_d,          -- javascript/typescript
-        require("null-ls").builtins.formatting.fish_indent,       -- fish
-        require("null-ls").builtins.formatting.isort,             -- python
-        require("null-ls").builtins.formatting.jq,                -- json
-        require("null-ls").builtins.formatting.lua_format,        -- lua
-        require("null-ls").builtins.formatting.markdownlint,      -- markdown
-        require("null-ls").builtins.formatting.nixfmt,            -- nix
-        require("null-ls").builtins.formatting.nixpkgs_fmt,       -- nix
-        require("null-ls").builtins.formatting.rubocop,           -- ruby
-        require("null-ls").builtins.formatting.rustfmt,           -- rust
-        require("null-ls").builtins.formatting.shellharden,       -- bash
-        require("null-ls").builtins.formatting.shfmt.with({       -- bash
+        -- Git
+        require("null-ls").builtins.code_actions.gitsigns,
+        require("null-ls").builtins.diagnostics.gitlint,
+
+        -- English
+        require("null-ls").builtins.code_actions.proselint,
+        require("null-ls").builtins.diagnostics.alex,
+        require("null-ls").builtins.diagnostics.proselint,
+        require("null-ls").builtins.diagnostics.codespell,
+        require("null-ls").builtins.formatting.codespell,
+        -- require("null-ls").builtins.completion.spell,
+
+        -- Javascript/Typescript
+        require("null-ls").builtins.code_actions.eslint_d,
+        require("null-ls").builtins.formatting.eslint_d,
+        require("null-ls").builtins.diagnostics.eslint_d,
+
+        -- Programming
+        require("null-ls").builtins.code_actions.refactoring,
+        require("null-ls").builtins.completion.tags,
+
+        -- Bash
+        require("null-ls").builtins.code_actions.shellcheck,
+        -- require("null-ls").builtins.formatting.shellharden,
+        require("null-ls").builtins.formatting.shfmt.with({
              extra_args = {"-i", "2", "-ci", "-sr", "-kp"}  -- Make shfmt pretty.
         }),
-        require("null-ls").builtins.formatting.tidy,              -- html
-        require("null-ls").builtins.diagnostics.eslint_d,         -- javascript/typescript
-        require("null-ls").builtins.diagnostics.alex,             -- english
-        require("null-ls").builtins.diagnostics.buf,              -- protocol buffers
-        --XXX require("null-ls").builtins.diagnostics.cfn_lint,         -- cloud formation templates
-        require("null-ls").builtins.diagnostics.checkmake,        -- make
-        require("null-ls").builtins.diagnostics.codespell,        -- english
-        require("null-ls").builtins.diagnostics.cppcheck,         -- C/C++
-        require("null-ls").builtins.diagnostics.deadnix,          -- nix
-        require("null-ls").builtins.diagnostics.fish,             -- fish
-        require("null-ls").builtins.diagnostics.flake8.with({     -- python
-             extra_args = {"--max-line-length", "88"}  -- Match the line-length of Black.
-         }),
-        require("null-ls").builtins.diagnostics.gitlint,          -- git commit messages
-        require("null-ls").builtins.diagnostics.hadolint,         -- dockerfile
-        require("null-ls").builtins.diagnostics.jsonlint,         -- json
-        require("null-ls").builtins.diagnostics.markdownlint,     -- markdown
-        require("null-ls").builtins.diagnostics.mypy,             -- python
-        require("null-ls").builtins.diagnostics.proselint,        -- english
-        require("null-ls").builtins.diagnostics.pydocstyle,       -- python
-        require("null-ls").builtins.diagnostics.pyproject_flake8, -- python
-        require("null-ls").builtins.diagnostics.rubocop,          -- ruby
-        require("null-ls").builtins.diagnostics.selene,           -- lua
-        require("null-ls").builtins.diagnostics.shellcheck.with({ -- bash
+        require("null-ls").builtins.diagnostics.shellcheck.with({
              extra_args = {"-s", "bash", "-e", "SC1008"}  -- Force shellcheck to always assume Bash,
                                                           -- and ignore warning about unsupported #!.
         }),
-        require("null-ls").builtins.diagnostics.statix,           -- nix
-        require("null-ls").builtins.diagnostics.tidy,             -- html
-        require("null-ls").builtins.diagnostics.vulture,          -- python
-        require("null-ls").builtins.diagnostics.yamllint,         -- yaml
-        require("null-ls").builtins.completion.spell,             -- spell
-        require("null-ls").builtins.completion.tags,              -- tags
+
+        -- Nix
+        require("null-ls").builtins.code_actions.statix,
+        require("null-ls").builtins.formatting.alejandra,
+        -- require("null-ls").builtins.formatting.nixfmt,
+        -- require("null-ls").builtins.formatting.nixpkgs_fmt,
+        require("null-ls").builtins.diagnostics.deadnix,
+        require("null-ls").builtins.diagnostics.statix,
+
+        -- Python
+        require("null-ls").builtins.formatting.black,
+        -- require("null-ls").builtins.formatting.isort,
+        require("null-ls").builtins.diagnostics.flake8.with({
+             --only_local = vim.fn.expand "~/.nix-profile/bin",
+             extra_args = {"--max-line-length", "88"}  -- Match the line-length of Black.
+         }),
+        require("null-ls").builtins.diagnostics.mypy,
+        require("null-ls").builtins.diagnostics.pydocstyle,
+        -- require("null-ls").builtins.diagnostics.vulture,
+        -- Not currently available via Nix
+        -- require("null-ls").builtins.diagnostics.pyproject_flake8,
+
+        -- C/C++
+        require("null-ls").builtins.formatting.clang_format,
+        require("null-ls").builtins.diagnostics.cppcheck,
+
+        -- Fish
+        require("null-ls").builtins.formatting.fish_indent,
+        require("null-ls").builtins.diagnostics.fish,
+
+        -- Ruby
+        require("null-ls").builtins.formatting.rubocop,
+        require("null-ls").builtins.diagnostics.rubocop,
+
+        -- Markdown
+        require("null-ls").builtins.formatting.markdownlint,
+        require("null-ls").builtins.diagnostics.markdownlint,
+
+        -- Protobuf
+        require("null-ls").builtins.formatting.buf,
+        require("null-ls").builtins.diagnostics.buf,
+
+        -- CMake
+        require("null-ls").builtins.formatting.cmake_format,
+
+        -- JSON
+        require("null-ls").builtins.formatting.jq,
+        require("null-ls").builtins.diagnostics.jsonlint,
+
+        -- YAML
+        require("null-ls").builtins.diagnostics.yamllint,
+
+        -- Lua
+        require("null-ls").builtins.formatting.lua_format,
+        require("null-ls").builtins.diagnostics.selene,
+
+        -- Rust
+        require("null-ls").builtins.formatting.rustfmt,
+
+        -- HTML
+        require("null-ls").builtins.formatting.tidy,
+        require("null-ls").builtins.diagnostics.tidy,
+
+        -- CFN
+        --XXX require("null-ls").builtins.diagnostics.cfn_lint,
+
+        -- Make
+        require("null-ls").builtins.diagnostics.checkmake,
+
+        -- Dockerfile
+        require("null-ls").builtins.diagnostics.hadolint,
     },
 })
+
+-- luasnip
+local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load() -- Load VSCode-like snippets, e.g. from `friendly-snippets`
+
+-- From: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 -- nvim-cmp
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
@@ -194,64 +262,125 @@ local cmp = require("cmp")
 cmp.setup({
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
     }),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
     }, {
-            { name = 'buffer' },
-        })
-})
-
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-        { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-            { name = 'buffer' },
-        })
+        { name = "buffer" },
+        { name = "calc" },
+    }),
+    completion = {
+        keyword_length = 3,
+    },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'buffer' }
+        { name = "buffer" }
     }
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'path' }
+        { name = "path" }
     }, {
-            { name = 'cmdline' }
-        })
+        { name = "cmdline" }
+    })
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['rust_analyzer'].setup {
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local lsp_keymap_opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, lsp_keymap_opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, lsp_keymap_opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, lsp_keymap_opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, lsp_keymap_opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(_client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  --vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  --vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  -- vim.keymap.set('n', '<space>wl', function()
+  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set("n", "ge", "lua vim.lsp.diagnostic.goto_next()", bufopts)
+  vim.keymap.set("n", "gE", "lua vim.lsp.diagnostic.goto_prev()", bufopts)
+  vim.keymap.set("n", "gi", "lua vim.lsp.buf.implementation()", bufopts)
+  vim.keymap.set("n", "gl", "lua vim.lsp.diagnostic.show_line_diagnostics()", bufopts)
+end
+
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Add each lsp server you've enabled.
+require("lspconfig")["rust_analyzer"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    -- settings = {
+    --     ["rust_analyzer"] = {}
+    -- },
+}
+require("lspconfig")["pyright"].setup {
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
--- luasnip
-require("luasnip.loaders.from_vscode").lazy_load() -- Load VSCode-like snippets, e.g. from `friendly-snippets`
+-- rust-tools-nvim
+require('rust-tools').setup({})
 
 -- camelcasemotion
 vim.g.camelcasemotion_key = "<leader>"

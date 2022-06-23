@@ -21,12 +21,9 @@ EOF
       cmp-buffer
       cmp-calc
       cmp-cmdline
-      cmp-dictionary
-      cmp-git
       cmp_luasnip
       cmp-nvim-lsp
       cmp-path
-      cmp-conventionalcommits
       dracula-vim
       friendly-snippets
       gitsigns-nvim
@@ -61,6 +58,7 @@ EOF
         ]))
       plantuml-syntax
       plenary-nvim
+      rust-tools-nvim
       tagbar
       vim-abolish
       vim-airline

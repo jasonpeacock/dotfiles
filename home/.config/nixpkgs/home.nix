@@ -11,8 +11,20 @@ let
   python39Custom = mach-nix.mkPython {
     python = pkgs.python39;
     requirements = ''
+      # C-based packages
       pycapnp
       pyyaml
+      # Flake8 & Plugins
+      flake8
+      flake8-import-order
+      flake8-docstrings
+      flake8-blind-except
+      flake8-builtins
+      pep8-naming
+      pydocstyle
+      # MyPy
+      mypy
+      types-PyYAML
     '';
   };
 in
@@ -93,19 +105,12 @@ in
     nodePackages.eslint_d
     nodePackages.jsonlint
     nodePackages.markdownlint-cli
+    nodePackages.pyright
     proselint
     python39Packages.black
     python39Packages.codespell
-    python39Packages.flake8
-    python39Packages.flake8-blind-except
-    python39Packages.flake8-docstrings
-    python39Packages.flake8-import-order
     python39Packages.jsonschema
-    python39Packages.lxml
-    python39Packages.mypy
-    python39Packages.pep8-naming
-    python39Packages.pydocstyle
-    python39Packages.vulture
+    # python39Packages.vulture
     python39Packages.yamllint
     python39Packages.yapf
     rubocop
