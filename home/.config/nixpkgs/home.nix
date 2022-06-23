@@ -31,7 +31,6 @@ in
 
 {
   imports = [
-    ./atuin.nix
     ./bat.nix
     ./direnv.nix
     ./fish.nix
