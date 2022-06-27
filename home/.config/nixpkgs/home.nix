@@ -97,7 +97,6 @@ in {
       # Formatters/linters
       alejandra
       buf
-      checkmake
       cppcheck
       deadnix
       gitlint
@@ -131,6 +130,7 @@ in {
       can-utils
       sysstat
       gping # fails to build on OSX
+      checkmake # not available on Darwin
     ]
     ++ lib.optionals stdenv.isDarwin [
       reattach-to-user-namespace
