@@ -15,6 +15,8 @@
 
   python39Custom = mach-nix.mkPython {
     requirements = ''
+      requests
+      boto3
       # C-based packages
       pycapnp
       pyyaml

@@ -1,31 +1,29 @@
 -- Lua configuration for Neovim
-
---# selene: allow(undefined_variable, unscoped_variables)
-
+-- # selene: allow(undefined_variable, unscoped_variables)
 -- Use spacebar for leader key, instead of '\'.
 vim.g.mapleader = " "
 
-vim.opt.autoindent = true             -- Always enable auto-indenting.
---vim.opt.clipboard-unnamed = true      -- Use system clipboard.
---vim.opt.laststatus = 2                -- Always have a status bar.
---vim.opt.wrap = false                  -- Stop word wrapping.
---vim.opt.scrolloff = 1                 -- Space above cursor from screen edge.
---vim.opt.sidescrolloff = 5             -- Space beside cursor from screen edge.
---vim.opt.cursorcolumn = true           -- Highlight the current column.
+vim.opt.autoindent = true -- Always enable auto-indenting.
+-- vim.opt.clipboard-unnamed = true      -- Use system clipboard.
+-- vim.opt.laststatus = 2                -- Always have a status bar.
+-- vim.opt.wrap = false                  -- Stop word wrapping.
+-- vim.opt.scrolloff = 1                 -- Space above cursor from screen edge.
+-- vim.opt.sidescrolloff = 5             -- Space beside cursor from screen edge.
+-- vim.opt.cursorcolumn = true           -- Highlight the current column.
 -- vim.opt.cursorline = true             -- Highlight the current line.
---vim.opt.lazyredraw = true             -- Redraw only when needed, speeds up macros.
---vim.opt.conceallevel = 0              -- Don't hide characters.
-vim.opt.encoding = "utf8"             -- Set standard file encoding.
-vim.opt.mouse = "a"                   -- Enable the mouse.
-vim.opt.backup = false                -- Don't keep a backup file
-vim.opt.errorbells = false            -- Be quiet.
-vim.opt.swapfile = false              -- Don't use swap files.
-vim.opt.showmatch = true              -- Show matching brackets.
-vim.opt.updatetime = 100              -- Write to swap file faster, and makes vim-gitgutter more responsive
-vim.opt.undolevels = 100              -- Adjust system undo levels.
-vim.opt.wmh = 0                       -- Set smallest possible window when minimizing a split window.
-vim.opt.number = true                 -- Turn on line numbers.
---vim.opt.relativenumber = true         -- Show the line numbers as relative.
+-- vim.opt.lazyredraw = true             -- Redraw only when needed, speeds up macros.
+-- vim.opt.conceallevel = 0              -- Don't hide characters.
+vim.opt.encoding = "utf8" -- Set standard file encoding.
+vim.opt.mouse = "a" -- Enable the mouse.
+vim.opt.backup = false -- Don't keep a backup file
+vim.opt.errorbells = false -- Be quiet.
+vim.opt.swapfile = false -- Don't use swap files.
+vim.opt.showmatch = true -- Show matching brackets.
+vim.opt.updatetime = 100 -- Write to swap file faster, and makes vim-gitgutter more responsive
+vim.opt.undolevels = 100 -- Adjust system undo levels.
+vim.opt.wmh = 0 -- Set smallest possible window when minimizing a split window.
+vim.opt.number = true -- Turn on line numbers.
+-- vim.opt.relativenumber = true         -- Show the line numbers as relative.
 
 -- vim.opt.spell = true                  -- Enable spell check.
 -- vim.opt.spelllang = { "en_us" }       -- Use US English spelling.
@@ -36,7 +34,7 @@ vim.opt.formatoptions = "tcrq"
 
 -- Enable wildmenu support, which autocompletes commands.
 vim.opt.wildmenu = true
-vim.opt.wildmode = "list:longest,full"  -- list all options, match to the longest
+vim.opt.wildmode = "list:longest,full" -- list all options, match to the longest
 
 -- Set tab width & convert tabs to spaces.
 vim.opt.expandtab = true
@@ -47,19 +45,19 @@ vim.opt.tabstop = 4
 vim.opt.shiftround = true
 
 -- Support folding.
-vim.opt.foldenable = true             -- Enable folding.
---vim.opt.foldcolumn = 2                -- Reserve space for the fold.
-vim.opt.foldlevelstart = 99           -- All folds are open by default.
---vim.opt.foldmethod = "indent"           -- Use indenting to determine folds.
---vim.opt.foldmethod = syntax           -- Use syntax rules to determine folds.
+vim.opt.foldenable = true -- Enable folding.
+-- vim.opt.foldcolumn = 2                -- Reserve space for the fold.
+vim.opt.foldlevelstart = 99 -- All folds are open by default.
+-- vim.opt.foldmethod = "indent"           -- Use indenting to determine folds.
+-- vim.opt.foldmethod = syntax           -- Use syntax rules to determine folds.
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Searching.
-vim.opt.hlsearch = true               -- Use search highlighting.
-vim.opt.ignorecase = true             -- Do case insensitive searching.
-vim.opt.incsearch = true              -- Perform incremental searching.
-vim.opt.smartcase = true              -- Ignore case unless case is used.
+vim.opt.hlsearch = true -- Use search highlighting.
+vim.opt.ignorecase = true -- Do case insensitive searching.
+vim.opt.incsearch = true -- Perform incremental searching.
+vim.opt.smartcase = true -- Ignore case unless case is used.
 
 -- Fix grey background in Vim for dracula
 -- https://github.com/dracula/vim/issues/96
@@ -88,11 +86,14 @@ vim.g.strip_whitespace_on_save = 1
 require("indent_blankline").setup {
     -- for example, context is off by default, use this to turn it on
     show_current_context = true,
-    show_current_context_start = true,
+    show_current_context_start = true
 }
 
+-- trouble-nvim
+require('trouble').setup()
+
 -- gitsigns-nvim
-require('gitsigns').setup()
+require('gitsigns').setup {signcolumn = true}
 
 -- nvim-treesitter
 require'nvim-treesitter.configs'.setup {
@@ -105,7 +106,7 @@ require'nvim-treesitter.configs'.setup {
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = false
     },
     incremental_selection = {
         enable = true,
@@ -113,12 +114,10 @@ require'nvim-treesitter.configs'.setup {
             init_selection = "gnn",
             node_incremental = "grn",
             scope_incremental = "grc",
-            node_decremental = "grm",
-        },
+            node_decremental = "grm"
+        }
     },
-    indent = {
-        enable = true
-    }
+    indent = {enable = true}
 }
 
 -- null-ls-nvim
@@ -127,14 +126,14 @@ require("null-ls").setup({
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
             vim.api.nvim_create_autocmd("BufWritePre", {
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
                     vim.lsp.buf.formatting_sync()
-                end,
+                end
             })
         end
     end,
@@ -143,9 +142,7 @@ require("null-ls").setup({
     sources = {
         -- Git
         require("null-ls").builtins.code_actions.gitsigns,
-        require("null-ls").builtins.diagnostics.gitlint,
-
-        -- English
+        require("null-ls").builtins.diagnostics.gitlint, -- English
         require("null-ls").builtins.code_actions.proselint,
         require("null-ls").builtins.diagnostics.alex,
         require("null-ls").builtins.diagnostics.proselint,
@@ -156,102 +153,65 @@ require("null-ls").setup({
         -- Javascript/Typescript
         require("null-ls").builtins.code_actions.eslint_d,
         require("null-ls").builtins.formatting.eslint_d,
-        require("null-ls").builtins.diagnostics.eslint_d,
-
-        -- Programming
+        require("null-ls").builtins.diagnostics.eslint_d, -- Programming
         require("null-ls").builtins.code_actions.refactoring,
-        require("null-ls").builtins.completion.tags,
-
-        -- Bash
+        require("null-ls").builtins.completion.tags, -- Bash
         require("null-ls").builtins.code_actions.shellcheck,
         -- require("null-ls").builtins.formatting.shellharden,
         require("null-ls").builtins.formatting.shfmt.with({
-             extra_args = {"-i", "2", "-ci", "-sr", "-kp"}  -- Make shfmt pretty.
-        }),
-        require("null-ls").builtins.diagnostics.shellcheck.with({
-             extra_args = {"-s", "bash", "-e", "SC1008"}  -- Force shellcheck to always assume Bash,
-                                                          -- and ignore warning about unsupported #!.
-        }),
-
-        -- Nix
+            extra_args = {"-i", "2", "-ci", "-sr", "-kp"} -- Make shfmt pretty.
+        }), require("null-ls").builtins.diagnostics.shellcheck.with({
+            extra_args = {"-s", "bash", "-e", "SC1008"} -- Force shellcheck to always assume Bash,
+            -- and ignore warning about unsupported #!.
+        }), -- Nix
         require("null-ls").builtins.code_actions.statix,
         require("null-ls").builtins.formatting.alejandra,
         -- require("null-ls").builtins.formatting.nixfmt,
         -- require("null-ls").builtins.formatting.nixpkgs_fmt,
         require("null-ls").builtins.diagnostics.deadnix,
-        require("null-ls").builtins.diagnostics.statix,
-
-        -- Python
+        require("null-ls").builtins.diagnostics.statix, -- Python
         require("null-ls").builtins.formatting.black,
         -- require("null-ls").builtins.formatting.isort,
         require("null-ls").builtins.diagnostics.flake8.with({
-             --only_local = vim.fn.expand "~/.nix-profile/bin",
-             extra_args = {
-                "--max-line-length", "88",   -- Match the line-length of Black.
-                "--ignore", "E203,W503"}     -- Avoid conflict with Black.
-         }),
-        require("null-ls").builtins.diagnostics.mypy.with({
+            -- only_local = vim.fn.expand "~/.nix-profile/bin",
             extra_args = {
-                "--follow-imports", "silent",
-                "--warn-unreachable",
-                "--strict",
+                "--max-line-length", "88", -- Match the line-length of Black.
+                "--ignore", "E203,W503"
+            } -- Avoid conflict with Black.
+        }), require("null-ls").builtins.diagnostics.mypy.with({
+            extra_args = {
+                "--follow-imports", "silent", "--warn-unreachable", "--strict"
             }
-        }),
-        require("null-ls").builtins.diagnostics.pydocstyle,
+        }), require("null-ls").builtins.diagnostics.pydocstyle,
         -- require("null-ls").builtins.diagnostics.vulture,
         -- Not currently available via Nix
         -- require("null-ls").builtins.diagnostics.pyproject_flake8,
 
         -- C/C++
         require("null-ls").builtins.formatting.clang_format,
-        require("null-ls").builtins.diagnostics.cppcheck,
-
-        -- Fish
+        require("null-ls").builtins.diagnostics.cppcheck, -- Fish
         require("null-ls").builtins.formatting.fish_indent,
-        require("null-ls").builtins.diagnostics.fish,
-
-        -- Ruby
+        require("null-ls").builtins.diagnostics.fish, -- Ruby
         require("null-ls").builtins.formatting.rubocop,
-        require("null-ls").builtins.diagnostics.rubocop,
-
-        -- Markdown
+        require("null-ls").builtins.diagnostics.rubocop, -- Markdown
         require("null-ls").builtins.formatting.markdownlint,
-        require("null-ls").builtins.diagnostics.markdownlint,
-
-        -- Protobuf
+        require("null-ls").builtins.diagnostics.markdownlint, -- Protobuf
         require("null-ls").builtins.formatting.buf,
-        require("null-ls").builtins.diagnostics.buf,
-
-        -- CMake
-        require("null-ls").builtins.formatting.cmake_format,
-
-        -- JSON
+        require("null-ls").builtins.diagnostics.buf, -- CMake
+        require("null-ls").builtins.formatting.cmake_format, -- JSON
         require("null-ls").builtins.formatting.jq,
-        require("null-ls").builtins.diagnostics.jsonlint,
-
-        -- YAML
-        require("null-ls").builtins.diagnostics.yamllint,
-
-        -- Lua
+        require("null-ls").builtins.diagnostics.jsonlint, -- YAML
+        require("null-ls").builtins.diagnostics.yamllint, -- Lua
         require("null-ls").builtins.formatting.lua_format,
-        require("null-ls").builtins.diagnostics.selene,
-
-        -- Rust
-        require("null-ls").builtins.formatting.rustfmt,
-
-        -- HTML
+        require("null-ls").builtins.diagnostics.selene, -- Rust
+        require("null-ls").builtins.formatting.rustfmt, -- HTML
         require("null-ls").builtins.formatting.tidy,
-        require("null-ls").builtins.diagnostics.tidy,
-
-        -- CFN
-        --XXX require("null-ls").builtins.diagnostics.cfn_lint,
-
+        require("null-ls").builtins.diagnostics.tidy, -- CFN
+        -- XXX require("null-ls").builtins.diagnostics.cfn_lint,
         -- Make
-        require("null-ls").builtins.diagnostics.checkmake,
-
-        -- Dockerfile
-        require("null-ls").builtins.diagnostics.hadolint,
-    },
+        require("null-ls").builtins.diagnostics.checkmake, -- Dockerfile
+        require("null-ls").builtins.diagnostics.hadolint
+    }
 })
 
 -- luasnip
@@ -260,22 +220,21 @@ require("luasnip.loaders.from_vscode").lazy_load() -- Load VSCode-like snippets,
 
 -- From: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and
+               vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col,
+                                                                          col)
+                   :match("%s") == nil
 end
 
 -- nvim-cmp
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 local cmp = require("cmp")
 cmp.setup({
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
+    snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
     window = {
         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -283,7 +242,7 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<CR>"] = cmp.mapping.confirm({select = true}),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -294,7 +253,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, {"i", "s"}),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -303,41 +262,28 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, {"i", "s"})
     }),
-    sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-    }, {
-        { name = "buffer" },
-        { name = "calc" },
-    }),
-    completion = {
-        keyword_length = 3,
-    },
+    sources = cmp.config.sources({{name = "nvim_lsp"}, {name = "luasnip"}},
+                                 {{name = "buffer"}, {name = "calc"}}),
+    completion = {keyword_length = 3}
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = "buffer" }
-    }
+    sources = {{name = "buffer"}}
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = "path" }
-    }, {
-        { name = "cmdline" }
-    })
+    sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}})
 })
 
 -- Setup lspconfig.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local lsp_keymap_opts = { noremap=true, silent=true }
+local lsp_keymap_opts = {noremap = true, silent = true}
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, lsp_keymap_opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, lsp_keymap_opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, lsp_keymap_opts)
@@ -346,38 +292,41 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, lsp_keymap_opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  --vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  --vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  -- vim.keymap.set('n', '<space>wl', function()
-  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  -- end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "ge", "lua vim.lsp.diagnostic.goto_next()", bufopts)
-  vim.keymap.set("n", "gE", "lua vim.lsp.diagnostic.goto_prev()", bufopts)
-  vim.keymap.set("n", "gi", "lua vim.lsp.buf.implementation()", bufopts)
-  vim.keymap.set("n", "gl", "lua vim.lsp.diagnostic.show_line_diagnostics()", bufopts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = {noremap = true, silent = true, buffer = bufnr}
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    -- vim.keymap.set('n', '<space>wl', function()
+    --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    -- end, bufopts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set("n", "ge", "lua vim.lsp.diagnostic.goto_next()", bufopts)
+    vim.keymap.set("n", "gE", "lua vim.lsp.diagnostic.goto_prev()", bufopts)
+    vim.keymap.set("n", "gi", "lua vim.lsp.buf.implementation()", bufopts)
+    vim.keymap.set("n", "gl", "lua vim.lsp.diagnostic.show_line_diagnostics()",
+                   bufopts)
 end
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
+                                                                     .protocol
+                                                                     .make_client_capabilities())
 -- Add each lsp server you've enabled.
 require("lspconfig")["rust_analyzer"].setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = capabilities
     -- settings = {
     --     ["rust_analyzer"] = {}
     -- },
@@ -447,24 +396,34 @@ vim.cmd("au VimLeave * set guicursor=a:hor25-blinkon0")
 -- Make Y yank everything from the cursor to the end of the line. This makes Y
 -- act more like C or D because by default, Y yanks the current line (i.e. the
 -- same as yy).
-vim.keymap.set("", "Y", "y$", {desc = "Yank from cursor to the end of the line"})
+vim.keymap
+    .set("", "Y", "y$", {desc = "Yank from cursor to the end of the line"})
 
 -- Turn off the search highlight.
-vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>", {desc = "Turn off the search highlight"})
+vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>",
+               {desc = "Turn off the search highlight"})
 
 -- Map ctrl-h/j/k/l to move between split windows.
-vim.keymap.set("", "<c-h>", "<c-w>j<c-w>_", {desc = "Move left to window split"})
-vim.keymap.set("", "<c-j>", "<c-w>j<c-w>_", {desc = "Move down to window split"})
+vim.keymap
+    .set("", "<c-h>", "<c-w>j<c-w>_", {desc = "Move left to window split"})
+vim.keymap
+    .set("", "<c-j>", "<c-w>j<c-w>_", {desc = "Move down to window split"})
 vim.keymap.set("", "<c-k>", "<c-w>k<c-w>_", {desc = "Move up to window split"})
-vim.keymap.set("", "<c-l>", "<c-w>l<c-w>_", {desc = "Move right to window split"})
+vim.keymap.set("", "<c-l>", "<c-w>l<c-w>_",
+               {desc = "Move right to window split"})
 
 -- Delete a selection w/o updating the buffer.
-vim.keymap.set("v", "x", '"_x', {desc = "Delete (d) without updating the buffer"})
-vim.keymap.set("v", "X", '"_X', {desc = "Delete (D) without updating the buffer"})
+vim.keymap.set("v", "x", '"_x',
+               {desc = "Delete (d) without updating the buffer"})
+vim.keymap.set("v", "X", '"_X',
+               {desc = "Delete (D) without updating the buffer"})
 
 -- Toggle 'slf/gundo.vim'
-vim.keymap.set("n", "<leader>u", ":GundoToggle<CR>", {desc = "Toggle 'Gundo' plugin"})
+vim.keymap.set("n", "<leader>u", ":GundoToggle<CR>",
+               {desc = "Toggle 'Gundo' plugin"})
 
 -- Move up/down over wrapped lines in a nice manner.
-vim.keymap.set("", "j", "(v:count == 0 ? 'gj' : 'j')", {expr = true, silent = true})
-vim.keymap.set("", "k", "(v:count == 0 ? 'gk' : 'k')", {expr = true, silent = true})
+vim.keymap.set("", "j", "(v:count == 0 ? 'gj' : 'j')",
+               {expr = true, silent = true})
+vim.keymap.set("", "k", "(v:count == 0 ? 'gk' : 'k')",
+               {expr = true, silent = true})

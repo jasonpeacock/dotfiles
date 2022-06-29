@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.ssh = {
     enable = true;
 
@@ -17,9 +15,9 @@
 CheckHostIP no
 TCPKeepAlive yes
 IPQoS=throughput
-GSSAPIKeyExchange yes
-GSSAPIAuthentication yes
-GSSAPIDelegateCredentials yes
+GSSAPIKeyExchange no
+GSSAPIAuthentication no
+GSSAPIDelegateCredentials no
     ";
 
     matchBlocks = {
