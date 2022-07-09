@@ -48,7 +48,7 @@ style = "bold #f1fa8c"
 
 [directory]
 read_only = " "
-truncation_length = 4
+truncation_length = 3
 truncate_to_repo = false
 truncation_symbol = ".../"
 style = "bold #50fa7b"
@@ -59,7 +59,7 @@ disabled = true
 
 [git_branch]
 format = "on [$symbol$branch(:$remote_branch)]($style) "
-truncation_length = 20
+truncation_length = 30
 style = "bold #ff79c6"
 
 [git_commit]

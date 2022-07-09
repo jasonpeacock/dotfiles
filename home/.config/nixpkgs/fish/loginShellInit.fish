@@ -14,6 +14,9 @@ set -gx EDITOR \"nvim\"
 # Cargo/rust support for all hosts.
 fish_add_path $HOME/.cargo/bin
 
+# pipx support for all hosts.
+fish_add_path $HOME/.local/bin
+
 # Load host-specific configuration.
 set THIS_HOST (hostname | sed 's/\\..*$//')
 if test -f $HOME/.config/host-init/$THIS_HOST.fish
@@ -25,6 +28,6 @@ end
 
 # Dotfile management with homeshick.
 if test -d $HOME/.homesick
-  source $HOME/.homesick/repos/homeshick/homeshick.fish
-  source $HOME/.homesick/repos/homeshick/completions/homeshick.fish
+    source $HOME/.homesick/repos/homeshick/homeshick.fish
+    source $HOME/.homesick/repos/homeshick/completions/homeshick.fish
 end

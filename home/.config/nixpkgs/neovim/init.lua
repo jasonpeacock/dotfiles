@@ -85,8 +85,8 @@ vim.g.strip_whitespace_on_save = 1
 -- indent-blankline-nvim
 require("indent_blankline").setup {
     -- for example, context is off by default, use this to turn it on
-    show_current_context = true,
-    show_current_context_start = true
+    show_current_context = true
+    -- show_current_context_start = true
 }
 
 -- trouble-nvim
@@ -106,7 +106,7 @@ require'nvim-treesitter.configs'.setup {
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false
+        additional_vim_regex_highlighting = {"python"}
     },
     incremental_selection = {
         enable = true,
@@ -117,12 +117,13 @@ require'nvim-treesitter.configs'.setup {
             node_decremental = "grm"
         }
     },
-    indent = {enable = true}
+    indent = {enable = true, disable = {"python"}}
 }
 
 -- null-ls-nvim
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
+    diagnostics_format = "[#{c}] #{m} (#{s})",
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
@@ -136,81 +137,63 @@ require("null-ls").setup({
                 end
             })
         end
+        common_on_attach(client, bufnr)
     end,
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
     sources = {
-        -- Git
-        require("null-ls").builtins.code_actions.gitsigns,
-        require("null-ls").builtins.diagnostics.gitlint, -- English
-        require("null-ls").builtins.code_actions.proselint,
-        require("null-ls").builtins.diagnostics.alex,
-        require("null-ls").builtins.diagnostics.proselint,
-        require("null-ls").builtins.diagnostics.codespell,
-        require("null-ls").builtins.formatting.codespell,
-        -- require("null-ls").builtins.completion.spell,
-
-        -- Javascript/Typescript
-        require("null-ls").builtins.code_actions.eslint_d,
-        require("null-ls").builtins.formatting.eslint_d,
-        require("null-ls").builtins.diagnostics.eslint_d, -- Programming
-        require("null-ls").builtins.code_actions.refactoring,
-        require("null-ls").builtins.completion.tags, -- Bash
-        require("null-ls").builtins.code_actions.shellcheck,
-        -- require("null-ls").builtins.formatting.shellharden,
-        require("null-ls").builtins.formatting.shfmt.with({
-            extra_args = {"-i", "2", "-ci", "-sr", "-kp"} -- Make shfmt pretty.
-        }), require("null-ls").builtins.diagnostics.shellcheck.with({
+        -- require("null-ls").builtins.code_actions.gitsigns, -- Git
+        require("null-ls").builtins.diagnostics.gitlint, -- Git
+        -- require("null-ls").builtins.code_actions.eslint_d, -- Javascript/Typescript
+        require("null-ls").builtins.formatting.eslint_d, -- Javascript/Typescript
+        require("null-ls").builtins.diagnostics.eslint_d, -- Javascript/Typescript
+        -- require("null-ls").builtins.code_actions.refactoring, -- Programming
+        require("null-ls").builtins.completion.tags, -- Programming
+        -- require("null-ls").builtins.code_actions.shellcheck, -- Bash
+        require("null-ls").builtins.formatting.shfmt.with({ -- Bash
+            extra_args = {"-i", "2", "-ci", "-sr"} -- Make shfmt pretty.
+        }), require("null-ls").builtins.diagnostics.shellcheck.with({ -- Bash
             extra_args = {"-s", "bash", "-e", "SC1008"} -- Force shellcheck to always assume Bash,
             -- and ignore warning about unsupported #!.
-        }), -- Nix
-        require("null-ls").builtins.code_actions.statix,
-        require("null-ls").builtins.formatting.alejandra,
-        -- require("null-ls").builtins.formatting.nixfmt,
-        -- require("null-ls").builtins.formatting.nixpkgs_fmt,
-        require("null-ls").builtins.diagnostics.deadnix,
-        require("null-ls").builtins.diagnostics.statix, -- Python
-        require("null-ls").builtins.formatting.black,
-        -- require("null-ls").builtins.formatting.isort,
-        require("null-ls").builtins.diagnostics.flake8.with({
+        }), -- require("null-ls").builtins.code_actions.statix, -- Nix
+        require("null-ls").builtins.formatting.alejandra, -- Nix
+        require("null-ls").builtins.diagnostics.deadnix, -- Nix
+        require("null-ls").builtins.diagnostics.statix, -- Nix
+        require("null-ls").builtins.formatting.black, -- Python
+        require("null-ls").builtins.diagnostics.flake8.with({ -- Python
             -- only_local = vim.fn.expand "~/.nix-profile/bin",
             extra_args = {
                 "--max-line-length", "88", -- Match the line-length of Black.
-                "--ignore", "E203,W503"
-            } -- Avoid conflict with Black.
-        }), require("null-ls").builtins.diagnostics.mypy.with({
+                "--ignore", "E203,W503" -- Avoid conflict with Black.
+            }
+        }), require("null-ls").builtins.diagnostics.mypy.with({ -- Python
             extra_args = {
                 "--follow-imports", "silent", "--warn-unreachable", "--strict"
             }
-        }), require("null-ls").builtins.diagnostics.pydocstyle,
-        -- require("null-ls").builtins.diagnostics.vulture,
-        -- Not currently available via Nix
-        -- require("null-ls").builtins.diagnostics.pyproject_flake8,
-
-        -- C/C++
-        require("null-ls").builtins.formatting.clang_format,
-        require("null-ls").builtins.diagnostics.cppcheck, -- Fish
-        require("null-ls").builtins.formatting.fish_indent,
-        require("null-ls").builtins.diagnostics.fish, -- Ruby
-        require("null-ls").builtins.formatting.rubocop,
-        require("null-ls").builtins.diagnostics.rubocop, -- Markdown
-        require("null-ls").builtins.formatting.markdownlint,
-        require("null-ls").builtins.diagnostics.markdownlint, -- Protobuf
-        require("null-ls").builtins.formatting.buf,
-        require("null-ls").builtins.diagnostics.buf, -- CMake
-        require("null-ls").builtins.formatting.cmake_format, -- JSON
-        require("null-ls").builtins.formatting.jq,
-        require("null-ls").builtins.diagnostics.jsonlint, -- YAML
-        require("null-ls").builtins.diagnostics.yamllint, -- Lua
-        require("null-ls").builtins.formatting.lua_format,
-        require("null-ls").builtins.diagnostics.selene, -- Rust
-        require("null-ls").builtins.formatting.rustfmt, -- HTML
-        require("null-ls").builtins.formatting.tidy,
-        require("null-ls").builtins.diagnostics.tidy, -- CFN
-        -- XXX require("null-ls").builtins.diagnostics.cfn_lint,
-        -- Make
-        require("null-ls").builtins.diagnostics.checkmake, -- Dockerfile
-        require("null-ls").builtins.diagnostics.hadolint
+        }), require("null-ls").builtins.diagnostics.pydocstyle, -- Python
+        require("null-ls").builtins.formatting.clang_format, -- C/C++
+        require("null-ls").builtins.diagnostics.cppcheck, -- C/C++
+        require("null-ls").builtins.formatting.fish_indent, -- Fish
+        require("null-ls").builtins.diagnostics.fish, -- Fish
+        require("null-ls").builtins.formatting.rubocop, -- Ruby
+        require("null-ls").builtins.diagnostics.rubocop, -- Ruby
+        require("null-ls").builtins.formatting.markdownlint.with({ -- Markdown
+            extra_args = {"--disable=MD013"} -- disable LineLength
+        }),
+        require("null-ls").builtins.diagnostics.markdownlint.with({ -- Markdown
+            extra_args = {"--disable=MD013"} -- disable LineLength
+        }), require("null-ls").builtins.formatting.buf, -- Protobuf
+        require("null-ls").builtins.diagnostics.buf, -- Protobuf
+        require("null-ls").builtins.formatting.cmake_format, -- CMAKE
+        require("null-ls").builtins.formatting.jq, -- JSON
+        require("null-ls").builtins.diagnostics.jsonlint, -- JSON
+        require("null-ls").builtins.diagnostics.yamllint, -- YAML
+        require("null-ls").builtins.formatting.lua_format, -- Lua
+        require("null-ls").builtins.diagnostics.selene, -- Lua
+        require("null-ls").builtins.formatting.tidy, -- HTML
+        require("null-ls").builtins.diagnostics.tidy, -- HTML
+        require("null-ls").builtins.diagnostics.checkmake, -- CMake
+        require("null-ls").builtins.diagnostics.hadolint -- Dockerfile
     }
 })
 
@@ -242,7 +225,7 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.mapping.confirm({select = true}),
+        ["<CR>"] = cmp.mapping.confirm({select = false}),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -291,7 +274,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, lsp_keymap_opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_client, bufnr)
+common_on_attach = function(_client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -323,16 +306,28 @@ end
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
                                                                      .protocol
                                                                      .make_client_capabilities())
--- Add each lsp server you've enabled.
+-- Rust
+-- https://github.com/numToStr/dotfiles/blob/f972b9ebfd742daac8f2dc5ea6c19681241bd798/neovim/.config/nvim/lua/numToStr/plugins/lsp/servers.lua#L63-L85
 require("lspconfig")["rust_analyzer"].setup {
-    on_attach = on_attach,
+    on_attach = function(client, bufnr) common_on_attach(client, bufnr) end,
     capabilities = capabilities
     -- settings = {
-    --     ["rust_analyzer"] = {}
-    -- },
+    --     ["rust_analyzer"] = {
+    --         cargo = {allFeatures = false},
+    --         checkOnSave = {allFeatures = false, command = 'clippy'}
+    --         -- procMacro = {
+    --         --     ignored = {
+    --         --         ['async-trait'] = { 'async_trait' },
+    --         --         ['napi-derive'] = { 'napi' },
+    --         --         ['async-recursion'] = { 'async_recursion' },
+    --         --     },
+    --         -- },
+    --     }
+    -- }
 }
+-- Python
 require("lspconfig")["pyright"].setup {
-    on_attach = on_attach,
+    on_attach = function(client, bufnr) common_on_attach(client, bufnr) end,
     capabilities = capabilities
 }
 
@@ -342,52 +337,52 @@ require('rust-tools').setup({})
 -- camelcasemotion
 vim.g.camelcasemotion_key = "<leader>"
 
-vim.cmd([[
-augroup configgroup
-autocmd!
-autocmd VimEnter * highlight clear SignColumn
+-- vim.cmd([[
+-- augroup configgroup
+-- autocmd!
+-- autocmd VimEnter * highlight clear SignColumn
 
-" Strip trailing whitespace from all files. See the configuration in
-" plugins.vimrc for a blacklist of filetypes.
-autocmd BufEnter * EnableStripWhitespaceOnSave
+-- " Strip trailing whitespace from all files. See the configuration in
+-- " plugins.vimrc for a blacklist of filetypes.
+-- autocmd BufEnter * EnableStripWhitespaceOnSave
 
-" Allow word wrapping for some filetypes.
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd FileType markdown setlocal wrap
-autocmd FileType markdown setlocal conceallevel=0
+-- " Allow word wrapping for some filetypes.
+-- autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+-- autocmd FileType markdown setlocal wrap
+-- autocmd FileType markdown setlocal conceallevel=0
 
-" YAML style is 2-space indenting.
-autocmd FileType yaml setlocal tabstop=2
-autocmd FileType yaml setlocal shiftwidth=2
-autocmd FileType yaml setlocal softtabstop=2
-autocmd FileType yaml setlocal commentstring=#\ %s
+-- " YAML style is 2-space indenting.
+-- autocmd FileType yaml setlocal tabstop=2
+-- autocmd FileType yaml setlocal shiftwidth=2
+-- autocmd FileType yaml setlocal softtabstop=2
+-- autocmd FileType yaml setlocal commentstring=#\ %s
 
-" Bash style is 2-space indenting.
-autocmd FileType sh setlocal tabstop=2
-autocmd FileType sh setlocal shiftwidth=2
-autocmd FileType sh setlocal softtabstop=2
-autocmd FileType sh setlocal commentstring=#\ %s
+-- " Bash style is 2-space indenting.
+-- autocmd FileType sh setlocal tabstop=2
+-- autocmd FileType sh setlocal shiftwidth=2
+-- autocmd FileType sh setlocal softtabstop=2
+-- autocmd FileType sh setlocal commentstring=#\ %s
 
-" Ruby style is 2-space indenting.
-autocmd FileType ruby setlocal tabstop=2
-autocmd FileType ruby setlocal shiftwidth=2
-autocmd FileType ruby setlocal softtabstop=2
-autocmd FileType ruby setlocal commentstring=#\ %s
+-- " Ruby style is 2-space indenting.
+-- autocmd FileType ruby setlocal tabstop=2
+-- autocmd FileType ruby setlocal shiftwidth=2
+-- autocmd FileType ruby setlocal softtabstop=2
+-- autocmd FileType ruby setlocal commentstring=#\ %s
 
-autocmd FileType python setlocal commentstring=#\ %s
+-- autocmd FileType python setlocal commentstring=#\ %s
 
-" Map unknown files to known filetypes.
-autocmd BufEnter *.cls setlocal filetype=java
-autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-autocmd BufEnter *.launch setlocal filetype=xml " ROS .launch files are XML
-autocmd BufEnter *.bats set filetype=sh
+-- " Map unknown files to known filetypes.
+-- autocmd BufEnter *.cls setlocal filetype=java
+-- autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+-- autocmd BufEnter *.launch setlocal filetype=xml " ROS .launch files are XML
+-- autocmd BufEnter *.bats set filetype=sh
 
-" Makefiles need to keep their tabs.
-autocmd BufEnter Makefile setlocal noexpandtab
-augroup END
-]])
+-- " Makefiles need to keep their tabs.
+-- autocmd BufEnter Makefile setlocal noexpandtab
+-- augroup END
+-- ]])
 
-vim.cmd("filetype plugin indent on")
+-- vim.cmd("filetype plugin indent on")
 -- vim.cmd("syntax enable")
 
 -- Restore cursor style on exit.

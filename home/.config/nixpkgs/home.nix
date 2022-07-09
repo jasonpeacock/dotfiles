@@ -15,8 +15,12 @@
 
   python39Custom = mach-nix.mkPython {
     requirements = ''
+      awscliv2
       requests
       boto3
+      botocore
+      requests
+      git-remote-codecommit
       # C-based packages
       pycapnp
       pyyaml
@@ -74,7 +78,6 @@ in {
       gitAndTools.git-extras
       gitAndTools.lefthook
       gitAndTools.tig
-      git-remote-codecommit
       glow
       gping
       hyperfine
@@ -105,25 +108,19 @@ in {
       hadolint
       luaformatter
       nixfmt
-      nodePackages.alex
       nodePackages.eslint_d
       nodePackages.jsonlint
       nodePackages.markdownlint-cli
       nodePackages.pyright
-      proselint
       python39Packages.black
-      python39Packages.codespell
       python39Packages.jsonschema
-      # python39Packages.mypy
-      # python39Packages.vulture
+      python39Packages.pipx
       python39Packages.yamllint
       python39Packages.yapf
       rubocop
       rust-analyzer
-      rustfmt
       selene
       shellcheck
-      shellharden
       shfmt
       statix
       html-tidy

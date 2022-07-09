@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     # shellInit = builtins.readFile fish/shellInit.fish;
@@ -11,6 +9,38 @@ starship init fish | source
 thefuck --alias | source
     ";
     functions = {
+      # Access history of all shells.
+      # https://github.com/2m/fish-history-merge
+      /*
+             up-or-search = "
+       # If we are already in search mode, continue
+       if commandline --search-mode
+           commandline -f history-search-backward
+           return
+       end
+       
+       # If we are navigating the pager, then up always navigates
+       if commandline --paging-mode
+           commandline -f up-line
+           return
+       end
+       
+       # We are not already in search mode.
+       # If we are on the top line, start search mode,
+       # otherwise move up
+       set lineno (commandline -L)
+       
+       switch $lineno
+           case 1
+               commandline -f history-search-backward
+               history merge # <-- ADDED THIS
+       
+           case '*'
+               commandline -f up-line
+       end
+             ";
+       */
+
       # Initialize directory to run a local nix-shell.
       nixify = "
 if test -f ./.envrc
@@ -90,22 +120,25 @@ bind '$' bind_dollar
       ";
     };
     shellAliases = {
-      bc="bc -l -q \"\$HOME/.bc\"";
-      grep="grep --color=auto";
-      http="python3 -m http.server";
-      less="less -R -n";
-      ls="exa --icons --git";
-      scp="scp -C";
-      tmux="tmux new -As0";
-      tree="exa --tree --icons --git";
-      vi="nvim -o";
-      work="cd \"$HOME/workplace\"";
+      bc = "bc -l -q \"\$HOME/.bc\"";
+      grep = "grep --color=auto";
+      http = "python3 -m http.server";
+      less = "less -R -n";
+      ls = "exa --icons --git";
+      scp = "scp -C";
+      tmux = "tmux new -As0";
+      tree = "exa --tree --icons --git";
+      vi = "nvim -o";
+      work = "cd \"$HOME/workplace\"";
     };
     plugins = [
       # Bring in `fenv` for sourcing files from other shells (like Zsh).
       # Need to add the plugin here, and not in `home.nix` b/c we need to
       # access `fenv` in the init scripts of Fish during shell initialization.
-      { name = "foreign-env"; src = pkgs.fishPlugins.foreign-env.src; }
+      {
+        name = "foreign-env";
+        src = pkgs.fishPlugins.foreign-env.src;
+      }
       # Example of loading a plugin from source repo:
       # {
       #   name = "z";

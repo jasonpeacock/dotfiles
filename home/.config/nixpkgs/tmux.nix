@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.tmux = {
     enable = true;
 
@@ -57,7 +55,7 @@ set -g -a terminal-overrides ',*:Ss=\\E[%p1%d q:Se=\\E[2 q'
 set -sg escape-time 10
 
 # Override the theme color.
-# set -g pane-active-border-style fg=yellow
+set -g pane-active-border-style fg=green
     ";
   };
 }

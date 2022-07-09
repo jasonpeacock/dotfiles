@@ -14,7 +14,17 @@ ${builtins.readFile neovim/init.lua}
 EOF
 ";
 
-    plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs.vimPlugins; let
+      toggle-lsp-diagnostics = pkgs.vimUtils.buildVimPlugin {
+        name = "toggle-lsp-diagnostics";
+        src = pkgs.fetchFromGitHub {
+          owner = "whoissethdaniel";
+          repo = "toggle-lsp-diagnostics.nvim";
+          rev = "32fd1d3505a1ae931709e750836a4b90596f1257";
+          sha256 = "a7Jiq6hzaNEbBcMPgaL5IywHtDqMRDIP3O4sZKDVA58=";
+        };
+      };
+    in [
       camelcasemotion
       cmp-buffer
       cmp-calc
@@ -32,7 +42,6 @@ EOF
       null-ls-nvim
       nvim-cmp
       nvim-lspconfig
-      # (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       (nvim-treesitter.withPlugins (
         plugins:
           with plugins; [
@@ -61,6 +70,7 @@ EOF
       plenary-nvim
       rust-tools-nvim
       tagbar
+      toggle-lsp-diagnostics
       trouble-nvim
       vim-abolish
       vim-airline
