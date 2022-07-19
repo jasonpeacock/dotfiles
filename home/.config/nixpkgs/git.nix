@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
-with import ./git/host.nix;
-
-{
+{pkgs, ...}:
+with import ./git/host.nix; {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.git;
@@ -15,6 +12,7 @@ with import ./git/host.nix;
     aliases = {
       graph = "log --graph --oneline --all --decorate --topo-order";
       dag = "log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order";
+      files = "diff-tree --name-only -r --no-commit-id";
     };
     extraConfig = {
       color = {
