@@ -66,6 +66,7 @@ in {
       #platformio
       asciinema
       cmake
+      clang-tools
       cookiecutter
       curl
       docker

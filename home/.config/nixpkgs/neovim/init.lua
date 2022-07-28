@@ -200,6 +200,7 @@ null_ls.setup({
         }), -- Python
         null_ls.builtins.formatting.clang_format, -- C/C++
         null_ls.builtins.diagnostics.cppcheck.with({
+            extra_args = {"--language", "c++"},
             diagnostics_format = diagnostics_msg
         }), -- C/C++
         null_ls.builtins.formatting.fish_indent, -- Fish
