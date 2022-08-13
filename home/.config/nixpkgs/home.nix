@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   mach-nix =
     import (
       builtins.fetchGit {
@@ -16,11 +12,11 @@
   python39Custom = mach-nix.mkPython {
     requirements = ''
       awscliv2
-      requests
       boto3
       botocore
-      requests
       git-remote-codecommit
+      invoke
+      requests
       # C-based packages
       pycapnp
       pyyaml
@@ -96,6 +92,10 @@ in {
       wget
       yq
 
+      # Spack
+      clingo
+      patchelf
+
       # Prompt/shell-theme tools
       starship
       vivid
@@ -107,6 +107,7 @@ in {
       deadnix
       gitlint
       hadolint
+      html-tidy
       luaformatter
       nixfmt
       nodePackages.eslint_d
@@ -124,7 +125,6 @@ in {
       shellcheck
       shfmt
       statix
-      html-tidy
     ]
     ++ lib.optionals stdenv.isLinux [
       can-utils

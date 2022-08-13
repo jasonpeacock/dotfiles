@@ -1,4 +1,7 @@
 {
   gitUserName = "Jason Peacock";
   gitUserEmail = "jason@jasonpeacock.com";
+  gitExtraConfig = {
+    commit = { template = "~/.gitmessage"; };
+  };
 }
