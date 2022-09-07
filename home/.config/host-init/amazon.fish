@@ -10,7 +10,7 @@ set -gx MAKE_OUTPUT_LEVEL QUIET # reduce noise during builds
 # Kuiper
 set -gx AWS_PROFILE kuiper-readonly # Need to set a default for the Git CodeCommit helper
 set -gx AWS_CONTAINER_CREDENTIALS_FULL_URI http://127.0.0.1:9911 # for Docker builds
-set -gx DEV_ACCOUNT=594035389188 # for CDK builds
+set -gx DEV_ACCOUNT 594035389188 # for CDK builds
 
 # Aliases
 alias bb "SKIP_DOCUMENTATION=1 brazil-build"
