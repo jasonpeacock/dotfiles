@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-$HOME/bin/inadyn --dyndns_server_name dynamic.pairnic.com --dyndns_server_url '/nic/update?' --ip_server_name myip.pairnic.com / -a 'buddhabellybaby.com' -u pairnic -p `cat $HOME/.certs/buddhabellybaby-pairnic.dynamic_dns_key` --iterations 1
