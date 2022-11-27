@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -o errexit -o nounset -o pipefail
+
+summary=""
+
+if nix upgrade-nix && nix-channel --update && nix-env --upgrade; then
+  summary+="[INFO]\tUpdated 'nix'\n" >&2
+else
+  summary+="[ERROR]\tFailed to update 'nix'\n" >&2
+fi
+
+if home-manager expire-generations "-1 days" && nix-collect-garbage -d; then
+  summary+="[INFO]\tGarbage collected 'nix'\n" >&2
+else
+  summary+="[ERROR]\tFailed to garbage collect 'nix'\n" >&2
+fi
+
+echo -e "${summary}" >&2
+
+echo -e "[INFO]\tUpdating home-manager environment"
+home-manager switch

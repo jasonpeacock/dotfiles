@@ -1,0 +1,17 @@
+{
+  gitUserName = "Jason Peacock";
+  gitUserEmail = "jpeacock@amazon.com";
+  gitExtraConfig = {
+    commit = { template = "~/.gitmessage"; };
+    credential = {
+      # helper = "!aws --profile kuiper-code-ear-prod codecommit credential-helper \$@";
+      helper = "!aws codecommit credential-helper \$@";
+      UseHttpPath = "true";
+    };
+    protocol = {
+      codecommit = {
+        allow = "always";
+      };
+    };
+  };
+}
