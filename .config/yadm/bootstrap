@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# A bootstrap script for YADM:
+#
+# https://yadm.io/docs/bootstrap
+set -o nounset -o pipefail -o errexit
+
+function info {
+  local msg="${1}" && shift
+
+  echo -e "\n[INFO]\t${msg}" >&2
+}
+
+info "Linking host-specific files"
+yadm alt
+
+if ! command -v nix > /dev/null; then
+  info "Installing Nix"
+  sh <(curl -L https://nixos.org/nix/install) --no-daemon
+else
+  info "Nix already installed"
+fi
+
+info "Configuring Nix & setting up home-manager"
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+
+info "Running home-manager"
+home-manager switch
