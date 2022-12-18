@@ -36,13 +36,13 @@ EOF
       # Autocomplete
       nvim-cmp
       cmp-buffer
+      cmp-cmdline
       cmp-nvim-lsp
       cmp-path
       # Snippets
-      cmp-vsnip
+      luasnip
+      cmp_luasnip
       friendly-snippets
-      #luasnip
-      #cmp_luasnip
       # Other
       camelcasemotion
       dracula-vim

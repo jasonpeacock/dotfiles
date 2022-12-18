@@ -89,7 +89,7 @@ vim.g.airline_powerline_fonts = 1
 vim.g.airline_theme = "dracula"
 
 -- vim-better-whitespace
-vim.g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit"} -- Filetypes to skip stripping of whitespace.
+vim.g.better_whitespace_filetypes_blacklist = { "diff", "gitcommit" } -- Filetypes to skip stripping of whitespace.
 vim.g.strip_whitelines_at_eof = 1
 vim.g.show_spaces_that_precede_tabs = 1
 vim.g.strip_whitespace_confirm = 0
@@ -109,42 +109,42 @@ vim.cmd("au VimLeave * set guicursor=a:hor25-blinkon0")
 -- act more like C or D because by default, Y yanks the current line (i.e. the
 -- same as yy).
 vim.keymap
-    .set("", "Y", "y$", {desc = "Yank from cursor to the end of the line"})
+    .set("", "Y", "y$", { desc = "Yank from cursor to the end of the line" })
 
 -- Turn off the search highlight.
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>",
-               {desc = "Turn off the search highlight"})
+    { desc = "Turn off the search highlight" })
 
 -- Map ctrl-h/j/k/l to move between split windows.
 vim.keymap
-    .set("", "<c-h>", "<c-w>j<c-w>_", {desc = "Move left to window split"})
+    .set("", "<c-h>", "<c-w>j<c-w>_", { desc = "Move left to window split" })
 vim.keymap
-    .set("", "<c-j>", "<c-w>j<c-w>_", {desc = "Move down to window split"})
-vim.keymap.set("", "<c-k>", "<c-w>k<c-w>_", {desc = "Move up to window split"})
+    .set("", "<c-j>", "<c-w>j<c-w>_", { desc = "Move down to window split" })
+vim.keymap.set("", "<c-k>", "<c-w>k<c-w>_", { desc = "Move up to window split" })
 vim.keymap.set("", "<c-l>", "<c-w>l<c-w>_",
-               {desc = "Move right to window split"})
+    { desc = "Move right to window split" })
 
 -- Delete a selection w/o updating the buffer.
 vim.keymap.set("v", "x", '"_x',
-               {desc = "Delete (d) without updating the buffer"})
+    { desc = "Delete (d) without updating the buffer" })
 vim.keymap.set("v", "X", '"_X',
-               {desc = "Delete (D) without updating the buffer"})
+    { desc = "Delete (D) without updating the buffer" })
 
 -- Toggle 'slf/gundo.vim'
 vim.keymap.set("n", "<leader>u", ":GundoToggle<CR>",
-               {desc = "Toggle 'Gundo' plugin"})
+    { desc = "Toggle 'Gundo' plugin" })
 
 -- Move up/down over wrapped lines in a nice manner.
 vim.keymap.set("", "j", "(v:count == 0 ? 'gj' : 'j')",
-               {expr = true, silent = true})
+    { expr = true, silent = true })
 vim.keymap.set("", "k", "(v:count == 0 ? 'gk' : 'k')",
-               {expr = true, silent = true})
+    { expr = true, silent = true })
 
 require("indent_blankline").setup {
     show_current_context = true
 }
 
-require('gitsigns').setup {signcolumn = true}
+require('gitsigns').setup { signcolumn = true }
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -154,38 +154,93 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+local has_words_before = function()
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+local luasnip = require("luasnip")
 local cmp = require("cmp")
 cmp.setup({
-  preselect = cmp.PreselectMode.None,
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    -- Add tab support
-    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-    ["<Tab>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    }),
-  },
+    preselect = cmp.PreselectMode.None,
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
+    },
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+        -- ["<Tab>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    },
 
-  -- Installed sources
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "vsnip" },
-    { name = "path" },
-    { name = "buffer" },
-  },
+    -- Installed sources
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "path" },
+        { name = "buffer" },
+    },
 })
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = 'buffer' }
+    }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        {
+            name = 'cmdline',
+            option = {
+                ignore_cmds = { 'Man', '!' }
+            }
+        }
+    })
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('fidget').setup {}
 
@@ -199,7 +254,7 @@ require('lsp-format').setup {
 local on_attach = function(client, bufnr)
     require('lsp-format').on_attach(client)
 
-    local keymap_opts = {noremap = true, silent = true, buffer = bufnr}
+    local keymap_opts = { noremap = true, silent = true, buffer = bufnr }
 
     -- Code navigation and shortcuts
     -- vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, keymap_opts)
@@ -214,24 +269,30 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "ga", vim.lsp.buf.code_action, keymap_opts)
     vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
     vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
-    vim.keymap.set('n', 'gf', function() vim.lsp.buf.format {async = true} end, keymap_opts)
+    vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = true } end, keymap_opts)
     vim.keymap.set('n', 'rn', vim.lsp.buf.rename, keymap_opts)
 
     -- Show diagnostic popup on cursor hover
-    local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-        callback = function()
-            vim.diagnostic.open_float(nil, { focusable = false })
-        end,
-        group = diag_float_grp,
-    })
+    -- local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
+    -- vim.api.nvim_create_autocmd("CursorHold", {
+    --     callback = function()
+    --         vim.diagnostic.open_float(nil, { focusable = false })
+    --     end,
+    --     group = diag_float_grp,
+    -- })
 end
 
 -- Bash
-require('lspconfig')['bashls'].setup {on_attach = on_attach}
+require('lspconfig')['bashls'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
 
 -- Nix
-require('lspconfig')['nil_ls'].setup {on_attach = on_attach}
+require('lspconfig')['nil_ls'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
 
 -- Rust
 -- Configure LSP through rust-tools.nvim plugin.
@@ -254,6 +315,7 @@ require('rust-tools').setup({
     -- set by `rust-tools.nvim`.
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
     server = {
+        capabilities = capabilities,
         on_attach = on_attach,
         settings = {
             -- To enable rust-analyzer settings, see:
@@ -269,6 +331,7 @@ require('rust-tools').setup({
 
 -- Lua
 require('lspconfig')['sumneko_lua'].setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         Lua = {
@@ -278,7 +341,7 @@ require('lspconfig')['sumneko_lua'].setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'},
+                globals = { 'vim' },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
@@ -299,6 +362,7 @@ require('lspconfig')['sumneko_lua'].setup {
 -- Using Ruff instead of Flake8/PyCodeStyle.
 -- Use line length of 88 to match Black's default.
 require('lspconfig')['pylsp'].setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         pylsp = {
@@ -337,9 +401,6 @@ require('lspconfig')['pylsp'].setup {
     },
 }
 
--- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp
---                                                                       .protocol
---                                                                       .make_client_capabilities())
 -- Rust
 -- https://github.com/numToStr/dotfiles/blob/f972b9ebfd742daac8f2dc5ea6c19681241bd798/neovim/.config/nvim/lua/numToStr/plugins/lsp/servers.lua#L63-L85
 -- require("lspconfig")["rust_analyzer"].setup {
@@ -359,11 +420,6 @@ require('lspconfig')['pylsp'].setup {
 --             }
 --         }
 --     }
--- }
--- -- Python
--- require("lspconfig")["pyright"].setup {
---     on_attach = function(client, bufnr) common_on_attach(client, bufnr) end,
---     capabilities = capabilities
 -- }
 
 -- nvim-treesitter
@@ -394,7 +450,7 @@ require('nvim-treesitter.configs').setup {
         }
     },
     --indent = {enable = true, disable = {"python"}}
-    indent = {enable = true}
+    indent = { enable = true }
 }
 
 -- null-ls-nvim
