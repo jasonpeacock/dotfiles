@@ -5,9 +5,9 @@
     viAlias = false;
     vimAlias = false;
 
-    withNodeJs = false;
+    withNodeJs = true;
     withPython3 = true;
-    withRuby = false;
+    withRuby = true;
 
     extraConfig = "lua <<EOF
 ${builtins.readFile neovim/init.lua}
@@ -25,38 +25,53 @@ EOF
         };
       };
     in [
-      camelcasemotion
+      # LSP
+      nvim-lspconfig
+      fidget-nvim
+      lsp-colors-nvim
+      lsp-format-nvim
+      rust-tools-nvim
+      toggle-lsp-diagnostics
+      #lspsaga-nvim  # TODO try this later
+      # Autocomplete
+      nvim-cmp
       cmp-buffer
-      cmp-calc
-      cmp-cmdline
-      cmp_luasnip
       cmp-nvim-lsp
       cmp-path
-      dracula-vim
+      # Snippets
+      cmp-vsnip
       friendly-snippets
+      #luasnip
+      #cmp_luasnip
+      # Other
+      camelcasemotion
+      dracula-vim
       gitsigns-nvim
-      gundo
       indent-blankline-nvim
-      lsp-colors-nvim
-      luasnip
-      null-ls-nvim
-      nvim-cmp
-      nvim-lspconfig
+      #gundo
+      #null-ls-nvim
       (nvim-treesitter.withPlugins (
         plugins:
           with plugins; [
             tree-sitter-bash
             tree-sitter-c
             tree-sitter-cmake
+            tree-sitter-comment
             tree-sitter-cpp
             tree-sitter-css
+            tree-sitter-diff
             tree-sitter-dockerfile
+            tree-sitter-dot
             tree-sitter-fish
+            tree-sitter-gitignore
+            tree-sitter-go
             tree-sitter-html
+            tree-sitter-javascript
             tree-sitter-json
             tree-sitter-lua
             tree-sitter-make
             tree-sitter-markdown
+            tree-sitter-markdown_inline
             tree-sitter-nix
             tree-sitter-python
             tree-sitter-rust
@@ -68,10 +83,9 @@ EOF
       ))
       plantuml-syntax
       plenary-nvim
-      rust-tools-nvim
+      popup-nvim
       tagbar
-      toggle-lsp-diagnostics
-      trouble-nvim
+      telescope-nvim
       vim-abolish
       vim-airline
       vim-airline-themes

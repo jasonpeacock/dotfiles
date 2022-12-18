@@ -6,7 +6,6 @@
     # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
 starship init fish | source
-thefuck --alias | source
     ";
     functions = {
       # Access history of all shells.
@@ -18,23 +17,23 @@ thefuck --alias | source
            commandline -f history-search-backward
            return
        end
-       
+
        # If we are navigating the pager, then up always navigates
        if commandline --paging-mode
            commandline -f up-line
            return
        end
-       
+
        # We are not already in search mode.
        # If we are on the top line, start search mode,
        # otherwise move up
        set lineno (commandline -L)
-       
+
        switch $lineno
            case 1
                commandline -f history-search-backward
                history merge # <-- ADDED THIS
-       
+
            case '*'
                commandline -f up-line
        end

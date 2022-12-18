@@ -31,7 +31,21 @@
       # MyPy
       mypy
       types-PyYAML
+      # Python LSP
+      pylsp-mypy
+      black
+      python-lsp-black
+      python-lsp-server
+      #python-lsp-ruff
+      rope
     '';
+    packagesExtra = [
+        (mach-nix.buildPythonPackage {
+            pname = "python-lsp-ruff";
+            version = "1.0.2";
+            src = "https://github.com/python-lsp/python-lsp-ruff/tarball/v1.0.2";
+        })
+    ];
   };
 in {
   imports = [
@@ -61,8 +75,8 @@ in {
     [
       #platformio
       asciinema
-      cmake
-      clang-tools
+      #cmake
+      #clang-tools
       cookiecutter
       curl
       docker
@@ -82,49 +96,45 @@ in {
       plantuml
       poetry
       python39Custom
+      python39Packages.pipx
       ripgrep
       rsync
-      ruby
       socat
-      thefuck
-      universal-ctags
       watch
       wget
       yq
-
-      # Spack
-      clingo
-      patchelf
 
       # Prompt/shell-theme tools
       starship
       vivid
 
-      # Formatters/linters
-      alejandra
-      buf
-      cppcheck
-      deadnix
-      gitlint
-      hadolint
-      html-tidy
-      luaformatter
-      nixfmt
-      nodePackages.eslint_d
-      nodePackages.jsonlint
-      nodePackages.markdownlint-cli
-      nodePackages.pyright
-      python39Packages.black
-      python39Packages.jsonschema
-      python39Packages.pipx
-      python39Packages.yamllint
-      python39Packages.yapf
-      rubocop
-      rust-analyzer
-      selene
+      # LSP
+      # - Bash
+      nodePackages.bash-language-server
       shellcheck
-      shfmt
-      statix
+      # - Lua
+      sumneko-lua-language-server
+      # - Nix
+      nil
+      # - Python
+      # See `Python39Custom` above for most of
+      # the LSP packages.
+      ruff
+      # - Rust
+      rust-analyzer
+      #alejandra
+      #buf
+      #cppcheck
+      #gitlint
+      #hadolint
+      #html-tidy
+      #luaformatter
+      #nixfmt
+      #python39Packages.jsonschema
+      #python39Packages.yamllint
+      #selene
+      #shfmt
+      #statix
     ]
     ++ lib.optionals stdenv.isLinux [
       can-utils
