@@ -77,6 +77,7 @@ in {
       asciinema
       #cmake
       #clang-tools
+      capnproto
       cookiecutter
       curl
       docker
@@ -85,6 +86,7 @@ in {
       exercism
       fd
       fswatch
+      gcc
       # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
       gitAndTools.git-extras
       gitAndTools.lefthook
