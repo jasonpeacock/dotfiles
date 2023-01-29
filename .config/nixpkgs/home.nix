@@ -82,11 +82,12 @@ in {
       curl
       docker
       docker-compose
+      du-dust
       entr
       exercism
       fd
       fswatch
-      gcc
+      #gcc
       # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
       gitAndTools.git-extras
       gitAndTools.lefthook
@@ -97,11 +98,13 @@ in {
       netcat-gnu
       plantuml
       poetry
+      procs
       python39Custom
       python39Packages.pipx
       ripgrep
       rsync
       socat
+      tealdeer
       watch
       wget
       yq
@@ -124,6 +127,10 @@ in {
       ruff
       # - Rust
       rust-analyzer
+      # - Typescript/Javascript
+      nodePackages.vscode-langservers-extracted
+      nodePackages.eslint
+      nodePackages.eslint_d
       #alejandra
       #buf
       #cppcheck

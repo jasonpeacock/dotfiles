@@ -4,14 +4,11 @@
 vim.g.mapleader = " "
 
 vim.opt.autoindent = true -- Always enable auto-indenting.
--- vim.opt.clipboard-unnamed = true      -- Use system clipboard.
--- vim.opt.laststatus = 2                -- Always have a status bar.
 -- vim.opt.wrap = false                  -- Stop word wrapping.
 -- vim.opt.scrolloff = 1                 -- Space above cursor from screen edge.
 -- vim.opt.sidescrolloff = 5             -- Space beside cursor from screen edge.
 -- vim.opt.cursorcolumn = true           -- Highlight the current column.
 -- vim.opt.cursorline = true             -- Highlight the current line.
--- vim.opt.lazyredraw = true             -- Redraw only when needed, speeds up macros.
 -- vim.opt.conceallevel = 0              -- Don't hide characters.
 vim.opt.encoding = "utf8" -- Set standard file encoding.
 vim.opt.mouse = "a" -- Enable the mouse.
@@ -24,9 +21,6 @@ vim.opt.undolevels = 100 -- Adjust system undo levels.
 vim.opt.wmh = 0 -- Set smallest possible window when minimizing a split window.
 vim.opt.number = true -- Turn on line numbers.
 -- vim.opt.relativenumber = true         -- Show the line numbers as relative.
-
--- vim.opt.spell = true                  -- Enable spell check.
--- vim.opt.spelllang = { "en_us" }       -- Use US English spelling.
 
 -- Fix behavior to continue comments on new lines, default is: tcqj
 -- :help fo-table
@@ -302,6 +296,12 @@ require('lspconfig')['bashls'].setup {
 
 -- Nix
 require('lspconfig')['nil_ls'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+
+-- Typescript/Javascript
+require('lspconfig')['eslint'].setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
