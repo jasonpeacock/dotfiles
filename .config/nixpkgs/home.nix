@@ -75,7 +75,8 @@ in {
     [
       #platformio
       asciinema
-      #cmake
+      asdf-vm
+      cmake
       #clang-tools
       capnproto
       cookiecutter
@@ -96,6 +97,7 @@ in {
       gping
       hyperfine
       netcat-gnu
+      ninja
       plantuml
       poetry
       procs
@@ -117,10 +119,13 @@ in {
       # - Bash
       nodePackages.bash-language-server
       shellcheck
+      shfmt # via null-ls
       # - Lua
       sumneko-lua-language-server
+      #luaformatter
       # - Nix
       nil
+      #nixfmt
       # - Python
       # See `Python39Custom` above for most of
       # the LSP packages.
@@ -131,18 +136,19 @@ in {
       nodePackages.vscode-langservers-extracted
       nodePackages.eslint
       nodePackages.eslint_d
+      # Docker
+      hadolint # via null-ls
+      # Markdown
+      nodePackages.markdownlint-cli # via null-ls
+      # YAML
+      python39Packages.yamllint # via null-ls
       #alejandra
       #buf
       #cppcheck
       #gitlint
-      #hadolint
       #html-tidy
-      #luaformatter
-      #nixfmt
       #python39Packages.jsonschema
-      #python39Packages.yamllint
       #selene
-      #shfmt
       #statix
     ]
     ++ lib.optionals stdenv.isLinux [

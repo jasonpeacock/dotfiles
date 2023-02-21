@@ -50,7 +50,7 @@ EOF
       indent-blankline-nvim
       nvim-autopairs
       #gundo
-      #null-ls-nvim
+      null-ls-nvim
       (nvim-treesitter.withPlugins (
         plugins:
           with plugins; [

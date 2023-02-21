@@ -68,7 +68,7 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 
 -- Fix grey background in Vim for dracula
 -- https://github.com/dracula/vim/issues/96
--- let g:dracula_colorterm = 0
+vim.g.dracula_colorterm = 0
 
 -- Use GUI-based colors even when run within a terminal,
 -- this pushes VIM to support truecolors and fixes the
@@ -255,9 +255,9 @@ require('lsp-format').setup {
     yaml = { tab_width = 2 },
 }
 
--- Use an on_attach function to only map the following keys
+-- Use a common on_attach function to only map the following keys
 -- after the language server attaches to the current buffer.
-local on_attach = function(client, bufnr)
+local common_on_attach = function(client, bufnr)
     require('lsp-format').on_attach(client)
 
     local keymap_opts = { noremap = true, silent = true, buffer = bufnr }
@@ -291,19 +291,19 @@ end
 -- Bash
 require('lspconfig')['bashls'].setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = common_on_attach
 }
 
 -- Nix
 require('lspconfig')['nil_ls'].setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = common_on_attach
 }
 
 -- Typescript/Javascript
 require('lspconfig')['eslint'].setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = common_on_attach
 }
 
 -- Rust
@@ -328,7 +328,7 @@ require('rust-tools').setup({
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
     server = {
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach = common_on_attach,
         settings = {
             -- To enable rust-analyzer settings, see:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -344,7 +344,7 @@ require('rust-tools').setup({
 -- Rust
 -- https://github.com/numToStr/dotfiles/blob/f972b9ebfd742daac8f2dc5ea6c19681241bd798/neovim/.config/nvim/lua/numToStr/plugins/lsp/servers.lua#L63-L85
 -- require("lspconfig")["rust_analyzer"].setup {
---     on_attach = on_attach,
+--     on_attach = common_on_attach,
 --     capabilities = capabilities,
 --     settings = {
 --         ["rust_analyzer"] = {
@@ -365,7 +365,7 @@ require('rust-tools').setup({
 -- Lua
 require('lspconfig')['sumneko_lua'].setup {
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = common_on_attach,
     settings = {
         Lua = {
             runtime = {
@@ -396,7 +396,7 @@ require('lspconfig')['sumneko_lua'].setup {
 -- Use line length of 88 to match Black's default.
 require('lspconfig')['pylsp'].setup {
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = common_on_attach,
     settings = {
         pylsp = {
             -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
@@ -466,127 +466,114 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- null-ls-nvim
--- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
--- local diagnostics_msg = "[#{c}] #{m} (#{s})"
--- local null_ls = require("null-ls")
--- null_ls.setup({
---     diagnostics_format = diagnostics_msg,
---     -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
---     on_attach = function(client, bufnr)
---         if client.supports_method("textDocument/formatting") then
---             vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
---             vim.api.nvim_create_autocmd("BufWritePre", {
---                 group = augroup,
---                 buffer = bufnr,
---                 callback = function()
---                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
---                     vim.lsp.buf.format()
---                 end
---             })
---         end
---         common_on_attach(client, bufnr)
---     end,
---     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
---     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
---     sources = {
---         null_ls.builtins.formatting.trim_newlines.with({
---             -- use their specific formatters
---             disabled_filetypes = {
---                 "rust", "python", "bash", "nix", "ruby", "markdown"
---             }
---         }), null_ls.builtins.formatting.trim_whitespace.with({
---             -- use their specific formatters
---             disabled_filetypes = {
---                 "rust", "python", "bash", "nix", "ruby", "markdown"
---             }
---         }), -- null_ls.builtins.formatting.rustfmt
---         --     .with({extra_args = {"--edition=2021"}}),
---         -- null_ls.builtins.code_actions.gitsigns, -- Git
---         null_ls.builtins.diagnostics.gitlint.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Git
---         -- null_ls.builtins.code_actions.eslint_d, -- Javascript/Typescript
---         null_ls.builtins.formatting.eslint_d, -- Javascript/Typescript
---         null_ls.builtins.diagnostics.eslint_d.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Javascript/Typescript
---         -- null_ls.builtins.code_actions.refactoring, -- Programming
---         null_ls.builtins.completion.tags, -- Programming
---         -- null_ls.builtins.code_actions.shellcheck, -- Bash
---         null_ls.builtins.formatting.shfmt.with({ -- Bash
---             extra_args = {"-i", "2", "-ci", "-sr"}, -- Make shfmt pretty.
---             diagnostics_format = diagnostics_msg
---         }), null_ls.builtins.diagnostics.shellcheck.with({ -- Bash
---             extra_args = {"-s", "bash", "-e", "SC1008"} -- Force shellcheck to always assume Bash,
---             -- and ignore warning about unsupported #!.
---         }), -- null_ls.builtins.code_actions.statix, -- Nix
---         null_ls.builtins.formatting.alejandra, -- Nix
---         null_ls.builtins.diagnostics.deadnix.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Nix
---         null_ls.builtins.diagnostics.statix.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Nix
---         null_ls.builtins.formatting.black, -- Python
---         null_ls.builtins.diagnostics.flake8.with({ -- Python
---             -- only_local = vim.fn.expand "~/.nix-profile/bin",
---             extra_args = {
---                 "--max-line-length", "88", -- Match the line-length of Black.
---                 "--ignore", "E203,W503" -- Avoid conflict with Black.
---             },
---             diagnostics_format = diagnostics_msg
---         }), null_ls.builtins.diagnostics.mypy.with({ -- Python
---             extra_args = {
---                 "--follow-imports", "silent", "--warn-unreachable", "--strict"
---             },
---             diagnostics_format = diagnostics_msg
---         }), null_ls.builtins.diagnostics.pydocstyle.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Python
---         null_ls.builtins.formatting.clang_format, -- C/C++
---         null_ls.builtins.diagnostics.cppcheck.with({
---             extra_args = {"--language", "c++"},
---             diagnostics_format = diagnostics_msg
---         }), -- C/C++
---         null_ls.builtins.formatting.fish_indent, -- Fish
---         null_ls.builtins.diagnostics.fish.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Fish
---         null_ls.builtins.formatting.rubocop, -- Ruby
---         null_ls.builtins.diagnostics.rubocop.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Ruby
---         null_ls.builtins.formatting.markdownlint.with({ -- Markdown
---             extra_args = {"--disable=MD013"}, -- disable LineLength
---             diagnostics_format = diagnostics_msg
---         }), null_ls.builtins.diagnostics.markdownlint.with({ -- Markdown
---             extra_args = {"--disable=MD013"}, -- disable LineLength
---             diagnostics_format = diagnostics_msg
---         }), null_ls.builtins.formatting.buf, -- Protobuf
---         null_ls.builtins.diagnostics.buf.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Protobuf
---         null_ls.builtins.formatting.cmake_format, -- CMAKE
---         null_ls.builtins.formatting.jq, -- JSON
---         null_ls.builtins.diagnostics.jsonlint.with({
---             diagnostics_format = diagnostics_msg
---         }), -- JSON
---         null_ls.builtins.diagnostics.yamllint.with({
---             diagnostics_format = diagnostics_msg
---         }), -- YAML
---         null_ls.builtins.formatting.lua_format, -- Lua
---         null_ls.builtins.diagnostics.selene.with({
---             diagnostics_format = diagnostics_msg
---         }), -- Lua
---         null_ls.builtins.formatting.tidy, -- HTML
---         null_ls.builtins.diagnostics.tidy.with({
---             diagnostics_format = diagnostics_msg
---         }), -- HTML
---         null_ls.builtins.diagnostics.checkmake.with({
---             diagnostics_format = diagnostics_msg
---         }), -- CMake
---         null_ls.builtins.diagnostics.hadolint.with({
---             diagnostics_format = diagnostics_msg
---         }) -- Dockerfile
---     }
--- })
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local diagnostics_msg = "[#{c}] #{m} (#{s})"
+local null_ls = require("null-ls")
+null_ls.setup({
+    diagnostics_format = diagnostics_msg,
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                    vim.lsp.buf.format()
+                end
+            })
+        end
+        common_on_attach(client, bufnr)
+    end,
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
+    sources = {
+        null_ls.builtins.formatting.trim_newlines.with({
+            -- use their specific formatters
+            disabled_filetypes = {
+                "rust", "python", "bash", "nix", "ruby", "markdown"
+            }
+        }), null_ls.builtins.formatting.trim_whitespace.with({
+            -- use their specific formatters
+            disabled_filetypes = {
+                "rust", "python", "bash", "nix", "ruby", "markdown"
+            }
+        }), null_ls.builtins.formatting.markdownlint.with({
+            extra_args = { "--disable=MD013" }, -- disable LineLength
+            diagnostics_format = diagnostics_msg
+        }), null_ls.builtins.diagnostics.markdownlint.with({
+            extra_args = { "--disable=MD013" }, -- disable LineLength
+            diagnostics_format = diagnostics_msg
+        }), null_ls.builtins.diagnostics.hadolint.with({
+            diagnostics_format = diagnostics_msg
+        })
+        --         null_ls.builtins.formatting.rustfmt
+        --         .with({extra_args = {"--edition=2021"}}),
+        --         null_ls.builtins.code_actions.gitsigns,
+        --         null_ls.builtins.diagnostics.gitlint.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.code_actions.eslint_d,
+        --         null_ls.builtins.formatting.eslint_d,
+        --         null_ls.builtins.diagnostics.eslint_d.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.code_actions.refactoring,
+        --         null_ls.builtins.completion.tags,
+        --         null_ls.builtins.code_actions.shellcheck,
+        --         null_ls.builtins.formatting.shfmt.with({
+        --             extra_args = {"-i", "2", "-ci", "-sr"}, -- Make shfmt pretty.
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.diagnostics.shellcheck.with({
+        --             extra_args = {"-s", "bash", "-e", "SC1008"} -- Force shellcheck to always assume Bash,
+        --             -- and ignore warning about unsupported #!.
+        --         }), null_ls.builtins.code_actions.statix,
+        --         null_ls.builtins.formatting.alejandra,
+        --         null_ls.builtins.diagnostics.deadnix.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.diagnostics.statix.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.black,
+        --         null_ls.builtins.diagnostics.flake8.with({
+        --             -- only_local = vim.fn.expand "~/.nix-profile/bin",
+        --             extra_args = {
+        --                 "--max-line-length", "88", -- Match the line-length of Black.
+        --                 "--ignore", "E203,W503" -- Avoid conflict with Black.
+        --             },
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.diagnostics.mypy.with({
+        --             extra_args = {
+        --                 "--follow-imports", "silent", "--warn-unreachable", "--strict"
+        --             },
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.diagnostics.pydocstyle.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.clang_format,
+        --         null_ls.builtins.diagnostics.cppcheck.with({
+        --             extra_args = {"--language", "c++"},
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.fish_indent,
+        --         null_ls.builtins.diagnostics.fish.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.rubocop,
+        --         null_ls.builtins.diagnostics.rubocop.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.buf,
+        --         null_ls.builtins.diagnostics.buf.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.cmake_format,
+        --         null_ls.builtins.formatting.jq,
+        --         null_ls.builtins.diagnostics.jsonlint.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.diagnostics.yamllint.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.lua_format,
+        --         null_ls.builtins.diagnostics.selene.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.formatting.tidy,
+        --         null_ls.builtins.diagnostics.tidy.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }), null_ls.builtins.diagnostics.checkmake.with({
+        --             diagnostics_format = diagnostics_msg
+        --         }),
+    }
+})
