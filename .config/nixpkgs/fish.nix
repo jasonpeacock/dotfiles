@@ -6,6 +6,7 @@
     # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
 starship init fish | source
+fish_config theme choose nord
     ";
     functions = {
       # Access history of all shells.
@@ -123,10 +124,10 @@ bind '$' bind_dollar
       grep = "grep --color=auto";
       http = "python3 -m http.server";
       less = "less -R -n";
-      ls = "exa --icons --git";
+      ls = "exa --across --color-scale --icons --git";
       scp = "scp -C";
       tmux = "tmux new -As0";
-      tree = "exa --tree --icons --git";
+      tree = "exa --tree --color-scale --icons --git";
       vi = "nvim -o";
       work = "cd \"$HOME/workplace\"";
     };

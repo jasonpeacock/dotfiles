@@ -68,19 +68,21 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 
 -- Fix grey background in Vim for dracula
 -- https://github.com/dracula/vim/issues/96
-vim.g.dracula_colorterm = 0
+--vim.g.dracula_colorterm = 0
 
 -- Use GUI-based colors even when run within a terminal,
 -- this pushes VIM to support truecolors and fixes the
 -- grey background in the Dracula theme
 vim.opt.termguicolors = true
 
-vim.cmd("colorscheme dracula")
+-- vim.cmd("colorscheme dracula")
+vim.cmd("colorscheme nord")
 vim.opt.background = "dark"
 
 -- vim-airline
 vim.g.airline_powerline_fonts = 1
-vim.g.airline_theme = "dracula"
+-- vim.g.airline_theme = "dracula"
+vim.g.airline_theme = "nord"
 
 -- vim-better-whitespace
 vim.g.better_whitespace_filetypes_blacklist = { "diff", "gitcommit" } -- Filetypes to skip stripping of whitespace.

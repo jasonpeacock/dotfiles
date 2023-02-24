@@ -14,7 +14,8 @@
     defaultOptions = [ "--height 40%" "--border" ];
 
     fileWidgetCommand = "fd --type f";
-    fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Dracula\' {}'" ];
+    # fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Dracula\' {}'" ];
+    fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Nord\' {}'" ];
 
     historyWidgetOptions = [ "--sort" "--exact" ];
   };

@@ -12,18 +12,19 @@
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
-      {
-        plugin = dracula;
-        extraConfig = "
-          set -g @dracula-show-battery false
-          set -g @dracula-show-powerline true
-          set -g @dracula-show-flags false
-          set -g @dracula-show-timezone true
-          set -g @dracula-military-time true
-          set -g @dracula-border-contrast true
-          set -g @dracula-plugins \"cpu-usage time\"
-        ";
-      }
+      /* { */
+      /*   plugin = dracula; */
+      /*   extraConfig = " */
+      /*     set -g @dracula-show-battery false */
+      /*     set -g @dracula-show-powerline true */
+      /*     set -g @dracula-show-flags false */
+      /*     set -g @dracula-show-timezone true */
+      /*     set -g @dracula-military-time true */
+      /*     set -g @dracula-border-contrast true */
+      /*     set -g @dracula-plugins \"cpu-usage time\" */
+      /*   "; */
+      /* } */
+      nord
       pain-control
     ];
 

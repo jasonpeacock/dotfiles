@@ -6,7 +6,8 @@
     enable = true;
     config = {
 #      pager = "less -FR";
-      theme = "Dracula";
+      # theme = "Dracula";
+      theme = "Nord";
       style = "plain";
     };
   };

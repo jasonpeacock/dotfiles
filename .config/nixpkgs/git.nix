@@ -23,6 +23,7 @@ with import ./git/host.nix; {
           editor = "nvim";
           # This conflicts with `delta` diff highlighter.
           # pager = "bat --style=plain --theme 'Dracula'";
+          # pager = "bat --style=plain --theme 'Nord'";
         };
         push = {
           followtags = true;
@@ -40,7 +41,7 @@ with import ./git/host.nix; {
           # but it's showing too dark when rendered via Git.
           true-color = "never";
           line-numbers = true;
-          syntax-theme = "Dracula";
+          syntax-theme = "Nord";
         };
       }
       gitExtraConfig

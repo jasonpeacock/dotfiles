@@ -25,6 +25,12 @@ EOF
         };
       };
     in [
+      # Themes
+      # dracula-vim
+      onenord-nvim
+      nordic-nvim
+      nord-vim
+      nord-nvim
       # LSP
       nvim-lspconfig
       fidget-nvim
@@ -45,7 +51,6 @@ EOF
       friendly-snippets
       # Other
       camelcasemotion
-      dracula-vim
       gitsigns-nvim
       indent-blankline-nvim
       nvim-autopairs
