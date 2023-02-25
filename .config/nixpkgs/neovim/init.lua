@@ -236,17 +236,6 @@ cmp.setup.cmdline(':', {
     })
 })
 
-require('nvim-autopairs').setup({
-    disable_filetype = { "TelescopePrompt", "vim" },
-})
-
--- If you want insert `(` after select function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-)
-
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -502,10 +491,10 @@ null_ls.setup({
                 "rust", "python", "bash", "nix", "ruby", "markdown"
             }
         }), null_ls.builtins.formatting.markdownlint.with({
-            extra_args = { "--disable=MD013" }, -- disable LineLength
+            extra_args = { "--disable MD013 MD046" },
             diagnostics_format = diagnostics_msg
         }), null_ls.builtins.diagnostics.markdownlint.with({
-            extra_args = { "--disable=MD013" }, -- disable LineLength
+            extra_args = { "--disable MD013 MD046" },
             diagnostics_format = diagnostics_msg
         }), null_ls.builtins.diagnostics.hadolint.with({
             diagnostics_format = diagnostics_msg

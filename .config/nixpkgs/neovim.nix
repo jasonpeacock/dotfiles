@@ -53,7 +53,6 @@ EOF
       camelcasemotion
       gitsigns-nvim
       indent-blankline-nvim
-      nvim-autopairs
       #gundo
       null-ls-nvim
       (nvim-treesitter.withPlugins (
