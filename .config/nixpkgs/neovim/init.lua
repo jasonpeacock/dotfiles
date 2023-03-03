@@ -490,11 +490,12 @@ null_ls.setup({
             disabled_filetypes = {
                 "rust", "python", "bash", "nix", "ruby", "markdown"
             }
-        }), null_ls.builtins.formatting.markdownlint.with({
-            extra_args = { "--disable MD013 MD046" },
-            diagnostics_format = diagnostics_msg
-        }), null_ls.builtins.diagnostics.markdownlint.with({
-            extra_args = { "--disable MD013 MD046" },
+            -- }), null_ls.builtins.formatting.markdownlint_cli2.with({
+            --     -- extra_args = { "--disable MD013 MD046 --" },
+            --     diagnostics_format = diagnostics_msg
+        }), null_ls.builtins.diagnostics.markdownlint_cli2.with({
+            args = { "$FILENAME" },
+            -- extra_args = { "--disable MD013 MD046 --" },
             diagnostics_format = diagnostics_msg
         }), null_ls.builtins.diagnostics.hadolint.with({
             diagnostics_format = diagnostics_msg

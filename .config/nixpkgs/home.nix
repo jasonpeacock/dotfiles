@@ -95,11 +95,11 @@ in {
       gitAndTools.tig
       glow
       gping
+      graphviz
       hyperfine
       netcat-gnu
-      ninja
       plantuml
-      poetry
+      #poetry
       procs
       python39Custom
       python39Packages.pipx
@@ -139,7 +139,7 @@ in {
       # Docker
       hadolint # via null-ls
       # Markdown
-      nodePackages.markdownlint-cli # via null-ls
+      nodePackages.markdownlint-cli2 # via null-ls
       # YAML
       python39Packages.yamllint # via null-ls
       #alejandra
