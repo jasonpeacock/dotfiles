@@ -175,7 +175,7 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping.select_next_item(),
         -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         -- ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs( -4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.close(),
@@ -197,8 +197,8 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            elseif luasnip.jumpable( -1) then
+                luasnip.jump( -1)
             else
                 fallback()
             end
@@ -313,7 +313,6 @@ require('rust-tools').setup({
             other_hints_prefix = "",
         },
     },
-
     -- All the opts to send to nvim-lspconfig, these override the defaults
     -- set by `rust-tools.nvim`.
     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
@@ -354,7 +353,7 @@ require('rust-tools').setup({
 -- }
 
 -- Lua
-require('lspconfig')['sumneko_lua'].setup {
+require('lspconfig')['lua_ls'].setup {
     capabilities = capabilities,
     on_attach = common_on_attach,
     settings = {
@@ -486,20 +485,20 @@ null_ls.setup({
                 "rust", "python", "bash", "nix", "ruby", "markdown"
             }
         }), null_ls.builtins.formatting.trim_whitespace.with({
-            -- use their specific formatters
-            disabled_filetypes = {
-                "rust", "python", "bash", "nix", "ruby", "markdown"
-            }
-            -- }), null_ls.builtins.formatting.markdownlint_cli2.with({
-            --     -- extra_args = { "--disable MD013 MD046 --" },
-            --     diagnostics_format = diagnostics_msg
-        }), null_ls.builtins.diagnostics.markdownlint_cli2.with({
-            args = { "$FILENAME" },
-            -- extra_args = { "--disable MD013 MD046 --" },
-            diagnostics_format = diagnostics_msg
-        }), null_ls.builtins.diagnostics.hadolint.with({
-            diagnostics_format = diagnostics_msg
-        })
+        -- use their specific formatters
+        disabled_filetypes = {
+            "rust", "python", "bash", "nix", "ruby", "markdown"
+        }
+        -- }), null_ls.builtins.formatting.markdownlint_cli2.with({
+        --     -- extra_args = { "--disable MD013 MD046 --" },
+        --     diagnostics_format = diagnostics_msg
+    }), null_ls.builtins.diagnostics.markdownlint_cli2.with({
+        args = { "$FILENAME" },
+        -- extra_args = { "--disable MD013 MD046 --" },
+        diagnostics_format = diagnostics_msg
+    }), null_ls.builtins.diagnostics.hadolint.with({
+        diagnostics_format = diagnostics_msg
+    })
         --         null_ls.builtins.formatting.rustfmt
         --         .with({extra_args = {"--edition=2021"}}),
         --         null_ls.builtins.code_actions.gitsigns,
