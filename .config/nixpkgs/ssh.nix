@@ -50,7 +50,7 @@ GSSAPIDelegateCredentials no
         proxyCommand = "sh -c \"aws --profile hitl-devices-administrator ssm start-session --target mi-08f3572f64c494dac --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
       };
       "i-* mi-*" = {
-        proxyCommand = "sh -c \"aws --profile hitl-devices-administrator ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
+        proxyCommand = "sh -c \"aws --profile flatsat ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
       };
     };
   };
