@@ -10,16 +10,16 @@ vim.opt.autoindent = true -- Always enable auto-indenting.
 -- vim.opt.cursorcolumn = true           -- Highlight the current column.
 -- vim.opt.cursorline = true             -- Highlight the current line.
 -- vim.opt.conceallevel = 0              -- Don't hide characters.
-vim.opt.encoding = "utf8" -- Set standard file encoding.
-vim.opt.mouse = "a" -- Enable the mouse.
-vim.opt.backup = false -- Don't keep a backup file
+vim.opt.encoding = "utf8"  -- Set standard file encoding.
+vim.opt.mouse = "a"        -- Enable the mouse.
+vim.opt.backup = false     -- Don't keep a backup file
 vim.opt.errorbells = false -- Be quiet.
-vim.opt.swapfile = false -- Don't use swap files.
-vim.opt.showmatch = true -- Show matching brackets.
-vim.opt.updatetime = 100 -- Write to swap file faster, and makes vim-gitgutter more responsive
-vim.opt.undolevels = 100 -- Adjust system undo levels.
-vim.opt.wmh = 0 -- Set smallest possible window when minimizing a split window.
-vim.opt.number = true -- Turn on line numbers.
+vim.opt.swapfile = false   -- Don't use swap files.
+vim.opt.showmatch = true   -- Show matching brackets.
+vim.opt.updatetime = 100   -- Write to swap file faster, and makes vim-gitgutter more responsive
+vim.opt.undolevels = 100   -- Adjust system undo levels.
+vim.opt.wmh = 0            -- Set smallest possible window when minimizing a split window.
+vim.opt.number = true      -- Turn on line numbers.
 -- vim.opt.relativenumber = true         -- Show the line numbers as relative.
 
 -- Fix behavior to continue comments on new lines, default is: tcqj
@@ -48,10 +48,10 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Searching.
-vim.opt.hlsearch = true -- Use search highlighting.
+vim.opt.hlsearch = true   -- Use search highlighting.
 vim.opt.ignorecase = true -- Do case insensitive searching.
-vim.opt.incsearch = true -- Perform incremental searching.
-vim.opt.smartcase = true -- Ignore case unless case is used.
+vim.opt.incsearch = true  -- Perform incremental searching.
+vim.opt.smartcase = true  -- Ignore case unless case is used.
 
 -- Put the Git signs/LSP diagnostics/etc into the number column,
 -- stop all the sideways jumping around.
@@ -79,7 +79,12 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 vim.cmd("colorscheme nord")
 vim.opt.background = "dark"
 
--- vim-airline
+
+-- https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
+-- https://stackoverflow.com/questions/5830125/how-to-change-font-color-for-comments-in-vim
+-- https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+vim.cmd("highlight Comment cterm=italic ctermfg=225")
+
 vim.g.airline_powerline_fonts = 1
 -- vim.g.airline_theme = "dracula"
 vim.g.airline_theme = "nord"
@@ -175,7 +180,7 @@ cmp.setup({
         ["<C-n>"] = cmp.mapping.select_next_item(),
         -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         -- ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs( -4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.close(),
@@ -197,8 +202,8 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable( -1) then
-                luasnip.jump( -1)
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end

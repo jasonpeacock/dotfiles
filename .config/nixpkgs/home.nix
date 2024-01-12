@@ -50,6 +50,7 @@
 in {
   imports = [
     ./bat.nix
+    ./broot.nix
     ./direnv.nix
     ./fish.nix
     ./fzf.nix
@@ -76,6 +77,7 @@ in {
       #platformio
       asciinema
       asdf-vm
+      broot
       cmake
       #clang-tools
       capnproto
@@ -99,7 +101,7 @@ in {
       hyperfine
       netcat-gnu
       plantuml
-      #poetry
+      # poetry
       procs
       python39Custom
       python39Packages.pipx
