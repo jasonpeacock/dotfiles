@@ -1,0 +1,36 @@
+{pkgs, ...}: {
+  programs.ssh = {
+    enable = true;
+
+    compression = true;
+    forwardAgent = true;
+    serverAliveInterval = 15;
+    serverAliveCountMax = 44;
+
+    extraOptionOverrides = {
+      "IgnoreUnknown" = "GSSAPIKeyExchange";
+    };
+
+    extraConfig = "
+Match all
+CheckHostIP no
+TCPKeepAlive yes
+IPQoS=throughput
+GSSAPIKeyExchange no
+GSSAPIAuthentication no
+GSSAPIDelegateCredentials no
+    ";
+
+    matchBlocks = {
+      "bloggg" = {
+        hostname = "35.167.77.210";
+        user = "ec2-user";
+        identityFile = "~/.ssh/LightsailDefaultKeyPair-us-west-2.pem";
+      };
+      "jasonpeacock" = {
+        hostname = "jasonpeacock.com";
+        user = "syzyby";
+      };
+    };
+  };
+}
