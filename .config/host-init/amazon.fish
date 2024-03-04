@@ -5,7 +5,7 @@ fish_add_path $HOME/.toolbox/bin
 set -gx APPEND_CR_URL 1 # auto-add CR links to git commits
 set -gx BRAZIL_COLORS 1 # show colors in the output
 set -gx BRAZIL_WORKSPACE_DEFAULT_LAYOUT short # Use short workspace layout in Brazil
-set -gx BRAZIL_PLATFORM_OVERRIDE=AL2_x86_64 # Force default to AL2
+set -gx BRAZIL_PLATFORM_OVERRIDE AL2_x86_64 # Force default to AL2
 set -gx MAKE_OUTPUT_LEVEL QUIET # reduce noise during builds
 
 # Kuiper
