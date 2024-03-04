@@ -141,8 +141,7 @@ vim.keymap.set("", "j", "(v:count == 0 ? 'gj' : 'j')",
 vim.keymap.set("", "k", "(v:count == 0 ? 'gk' : 'k')",
     { expr = true, silent = true })
 
-require("indent_blankline").setup {
-    show_current_context = true
+require("ibl").setup {
 }
 
 require('gitsigns').setup { signcolumn = true }

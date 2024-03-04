@@ -64,7 +64,7 @@ in {
 
   # These packages have lightweight config, not worth having
   # their own configuration files.
-  programs.exa.enable = true;
+  programs.eza.enable = true;
   programs.htop.enable = true;
   programs.jq.enable = true;
 
