@@ -49,6 +49,7 @@
   };
 in {
   imports = [
+    ./atuin.nix
     ./bat.nix
     ./broot.nix
     ./direnv.nix
@@ -59,6 +60,7 @@ in {
     ./lsd.nix
     ./neovim.nix
     ./ssh.nix
+    ./starship.nix
     ./tmux.nix
   ];
 
@@ -114,7 +116,6 @@ in {
       yq
 
       # Prompt/shell-theme tools
-      starship
       vivid
 
       # LSP

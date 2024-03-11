@@ -31,6 +31,7 @@ EOF
       nordic-nvim
       nord-vim
       nord-nvim
+      catppuccin-nvim
       # LSP
       nvim-lspconfig
       fidget-nvim

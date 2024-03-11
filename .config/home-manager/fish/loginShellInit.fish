@@ -7,7 +7,8 @@ end
 
 # Set directory colors from `ls`
 #set -gx LS_COLORS (vivid generate dracula)
-set -gx LS_COLORS (vivid generate nord)
+#set -gx LS_COLORS (vivid generate nord)
+set -gx LS_COLORS (vivid generate catppuccin-mocha)
 
 # Use Neovim as the default $EDITOR.
 set -gx EDITOR \"nvim\"

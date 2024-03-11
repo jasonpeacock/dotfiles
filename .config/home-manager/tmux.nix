@@ -24,7 +24,9 @@
       /*     set -g @dracula-plugins \"cpu-usage time\" */
       /*   "; */
       /* } */
-      nord
+      /* nord */
+      /* https://github.com/catppuccin/tmux */
+      catppuccin
       pain-control
     ];
 
@@ -56,7 +58,7 @@ set -g -a terminal-overrides ',*:Ss=\\E[%p1%d q:Se=\\E[2 q'
 set -sg escape-time 10
 
 # Override the theme color.
-set -g pane-active-border-style fg=green
+#set -g pane-active-border-style fg=green
 
 # Undercurl
 set -g default-terminal \"$\{TERM\}\"
