@@ -32,10 +32,8 @@
                 symbol = " ";
             };
             character = {
-                # success_symbol = "[➜](bold blue)";
-                # error_symbol = "[✗](bold red)";
-                success_symbol = "➜";
-                error_symbol = "✗";
+                success_symbol = "[➜](bold blue)";
+                error_symbol = "[✗](bold red)";
             };
             cmd_duration = {
                 min_time = 1000;
