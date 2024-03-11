@@ -24,7 +24,6 @@ with import ./git/host.nix; {
           # This conflicts with `delta` diff highlighter.
           # pager = "bat --style=plain --theme 'Dracula'";
           # pager = "bat --style=plain --theme 'Nord'";
-          # pager = "bat --style=plain --theme 'Catppuccin Mocha'";
         };
         push = {
           followtags = true;
@@ -42,8 +41,7 @@ with import ./git/host.nix; {
           # but it's showing too dark when rendered via Git.
           true-color = "never";
           line-numbers = true;
-          # syntax-theme = "Nord";
-          syntax-theme = "Catppuccin Mocha";
+          syntax-theme = "Nord";
         };
       }
       gitExtraConfig

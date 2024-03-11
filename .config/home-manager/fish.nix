@@ -6,8 +6,7 @@
     # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
 starship init fish | source
-# fish_config theme choose Nord
-fish_config theme choose \"Catppuccin Mocha\"
+fish_config theme choose Nord
     ";
     functions = {
       # Access history of all shells.

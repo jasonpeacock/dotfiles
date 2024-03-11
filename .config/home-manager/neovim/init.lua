@@ -76,8 +76,7 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 --vim.opt.termguicolors = true
 
 -- vim.cmd("colorscheme dracula")
--- vim.cmd("colorscheme nord")
-vim.cmd("colorscheme catppuccin") -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+vim.cmd("colorscheme nord")
 vim.opt.background = "dark"
 
 
@@ -88,8 +87,7 @@ vim.cmd("highlight Comment cterm=italic ctermfg=225")
 
 vim.g.airline_powerline_fonts = 1
 -- vim.g.airline_theme = "dracula"
--- vim.g.airline_theme = "nord"
-vim.g.airline_theme = "catppuccin"
+vim.g.airline_theme = "nord"
 
 -- vim-better-whitespace
 vim.g.better_whitespace_filetypes_blacklist = { "diff", "gitcommit" } -- Filetypes to skip stripping of whitespace.

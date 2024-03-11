@@ -24,9 +24,7 @@
       /*     set -g @dracula-plugins \"cpu-usage time\" */
       /*   "; */
       /* } */
-      /* nord */
-      /* https://github.com/catppuccin/tmux */
-      catppuccin
+      nord
       pain-control
     ];
 

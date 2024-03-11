@@ -7,8 +7,7 @@
     config = {
       # pager = "less -FR";
       # theme = "Dracula";
-      # theme = "Nord";
-      theme = "Catppuccin Mocha";
+      theme = "Nord";
       style = "plain";
     };
   };
