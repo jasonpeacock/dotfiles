@@ -71,9 +71,8 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 --vim.g.dracula_colorterm = 0
 
 -- Use GUI-based colors even when run within a terminal,
--- this pushes VIM to support truecolors and fixes the
--- grey background in the Dracula theme
---vim.opt.termguicolors = true
+-- this pushes VIM to support truecolors.
+vim.opt.termguicolors = true
 
 -- vim.cmd("colorscheme dracula")
 -- vim.cmd("colorscheme nord")
@@ -150,9 +149,6 @@ vim.keymap.set("", "j", "(v:count == 0 ? 'gj' : 'j')",
     { expr = true, silent = true })
 vim.keymap.set("", "k", "(v:count == 0 ? 'gk' : 'k')",
     { expr = true, silent = true })
-
-require("ibl").setup {
-}
 
 require('gitsigns').setup { signcolumn = true }
 
