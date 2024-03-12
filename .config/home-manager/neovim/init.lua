@@ -40,10 +40,10 @@ vim.opt.shiftround = true
 
 -- Support folding.
 vim.opt.foldenable = false
--- vim.opt.foldcolumn = 2                -- Reserve space for the fold.
--- vim.opt.foldlevelstart = 99 -- All folds are open by default.
--- vim.opt.foldmethod = "indent"           -- Use indenting to determine folds.
--- vim.opt.foldmethod = syntax           -- Use syntax rules to determine folds.
+-- vim.opt.foldcolumn = 2         -- Reserve space for the fold.
+-- vim.opt.foldlevelstart = 99    -- All folds are open by default.
+-- vim.opt.foldmethod = "indent"  -- Use indenting to determine folds.
+-- vim.opt.foldmethod = syntax    -- Use syntax rules to determine folds.
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
@@ -77,7 +77,6 @@ vim.opt.shortmess = vim.opt.shortmess + "c"
 
 -- vim.cmd("colorscheme dracula")
 -- vim.cmd("colorscheme nord")
---
 vim.g.solarized_italic_comments = true
 vim.g.solarized_italic_keywords = false
 vim.g.solarized_italic_functions = false
@@ -87,17 +86,18 @@ vim.g.solarized_borders = false
 vim.g.solarized_disable_background = false
 require('solarized').set()
 
-vim.opt.background = "dark"
+vim.opt.background = "light"
 
 
 -- https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
 -- https://stackoverflow.com/questions/5830125/how-to-change-font-color-for-comments-in-vim
 -- https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
-vim.cmd("highlight Comment cterm=italic ctermfg=225")
+-- vim.cmd("highlight Comment cterm=italic ctermfg=225")
 
 vim.g.airline_powerline_fonts = 1
 -- vim.g.airline_theme = "dracula"
-vim.g.airline_theme = "nord"
+-- vim.g.airline_theme = "nord"
+vim.g.airline_theme = "solarized"
 
 -- vim-better-whitespace
 vim.g.better_whitespace_filetypes_blacklist = { "diff", "gitcommit" } -- Filetypes to skip stripping of whitespace.
