@@ -27,10 +27,12 @@ EOF
     in [
       # Themes
       # dracula-vim
-      onenord-nvim
-      nordic-nvim
-      nord-vim
+      # onenord-nvim
+      # nordic-nvim
+      # nord-vim
       nord-nvim
+      solarized-nvim
+      nvim-solarized-lua
       # LSP
       nvim-lspconfig
       fidget-nvim

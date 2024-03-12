@@ -24,11 +24,15 @@
       /*     set -g @dracula-plugins \"cpu-usage time\" */
       /*   "; */
       /* } */
-      nord
+      # nord
+      tmux-colors-solarized
       pain-control
     ];
 
     extraConfig = "
+# Theme configutation (e.g. Nord)
+set -g @colors-solarized 'light'
+
 # Set ability to capture on start and restore on exit window data when running an application
 setw -g alternate-screen on
 

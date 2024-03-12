@@ -15,7 +15,8 @@
 
     fileWidgetCommand = "fd --type f";
     # fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Dracula\' {}'" ];
-    fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Nord\' {}'" ];
+    # fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Nord\' {}'" ];
+    fileWidgetOptions = [ "--preview 'bat --style=plain --theme \'Solarized (light)\' {}'" ];
 
     historyWidgetOptions = [ "--sort" "--exact" ];
   };
