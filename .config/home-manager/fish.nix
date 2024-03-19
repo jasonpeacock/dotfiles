@@ -125,10 +125,10 @@ bind '$' bind_dollar
       grep = "grep --color=auto";
       http = "python3 -m http.server";
       less = "less -R -n";
-      ls = "eza --across --color-scale --icons --git";
+      ls = "eza --across --git";
       scp = "scp -C";
       tmux = "tmux new -As0";
-      tree = "eza --tree --color-scale --icons --git";
+      tree = "eza --tree --git";
       vi = "nvim -o";
       work = "cd \"$HOME/workplace\"";
     };

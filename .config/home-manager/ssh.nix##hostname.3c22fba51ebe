@@ -53,7 +53,14 @@ GSSAPIDelegateCredentials no
         ];
       };
       "i-* mi-*" = {
-        proxyCommand = "sh -c \"aws --profile flatsat ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
+        proxyCommand = "sh -c \"aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
+      };
+      "cloud-ssm" = {
+        proxyCommand = "sh -c \"aws --profile jpeacock-dev-admin ssm start-session --target mi-0c36033c5cf16739c --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
+      };
+      "jpeacock-hitl-lab" = {
+        user="labuser";
+        proxyCommand = "sh -c \"aws --profile jpeacock-dev-admin ssm start-session --target mi-0c196120dc6f0b848 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
       };
       "bloggg" = {
         hostname = "35.167.77.210";
