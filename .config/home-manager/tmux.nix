@@ -60,7 +60,8 @@ set -g -a terminal-overrides ',*:Ss=\\E[%p1%d q:Se=\\E[2 q'
 set -sg escape-time 10
 
 # Override the theme color.
-set -g pane-active-border-style fg=green
+set -g pane-active-border-style fg=pink
+set -g pane-border-lines heavy
 
 # Fix colors
 set -g default-terminal \"$\{TERM\}\"

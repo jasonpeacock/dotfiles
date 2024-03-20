@@ -77,7 +77,6 @@ in {
   home.packages = with pkgs;
     [
       #platformio
-      asciinema
       asdf-vm
       broot
       cmake
@@ -110,7 +109,7 @@ in {
       ripgrep
       rsync
       socat
-      tealdeer
+      vhs
       watch
       wget
       yq
