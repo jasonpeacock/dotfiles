@@ -56,6 +56,7 @@ in {
     ./fish.nix
     ./fzf.nix
     ./git.nix
+    ./git-cliff.nix
     ./gnupg.nix
     ./lsd.nix
     ./neovim.nix
