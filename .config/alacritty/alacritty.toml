@@ -11,8 +11,8 @@ decorations = "None"
 x = 0
 y = 0
 [window.dimensions]
-columns = 307
-lines = 101
+columns = 120
+lines = 40
 
 [font]
 size = 14.0
