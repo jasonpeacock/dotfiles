@@ -16,20 +16,28 @@ lines = 40
 
 [font]
 size = 14.0
-[font.bold]
-# family = "GoMono Nerd Font" # Serif
-# family = "JetBrainsMono Nerd Font Mono" # SansSerif
-family = "IosevkaTermSlab Nerd Font Mono" # Serif
-style = "Regular" # Bold
 
-[font.bold_italic]
-family = "IosevkaTermSlab Nerd Font Mono"
-style = "Italic" # Bold Italic
+# family = "GoMono Nerd Font" # Serif
+# family = "JetBrainsMono Nerd Font Mono"
+# family = "IosevkaTermSlab Nerd Font Mono" # Serif
+# family = "Hurmit Nerd Font"
+# family = "IntoneMono Nerd Font"
+# family = "FiraCode Nerd Font Mono" # No italic
+# family = "Monoid NFM"
+# family = "SauceCodePro Nerd Font Mono" # only Regular
+# family = "ImWritingMono Nerd Font Mono"
+[font.normal]
+family = "IosevkaTermSlab Nerd Font Mono" # Serif
+style = "Light"
 
 [font.italic]
-family = "IosevkaTermSlab Nerd Font Mono"
-style = "Light Italic" # Italic
+family = "IosevkaTermSlab Nerd Font Mono" # Serif
+style = "Light Italic"
 
-[font.normal]
-family = "IosevkaTermSlab Nerd Font Mono"
-style = "Light" # Regular
+[font.bold]
+family = "IosevkaTermSlab Nerd Font Mono" # Serif
+style = "Regular"
+
+[font.bold_italic]
+family = "IosevkaTermSlab Nerd Font Mono" # Serif
+style = "Italic"
