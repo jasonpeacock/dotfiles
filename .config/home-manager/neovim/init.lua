@@ -499,16 +499,16 @@ null_ls.setup({
         disabled_filetypes = {
             "rust", "python", "bash", "nix", "ruby", "markdown"
         }
-        -- }), null_ls.builtins.formatting.markdownlint_cli2.with({
-        --     -- extra_args = { "--disable MD013 MD046 --" },
-        --     diagnostics_format = diagnostics_msg
     }), null_ls.builtins.diagnostics.markdownlint_cli2.with({
         args = { "$FILENAME" },
         -- extra_args = { "--disable MD013 MD046 --" },
         diagnostics_format = diagnostics_msg
     }), null_ls.builtins.diagnostics.hadolint.with({
         diagnostics_format = diagnostics_msg
-    })
+    }), null_ls.builtins.formatting.rubocop,
+        null_ls.builtins.diagnostics.rubocop.with({
+            diagnostics_format = diagnostics_msg
+        })
         --         null_ls.builtins.formatting.rustfmt
         --         .with({extra_args = {"--edition=2021"}}),
         --         null_ls.builtins.code_actions.gitsigns,
@@ -554,9 +554,6 @@ null_ls.setup({
         --             diagnostics_format = diagnostics_msg
         --         }), null_ls.builtins.formatting.fish_indent,
         --         null_ls.builtins.diagnostics.fish.with({
-        --             diagnostics_format = diagnostics_msg
-        --         }), null_ls.builtins.formatting.rubocop,
-        --         null_ls.builtins.diagnostics.rubocop.with({
         --             diagnostics_format = diagnostics_msg
         --         }), null_ls.builtins.formatting.buf,
         --         null_ls.builtins.diagnostics.buf.with({

@@ -30,7 +30,6 @@ EOF
       # onenord-nvim
       # nordic-nvim
       # nord-vim
-      nord-nvim
       solarized-nvim
       nvim-solarized-lua
       # LSP
@@ -55,7 +54,7 @@ EOF
       camelcasemotion
       gitsigns-nvim
       #gundo
-      null-ls-nvim
+      none-ls-nvim
       (nvim-treesitter.withPlugins (
         plugins:
           with plugins; [
@@ -80,6 +79,7 @@ EOF
             tree-sitter-markdown_inline
             tree-sitter-nix
             tree-sitter-python
+            tree-sitter-ruby
             tree-sitter-rust
             tree-sitter-tlaplus
             tree-sitter-toml

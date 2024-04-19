@@ -133,6 +133,8 @@ in {
       # See `Python39Custom` above for most of
       # the LSP packages.
       ruff
+      # - Ruby
+      rubocop
       # - Rust
       rust-analyzer
       # - Typescript/Javascript
