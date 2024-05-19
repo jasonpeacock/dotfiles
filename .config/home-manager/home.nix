@@ -1,52 +1,34 @@
 {pkgs, ...}: let
-  mach-nix =
-    import (
-      builtins.fetchGit {
-        url = "https://github.com/DavHau/mach-nix/";
-        ref = "refs/tags/3.5.0";
-      }
-    ) {
-      python = "python39";
-    };
+#  mach-nix =
+#    import (
+#      builtins.fetchGit {
+#        url = "https://github.com/DavHau/mach-nix/";
+#        ref = "refs/tags/3.5.0";
+#      }
+#    ) {
+#      python = "python310";
+#    };
 
-  python39Custom = mach-nix.mkPython {
-    requirements = ''
-      awscliv2
-      boto3
-      botocore
-      git-remote-codecommit
-      invoke
-      requests
-      # C-based packages
-      pycapnp
-      pyyaml
-      # Flake8 & Plugins
-      flake8
-      flake8-import-order
-      flake8-docstrings
-      flake8-blind-except
-      flake8-builtins
-      pep8-naming
-      pydocstyle
-      # MyPy
-      mypy
-      types-PyYAML
-      # Python LSP
-      pylsp-mypy
-      black
-      python-lsp-black
-      python-lsp-server
-      #python-lsp-ruff
-      rope
-    '';
-    packagesExtra = [
-        (mach-nix.buildPythonPackage {
-            pname = "python-lsp-ruff";
-            version = "1.0.2";
-            src = "https://github.com/python-lsp/python-lsp-ruff/tarball/v1.0.2";
-        })
-    ];
-  };
+#  python310Custom = mach-nix.mkPython {
+#    requirements = ''
+#      # MyPy
+#      mypy
+#      # Python LSP
+#      pylsp-mypy
+#      black
+#      python-lsp-black
+#      python-lsp-server
+#      pylsp-rope
+#      rope
+#    '';
+#    packagesExtra = [
+#        (mach-nix.buildPythonPackage {
+#            pname = "python-lsp-ruff";
+#            version = "1.0.2";
+#            src = "https://github.com/python-lsp/python-lsp-ruff/tarball/v1.0.2";
+#        })
+#    ];
+#  };
 in {
   imports = [
     ./atuin.nix
@@ -78,11 +60,7 @@ in {
   home.packages = with pkgs;
     [
       #platformio
-      asdf-vm
       broot
-      cmake
-      #clang-tools
-      capnproto
       cookiecutter
       curl
       docker
@@ -92,7 +70,7 @@ in {
       exercism
       fd
       fswatch
-      #gcc
+      git-remote-codecommit
       # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
       gitAndTools.git-extras
       gitAndTools.lefthook
@@ -101,12 +79,12 @@ in {
       gping
       graphviz
       hyperfine
+      mise
       netcat-gnu
       plantuml
-      # poetry
       procs
-      python39Custom
-      python39Packages.pipx
+      # python310Custom
+      python310
       ripgrep
       rsync
       socat
@@ -115,46 +93,16 @@ in {
       wget
       yq
 
+      # Mostly used by Neovim (nvim), but used here so they are available at the
+      # commandline if needed.
+      shellcheck
+      shfmt
+      mypy
+      black
+      ruff
+
       # Prompt/shell-theme tools
       vivid
-
-      # LSP
-      # - Bash
-      nodePackages.bash-language-server
-      shellcheck
-      shfmt # via null-ls
-      # - Lua
-      sumneko-lua-language-server
-      #luaformatter
-      # - Nix
-      nil
-      #nixfmt
-      # - Python
-      # See `Python39Custom` above for most of
-      # the LSP packages.
-      ruff
-      # - Ruby
-      rubocop
-      # - Rust
-      rust-analyzer
-      # - Typescript/Javascript
-      nodePackages.vscode-langservers-extracted
-      nodePackages.eslint
-      nodePackages.eslint_d
-      # Docker
-      hadolint # via null-ls
-      # Markdown
-      nodePackages.markdownlint-cli2 # via null-ls
-      # YAML
-      python39Packages.yamllint # via null-ls
-      #alejandra
-      #buf
-      #cppcheck
-      #gitlint
-      #html-tidy
-      #python39Packages.jsonschema
-      #selene
-      #statix
     ]
     ++ lib.optionals stdenv.isLinux [
       can-utils

@@ -10,9 +10,6 @@ end
 #set -gx LS_COLORS (vivid generate nord)
 set -gx LS_COLORS (vivid generate solarized-light)
 
-# Use Neovim as the default $EDITOR.
-set -gx EDITOR \"nvim\"
-
 # Cargo/rust support for all hosts.
 fish_add_path $HOME/.cargo/bin
 

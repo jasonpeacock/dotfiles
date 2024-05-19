@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
     package = pkgs.neovim-unwrapped;
     viAlias = false;
     vimAlias = false;
@@ -9,52 +10,82 @@
     withPython3 = true;
     withRuby = true;
 
-    extraConfig = "lua <<EOF
-${builtins.readFile neovim/init.lua}
-EOF
-";
+    extraLuaConfig = builtins.readFile neovim/nix.lua;
+
+    extraPackages = with pkgs; [
+      # Bash
+      nodePackages.bash-language-server
+      # Typescript/Javascript
+      #nodePackages.vscode-langservers-extracted
+      nodePackages.eslint
+      #nodePackages.eslint_d
+      # Docker
+      hadolint
+      # Markdown
+      nodePackages.markdownlint-cli2
+      # Python
+      python310Packages.python-lsp-server
+      python310Packages.python-lsp-black
+      python310Packages.python-lsp-ruff
+      python310Packages.pylsp-mypy
+      # Nix
+      nil
+      #nixfmt
+      # Git
+      gitlint
+      # Lua
+      #selene
+      #sumneko-lua-language-server
+      #luaformatter
+      # Ruby
+      #rubocop
+      # YAML
+      #python310Packages.yamllint # via null-ls
+      #alejandra
+      #buf
+      #cppcheck
+      #html-tidy
+      #python310Packages.jsonschema
+      #statix
+    ];
+
+    #extraLuaPackages = ps: let
+    #in [
+    #];
 
     plugins = with pkgs.vimPlugins; let
-      toggle-lsp-diagnostics = pkgs.vimUtils.buildVimPlugin {
-        name = "toggle-lsp-diagnostics";
+      none-ls-extras = pkgs.vimUtils.buildVimPlugin {
+        name = "none-ls-extras";
         src = pkgs.fetchFromGitHub {
-          owner = "whoissethdaniel";
-          repo = "toggle-lsp-diagnostics.nvim";
-          rev = "32fd1d3505a1ae931709e750836a4b90596f1257";
-          sha256 = "a7Jiq6hzaNEbBcMPgaL5IywHtDqMRDIP3O4sZKDVA58=";
+          owner = "nvimtools";
+          repo = "none-ls-extras.nvim";
+          rev = "336e84b9e43c0effb735b08798ffac382920053b";
+          sha256 = "UtU4oWSRTKdEoMz3w8Pk95sROuo3LEwxSDAm169wxwk=";
         };
       };
     in [
-      # Themes
-      # dracula-vim
-      # onenord-nvim
-      # nordic-nvim
-      # nord-vim
-      solarized-nvim
-      nvim-solarized-lua
+      fidget-nvim
       # LSP
       nvim-lspconfig
-      fidget-nvim
-      lsp-colors-nvim
       lsp-format-nvim
-      rust-tools-nvim
-      toggle-lsp-diagnostics
-      #lspsaga-nvim  # TODO try this later
-      # Autocomplete
-      nvim-cmp
-      cmp-buffer
-      cmp-cmdline
-      cmp-nvim-lsp
-      cmp-path
-      # Snippets
-      luasnip
-      cmp_luasnip
-      friendly-snippets
-      # Other
-      camelcasemotion
-      gitsigns-nvim
-      #gundo
+      lsp-colors-nvim
+      plenary-nvim # dependency of none-ls-nvim
       none-ls-nvim
+      none-ls-extras
+      rustaceanvim
+      #plantuml-syntax
+      #toggle-lsp-diagnostics
+      #lspsaga-nvim
+      # Autocomplete
+      #nvim-cmp
+      #cmp-buffer
+      #cmp-cmdline
+      #cmp-nvim-lsp
+      #cmp-path
+      # Snippets
+      #luasnip
+      #cmp_luasnip
+      #friendly-snippets
       (nvim-treesitter.withPlugins (
         plugins:
           with plugins; [
@@ -87,11 +118,18 @@ EOF
             tree-sitter-yaml
           ]
       ))
-      plantuml-syntax
-      plenary-nvim
-      popup-nvim
-      tagbar
+      # Themes
+      # dracula-vim
+      # onenord-nvim
+      # nordic-nvim
+      # nord-vim
+      solarized-nvim
+      nvim-solarized-lua
+      # popup-nvim
+      # tagbar
       telescope-nvim
+      gitsigns-nvim
+      camelcasemotion
       vim-abolish
       vim-airline
       vim-airline-themes
