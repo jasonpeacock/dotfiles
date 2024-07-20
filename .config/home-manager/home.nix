@@ -47,7 +47,6 @@ in {
     ./git-cliff.nix
     ./gnupg.nix
     ./lsd.nix
-    #./neovim.nix
     ./nixvim.nix
     ./ssh.nix
     ./starship.nix
@@ -62,7 +61,7 @@ in {
 
   # Lazy Git?
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "24.05";
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
 
@@ -102,13 +101,18 @@ in {
       wget
       yq
 
-      # Mostly used by Neovim (nvim), but included here so they are available at the
-      # commandline if needed.
-      shellcheck
-      shfmt
-      mypy
-      black
-      ruff
+      # Mostly used by Neovim (nvim), but included here so they are available at the commandline if needed.
+      alejandra       # Nix - https://kamadorueda.com/alejandra/
+      black           # Python - https://black.readthedocs.io/en/stable/
+      cmake-format    # CMake - https://github.com/cheshirekow/cmake_format
+      codespell       # Spelling - https://github.com/codespell-project/codespell
+      isort           # Python - https://pycqa.github.io/isort/
+      mypy            # Python - https://www.mypy-lang.org/
+      nil             # Nix - https://github.com/oxalica/nil
+      ruff            # Python - https://github.com/astral-sh/ruff
+      shellcheck      # Bash - https://github.com/koalaman/shellcheck
+      shfmt           # Bash - https://github.com/mvdan/sh
+      stylua          # Lua - https://github.com/JohnnyMorganz/StyLua
 
       # Prompt/shell-theme tools
       vivid
