@@ -39,7 +39,9 @@ with import ./git/host.nix; {
           ui = "auto";
         };
         commit = {
-            verbose = true;
+            # Show diff in the commit. This sounds good, but for large commits such as deleting
+            # lots of files, it causes `git commit` to hang while the massive diff is generated.
+            verbose = false;
         };
         core = {
           editor = "nvim";

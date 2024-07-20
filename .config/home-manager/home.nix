@@ -29,8 +29,14 @@
 #        })
 #    ];
 #  };
+  nixvim = import (builtins.fetchGit {
+    url = "https://github.com/nix-community/nixvim";
+    # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+    # ref = "nixos-24.05";
+  });
 in {
   imports = [
+    nixvim.homeManagerModules.nixvim
     ./atuin.nix
     ./bat.nix
     ./broot.nix
@@ -41,7 +47,8 @@ in {
     ./git-cliff.nix
     ./gnupg.nix
     ./lsd.nix
-    ./neovim.nix
+    #./neovim.nix
+    ./nixvim.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix
@@ -52,6 +59,8 @@ in {
   programs.eza.enable = true;
   programs.htop.enable = true;
   programs.jq.enable = true;
+
+  # Lazy Git?
 
   home.stateVersion = "22.11";
   home.username = builtins.getEnv "USER";
@@ -93,7 +102,7 @@ in {
       wget
       yq
 
-      # Mostly used by Neovim (nvim), but used here so they are available at the
+      # Mostly used by Neovim (nvim), but included here so they are available at the
       # commandline if needed.
       shellcheck
       shfmt

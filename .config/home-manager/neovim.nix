@@ -35,12 +35,12 @@
       gitlint
       # Lua
       #selene
-      #sumneko-lua-language-server
-      #luaformatter
+      sumneko-lua-language-server
+      #stylua
       # Ruby
       #rubocop
       # YAML
-      #python310Packages.yamllint # via null-ls
+      #python310Packages.yamllint
       #alejandra
       #buf
       #cppcheck
@@ -86,38 +86,7 @@
       #luasnip
       #cmp_luasnip
       #friendly-snippets
-      (nvim-treesitter.withPlugins (
-        plugins:
-          with plugins; [
-            tree-sitter-bash
-            tree-sitter-c
-            tree-sitter-cmake
-            tree-sitter-comment
-            tree-sitter-cpp
-            tree-sitter-css
-            tree-sitter-diff
-            tree-sitter-dockerfile
-            tree-sitter-dot
-            tree-sitter-fish
-            tree-sitter-gitignore
-            tree-sitter-go
-            tree-sitter-html
-            tree-sitter-javascript
-            tree-sitter-json
-            tree-sitter-lua
-            tree-sitter-make
-            tree-sitter-markdown
-            tree-sitter-markdown_inline
-            tree-sitter-nix
-            tree-sitter-python
-            tree-sitter-ruby
-            tree-sitter-rust
-            tree-sitter-tlaplus
-            tree-sitter-toml
-            tree-sitter-vim
-            tree-sitter-yaml
-          ]
-      ))
+      nvim-treesitter.withAllGrammars
       # Themes
       # dracula-vim
       # onenord-nvim
