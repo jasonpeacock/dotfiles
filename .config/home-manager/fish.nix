@@ -6,41 +6,40 @@
     # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
 starship init fish | source
-# fish_config theme choose Nord
-fish_config theme choose \"Solarized Light\"
+fish_config theme choose \"Solarized Dark\"
     ";
     functions = {
       # Access history of all shells.
       # https://github.com/2m/fish-history-merge
       /*
-             up-or-search = "
-       # If we are already in search mode, continue
-       if commandline --search-mode
-           commandline -f history-search-backward
-           return
-       end
+            up-or-search = "
+      # If we are already in search mode, continue
+      if commandline --search-mode
+          commandline -f history-search-backward
+          return
+      end
 
-       # If we are navigating the pager, then up always navigates
-       if commandline --paging-mode
-           commandline -f up-line
-           return
-       end
+      # If we are navigating the pager, then up always navigates
+      if commandline --paging-mode
+          commandline -f up-line
+          return
+      end
 
-       # We are not already in search mode.
-       # If we are on the top line, start search mode,
-       # otherwise move up
-       set lineno (commandline -L)
+      # We are not already in search mode.
+      # If we are on the top line, start search mode,
+      # otherwise move up
+      set lineno (commandline -L)
 
-       switch $lineno
-           case 1
-               commandline -f history-search-backward
-               history merge # <-- ADDED THIS
+      switch $lineno
+          case 1
+              commandline -f history-search-backward
+              history merge # <-- ADDED THIS
 
-           case '*'
-               commandline -f up-line
-       end
-             ";
-       */
+          case '*'
+              commandline -f up-line
+      end
+            ";
+      */
 
       # Initialize directory to run a local nix-shell.
       nixify = "

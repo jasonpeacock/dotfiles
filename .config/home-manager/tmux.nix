@@ -12,26 +12,50 @@
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
-      /* { */
-      /*   plugin = dracula; */
-      /*   extraConfig = " */
-      /*     set -g @dracula-show-battery false */
-      /*     set -g @dracula-show-powerline true */
-      /*     set -g @dracula-show-flags false */
-      /*     set -g @dracula-show-timezone true */
-      /*     set -g @dracula-military-time true */
-      /*     set -g @dracula-border-contrast true */
-      /*     set -g @dracula-plugins \"cpu-usage time\" */
-      /*   "; */
-      /* } */
+      /*
+      {
+      */
+      /*
+      plugin = dracula;
+      */
+      /*
+      extraConfig = "
+      */
+      /*
+      set -g @dracula-show-battery false
+      */
+      /*
+      set -g @dracula-show-powerline true
+      */
+      /*
+      set -g @dracula-show-flags false
+      */
+      /*
+      set -g @dracula-show-timezone true
+      */
+      /*
+      set -g @dracula-military-time true
+      */
+      /*
+      set -g @dracula-border-contrast true
+      */
+      /*
+      set -g @dracula-plugins \"cpu-usage time\"
+      */
+      /*
+      ";
+      */
+      /*
+      }
+      */
       # nord
       tmux-colors-solarized
       pain-control
     ];
 
     extraConfig = "
-# Theme configutation (e.g. Nord)
-set -g @colors-solarized 'light'
+# Theme configuration (e.g. Nord)
+set -g @colors-solarized 'dark'
 
 # Set ability to capture on start and restore on exit window data when running an application
 setw -g alternate-screen on

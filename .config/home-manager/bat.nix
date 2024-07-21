@@ -1,14 +1,9 @@
-
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.bat = {
     enable = true;
     config = {
       # pager = "less -FR";
-      # theme = "Dracula";
-      # theme = "Nord";
-      theme = "Solarized (light)";
+      theme = "Solarized (dark)";
       style = "plain";
     };
   };

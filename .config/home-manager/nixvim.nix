@@ -60,7 +60,8 @@
         };
       };
       fidget.enable = true;
-      gitsigns.enable = true;
+      gitsigns.enable = true; # https://github.com/lewis6991/gitsigns.nvim/
+      glow.enable = true; # https://github.com/ellisonleao/glow.nvim/
       lastplace.enable = true; # https://github.com/farmergreg/vim-lastplace
       lsp = {
         enable = true;
@@ -70,6 +71,7 @@
           lua-ls.enable = true; # Lua - https://github.com/luals/lua-language-server
           nil-ls.enable = true; # Nix - https://github.com/oxalica/nil
           ruff.enable = true; # Python - https://github.com/astral-sh/ruff
+          marksman.enable = true; # Markdown - https://github.com/artempyanykh/marksman
         };
       };
       lsp-lines.enable = true; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
@@ -163,7 +165,7 @@
       # Use GUI-based colors even when run within a terminal, this pushes VIM to support truecolors.
       termguicolors = true;
 
-      background = "light";
+      background = "dark";
     };
 
     autoCmd = [
