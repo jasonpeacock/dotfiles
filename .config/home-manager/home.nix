@@ -1,34 +1,33 @@
 {pkgs, ...}: let
-#  mach-nix =
-#    import (
-#      builtins.fetchGit {
-#        url = "https://github.com/DavHau/mach-nix/";
-#        ref = "refs/tags/3.5.0";
-#      }
-#    ) {
-#      python = "python310";
-#    };
-
-#  python310Custom = mach-nix.mkPython {
-#    requirements = ''
-#      # MyPy
-#      mypy
-#      # Python LSP
-#      pylsp-mypy
-#      black
-#      python-lsp-black
-#      python-lsp-server
-#      pylsp-rope
-#      rope
-#    '';
-#    packagesExtra = [
-#        (mach-nix.buildPythonPackage {
-#            pname = "python-lsp-ruff";
-#            version = "1.0.2";
-#            src = "https://github.com/python-lsp/python-lsp-ruff/tarball/v1.0.2";
-#        })
-#    ];
-#  };
+  #  mach-nix =
+  #    import (
+  #      builtins.fetchGit {
+  #        url = "https://github.com/DavHau/mach-nix/";
+  #        ref = "refs/tags/3.5.0";
+  #      }
+  #    ) {
+  #      python = "python310";
+  #    };
+  #  python310Custom = mach-nix.mkPython {
+  #    requirements = ''
+  #      # MyPy
+  #      mypy
+  #      # Python LSP
+  #      pylsp-mypy
+  #      black
+  #      python-lsp-black
+  #      python-lsp-server
+  #      pylsp-rope
+  #      rope
+  #    '';
+  #    packagesExtra = [
+  #        (mach-nix.buildPythonPackage {
+  #            pname = "python-lsp-ruff";
+  #            version = "1.0.2";
+  #            src = "https://github.com/python-lsp/python-lsp-ruff/tarball/v1.0.2";
+  #        })
+  #    ];
+  #  };
   nixvim = import (builtins.fetchGit {
     url = "https://github.com/nix-community/nixvim";
     # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
@@ -102,17 +101,18 @@ in {
       yq
 
       # Mostly used by Neovim (nvim), but included here so they are available at the commandline if needed.
-      alejandra       # Nix - https://kamadorueda.com/alejandra/
-      black           # Python - https://black.readthedocs.io/en/stable/
-      cmake-format    # CMake - https://github.com/cheshirekow/cmake_format
-      codespell       # Spelling - https://github.com/codespell-project/codespell
-      isort           # Python - https://pycqa.github.io/isort/
-      mypy            # Python - https://www.mypy-lang.org/
-      nil             # Nix - https://github.com/oxalica/nil
-      ruff            # Python - https://github.com/astral-sh/ruff
-      shellcheck      # Bash - https://github.com/koalaman/shellcheck
-      shfmt           # Bash - https://github.com/mvdan/sh
-      stylua          # Lua - https://github.com/JohnnyMorganz/StyLua
+      alejandra # Nix - https://kamadorueda.com/alejandra/
+      biome # JS/TS/JSON - https://biomejs.dev/
+      black # Python - https://black.readthedocs.io/en/stable/
+      cmake-format # CMake - https://github.com/cheshirekow/cmake_format
+      codespell # Spelling - https://github.com/codespell-project/codespell
+      isort # Python - https://pycqa.github.io/isort/
+      mypy # Python - https://www.mypy-lang.org/
+      nil # Nix - https://github.com/oxalica/nil
+      ruff # Python - https://github.com/astral-sh/ruff
+      shellcheck # Bash - https://github.com/koalaman/shellcheck
+      shfmt # Bash - https://github.com/mvdan/sh
+      stylua # Lua - https://github.com/JohnnyMorganz/StyLua
 
       # Prompt/shell-theme tools
       vivid

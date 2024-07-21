@@ -50,27 +50,31 @@
         formattersByFt = {
           "*" = ["codespell"];
           cmake = ["cmake-format"];
+          javascript = ["biome"];
+          json = ["biome"];
           lua = ["stylua"];
           nix = ["alejandra"];
           python = ["isort" "black"];
           sh = ["shfmt"];
-          # Use the "_" filetype to run formatters on filetypes that don't have other formatters configured.
-          #"_" = [ "trim_whitespace" ];
+          typescript = ["biome"];
         };
       };
       fidget.enable = true;
       gitsigns.enable = true;
+      lastplace.enable = true; # https://github.com/farmergreg/vim-lastplace
       lsp = {
         enable = true;
         servers = {
           bashls.enable = true; # Bash - https://github.com/bash-lsp/bash-language-server
+          biome.enable = true; # JS/TS/JSON - https://biomejs.dev/
           lua-ls.enable = true; # Lua - https://github.com/luals/lua-language-server
           nil-ls.enable = true; # Nix - https://github.com/oxalica/nil
-          ruff.enable = true; # Python
+          ruff.enable = true; # Python - https://github.com/astral-sh/ruff
         };
       };
       lsp-lines.enable = true; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
       plantuml-syntax.enable = true;
+      rainbow-delimiters.enable = true; # https://gitlab.com/HiPhish/rainbow-delimiters.nvim
       surround.enable = true; # https://github.com/tpope/vim-surround
       tagbar.enable = true; # https://github.com/preservim/tagbar/
       telescope = {
@@ -117,6 +121,7 @@
     opts = {
       autoindent = true; # Always enable auto-indenting.
       backup = false; # Don't keep a backup file.
+      conceallevel = 1;
       encoding = "utf8"; # Set standard file encoding.
       errorbells = false; # Be quiet.
       formatoptions = "tcrq"; # Continue comments on new lines, default is: tcqj (:help fo-table)
@@ -139,6 +144,7 @@
       softtabstop = 4;
       tabstop = 4;
       shiftround = true;
+      backspace = ["indent" "eol" "start"];
 
       # Folding.
       foldenable = true;
@@ -161,8 +167,17 @@
     };
 
     autoCmd = [
-      # autocmd FileType html setlocal shiftwidth=2 tabstop=2
+      # Set shorter tabstops for some files.
       {
+        command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2";
+        event = "FileType";
+        pattern = ["html" "nix" "sh"];
+      }
+      # Don't break Makefiles, which require actual tabs.
+      {
+        command = "setlocal noexpandtab";
+        event = "FileType";
+        pattern = ["make"];
       }
     ];
 
