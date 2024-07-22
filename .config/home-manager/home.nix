@@ -105,6 +105,7 @@ in {
       cmake-format # CMake - https://github.com/cheshirekow/cmake_format
       codespell # Spelling - https://github.com/codespell-project/codespell
       isort # Python - https://pycqa.github.io/isort/
+      markdownlint-cli2 #Markdown - https://github.com/DavidAnson/markdownlint-cli2
       marksman # Markdown - https://github.com/artempyanykh/marksman
       mypy # Python - https://www.mypy-lang.org/
       nil # Nix - https://github.com/oxalica/nil

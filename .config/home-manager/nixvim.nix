@@ -53,6 +53,7 @@
           javascript = ["biome"];
           json = ["biome"];
           lua = ["stylua"];
+          markdown = ["markdownlint-cli2"];
           nix = ["alejandra"];
           python = ["isort" "black"];
           sh = ["shfmt"];
@@ -75,6 +76,20 @@
         };
       };
       lsp-lines.enable = true; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
+      none-ls = {
+        enable = true;
+        enableLspFormat = false;
+        sources = {
+          diagnostics = {
+            markdownlint_cli2 = {
+              enable = true;
+              settings = {
+                args = ["$FILENAME"];
+              };
+            };
+          };
+        };
+      };
       plantuml-syntax.enable = true;
       rainbow-delimiters.enable = true; # https://gitlab.com/HiPhish/rainbow-delimiters.nvim
       surround.enable = true; # https://github.com/tpope/vim-surround

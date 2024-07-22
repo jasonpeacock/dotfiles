@@ -12,49 +12,12 @@
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
-      /*
-      {
-      */
-      /*
-      plugin = dracula;
-      */
-      /*
-      extraConfig = "
-      */
-      /*
-      set -g @dracula-show-battery false
-      */
-      /*
-      set -g @dracula-show-powerline true
-      */
-      /*
-      set -g @dracula-show-flags false
-      */
-      /*
-      set -g @dracula-show-timezone true
-      */
-      /*
-      set -g @dracula-military-time true
-      */
-      /*
-      set -g @dracula-border-contrast true
-      */
-      /*
-      set -g @dracula-plugins \"cpu-usage time\"
-      */
-      /*
-      ";
-      */
-      /*
-      }
-      */
-      # nord
       tmux-colors-solarized
       pain-control
     ];
 
     extraConfig = "
-# Theme configuration (e.g. Nord)
+# Theme configuration
 set -g @colors-solarized 'dark'
 
 # Set ability to capture on start and restore on exit window data when running an application
@@ -85,11 +48,11 @@ set -sg escape-time 10
 
 # Override the theme color.
 set -g pane-active-border-style fg=pink
-set -g pane-border-lines heavy
+#set -g pane-border-lines heavy
 
 # Fix colors
 set -g default-terminal \"$\{TERM\}\"
-set-option -ga terminal-overrides \",xterm-256color:Tc\"
+set -ga terminal-overrides \",xterm-256color:Tc\"
 
 # Undercurl
 set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
