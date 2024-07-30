@@ -100,10 +100,10 @@ in {
 
       # Mostly used by Neovim (nvim), but included here so they are available at the commandline if needed.
       alejandra # Nix - https://kamadorueda.com/alejandra/
-      biome # JS/TS/JSON - https://biomejs.dev/
       black # Python - https://black.readthedocs.io/en/stable/
       cmake-format # CMake - https://github.com/cheshirekow/cmake_format
       codespell # Spelling - https://github.com/codespell-project/codespell
+      eslint_d # JS/TS/JSON - https://github.com/mantoni/eslint_d.js/
       isort # Python - https://pycqa.github.io/isort/
       markdownlint-cli2 #Markdown - https://github.com/DavidAnson/markdownlint-cli2
       marksman # Markdown - https://github.com/artempyanykh/marksman
@@ -113,6 +113,7 @@ in {
       shellcheck # Bash - https://github.com/koalaman/shellcheck
       shfmt # Bash - https://github.com/mvdan/sh
       stylua # Lua - https://github.com/JohnnyMorganz/StyLua
+      vscode-langservers-extracted # JS/TS/JSON https://github.com/hrsh7th/vscode-langservers-extracted
 
       # Prompt/shell-theme tools
       vivid

@@ -6,8 +6,6 @@ else
 end
 
 # Set directory colors from `ls`
-#set -gx LS_COLORS (vivid generate dracula)
-#set -gx LS_COLORS (vivid generate nord)
 set -gx LS_COLORS (vivid generate solarized-dark)
 
 # Cargo/rust support for all hosts.

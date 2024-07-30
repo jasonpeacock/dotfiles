@@ -50,14 +50,14 @@
         formattersByFt = {
           "*" = ["codespell"];
           cmake = ["cmake-format"];
-          javascript = ["biome"];
-          json = ["biome"];
+          javascript = ["eslint_d"];
+          json = ["jq"];
           lua = ["stylua"];
           markdown = ["markdownlint-cli2"];
           nix = ["alejandra"];
           python = ["isort" "black"];
           sh = ["shfmt"];
-          typescript = ["biome"];
+          typescript = ["eslint_d"];
         };
       };
       fidget.enable = true;
@@ -68,7 +68,8 @@
         enable = true;
         servers = {
           bashls.enable = true; # Bash - https://github.com/bash-lsp/bash-language-server
-          biome.enable = true; # JS/TS/JSON - https://biomejs.dev/
+          eslint.enable = true; # JS/TS - https://github.com/hrsh7th/vscode-langservers-extracted
+          jsonls.enable = true; # JSON - https://github.com/hrsh7th/vscode-langservers-extracted
           lua-ls.enable = true; # Lua - https://github.com/luals/lua-language-server
           nil-ls.enable = true; # Nix - https://github.com/oxalica/nil
           ruff.enable = true; # Python - https://github.com/astral-sh/ruff
@@ -85,13 +86,13 @@
               enable = true;
               settings = {
                 args = ["$FILENAME"];
+                #extra_args = [ "--disable MD013 MD046 --" ];
               };
             };
           };
         };
       };
       plantuml-syntax.enable = true;
-      rainbow-delimiters.enable = true; # https://gitlab.com/HiPhish/rainbow-delimiters.nvim
       surround.enable = true; # https://github.com/tpope/vim-surround
       tagbar.enable = true; # https://github.com/preservim/tagbar/
       telescope = {
