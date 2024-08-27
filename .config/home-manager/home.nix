@@ -93,6 +93,8 @@ in {
       ripgrep
       rsync
       socat
+      taskwarrior3
+      taskwarrior-tui
       vhs
       watch
       wget

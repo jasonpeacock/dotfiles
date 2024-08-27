@@ -41,23 +41,23 @@
       conform-nvim = {
         # https://github.com/stevearc/conform.nvim
         enable = true;
-        extraOptions = {
+        settings = {
           format_on_save = {
             timeout_ms = 500;
             lsp_format = "fallback";
           };
-        };
-        formattersByFt = {
-          "*" = ["codespell"];
-          cmake = ["cmake-format"];
-          javascript = ["eslint_d"];
-          json = ["jq"];
-          lua = ["stylua"];
-          markdown = ["markdownlint-cli2"];
-          nix = ["alejandra"];
-          python = ["isort" "black"];
-          sh = ["shfmt"];
-          typescript = ["eslint_d"];
+          formatters_by_ft = {
+            "*" = ["codespell"];
+            cmake = ["cmake-format"];
+            javascript = ["eslint_d"];
+            json = ["jq"];
+            lua = ["stylua"];
+            markdown = ["markdownlint-cli2"];
+            nix = ["alejandra"];
+            python = ["isort" "black"];
+            sh = ["shfmt"];
+            typescript = ["eslint_d"];
+          };
         };
       };
       fidget.enable = true;
