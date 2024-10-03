@@ -1,8 +1,12 @@
 # Source Nix setup script.
+if test -f /etc/profile.d/nix.sh
+    # Modern Nix installation path
+    fenv source /etc/profile.d/nix.sh
 if test -f $HOME/.nix-profile/etc/profile.d/nix.sh
+    # Legacy Nix installation path
     fenv source $HOME/.nix-profile/etc/profile.d/nix.sh
 else
-    echo >&2 "Nix setup [$HOME/.nix-profile/etc/profile.d/nix.sh] is missing"
+    echo >&2 "Nix setup script is missing"
 end
 
 # Set directory colors from `ls`
