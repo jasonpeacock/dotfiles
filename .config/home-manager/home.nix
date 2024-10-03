@@ -41,7 +41,7 @@ in {
     ./fish.nix
     ./fzf.nix
     ./git.nix
-    ./git-cliff.nix
+    # ./git-cliff.nix
     ./gnupg.nix
     ./lsd.nix
     ./nixvim.nix

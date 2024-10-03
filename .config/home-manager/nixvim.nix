@@ -33,7 +33,7 @@
       airline = {
         enable = true;
         settings = {
-          powerline_fonts = true;
+          powerline_fonts = 1;
           theme = "solarized";
         };
       };
@@ -93,7 +93,7 @@
         };
       };
       plantuml-syntax.enable = true;
-      surround.enable = true; # https://github.com/tpope/vim-surround
+      vim-surround.enable = true; # https://github.com/tpope/vim-surround
       tagbar.enable = true; # https://github.com/preservim/tagbar/
       telescope = {
         enable = true;
@@ -115,6 +115,7 @@
         enable = true;
         folding = true;
       };
+      web-devicons.enable = true;
     };
 
     extraPlugins = with pkgs.vimPlugins; [

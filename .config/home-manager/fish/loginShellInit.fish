@@ -2,12 +2,15 @@
 if test -f /etc/profile.d/nix.sh
     # Modern Nix installation path
     fenv source /etc/profile.d/nix.sh
-if test -f $HOME/.nix-profile/etc/profile.d/nix.sh
+else if test -f $HOME/.nix-profile/etc/profile.d/nix.sh
     # Legacy Nix installation path
     fenv source $HOME/.nix-profile/etc/profile.d/nix.sh
 else
     echo >&2 "Nix setup script is missing"
 end
+
+# Explicitly set the SHELL so TMUX does the right thing.
+set -gx SHELL /Users/jasonpeacock/.nix-profile/bin/fish
 
 # Set directory colors from `ls`
 set -gx LS_COLORS (vivid generate solarized-dark)
