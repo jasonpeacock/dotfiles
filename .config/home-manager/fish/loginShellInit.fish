@@ -10,7 +10,7 @@ else
 end
 
 # Explicitly set the SHELL so TMUX does the right thing.
-set -gx SHELL /Users/jasonpeacock/.nix-profile/bin/fish
+set -gx SHELL $HOME/.nix-profile/bin/fish
 
 # Set directory colors from `ls`
 set -gx LS_COLORS (vivid generate solarized-dark)

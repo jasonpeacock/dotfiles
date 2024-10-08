@@ -3,7 +3,7 @@ live_config_reload = true
 
 [shell]
 args = ["--login"]
-program = "/Users/jasonpeacock/.nix-profile/bin/fish"
+program = "/Users/jpeacock/.nix-profile/bin/fish"
 
 [window]
 decorations = "None"
