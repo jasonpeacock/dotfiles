@@ -47,7 +47,7 @@
             lsp_format = "fallback";
           };
           formatters_by_ft = {
-            "*" = ["codespell"];
+            #"*" = ["codespell"];
             cmake = ["cmake-format"];
             javascript = ["eslint_d"];
             json = ["jq"];
@@ -70,8 +70,8 @@
           bashls.enable = true; # Bash - https://github.com/bash-lsp/bash-language-server
           eslint.enable = true; # JS/TS - https://github.com/hrsh7th/vscode-langservers-extracted
           jsonls.enable = true; # JSON - https://github.com/hrsh7th/vscode-langservers-extracted
-          lua-ls.enable = true; # Lua - https://github.com/luals/lua-language-server
-          nil-ls.enable = true; # Nix - https://github.com/oxalica/nil
+          lua_ls.enable = true; # Lua - https://github.com/luals/lua-language-server
+          nil_ls.enable = true; # Nix - https://github.com/oxalica/nil
           ruff.enable = true; # Python - https://github.com/astral-sh/ruff
           marksman.enable = true; # Markdown - https://github.com/artempyanykh/marksman
         };

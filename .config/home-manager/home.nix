@@ -65,9 +65,11 @@ in {
   home.packages = with pkgs;
     [
       #platformio
+      autossh
       broot
       cookiecutter
       curl
+      dive
       docker
       docker-compose
       du-dust
@@ -84,6 +86,7 @@ in {
       gping
       graphviz
       hyperfine
+      jless
       mise
       netcat-gnu
       plantuml

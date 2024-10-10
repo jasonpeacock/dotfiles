@@ -22,6 +22,9 @@ GSSAPIDelegateCredentials no
     ";
 
     matchBlocks = {
+      "container-build-testing-*" = {
+        proxyCommand = "none";
+      };
       "i-* mi-*" = {
         proxyCommand = "sh -c \"aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\"";
       };
