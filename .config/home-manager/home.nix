@@ -74,6 +74,7 @@ in {
       docker-compose
       du-dust
       entr
+      eternal-terminal
       exercism
       fd
       fswatch
