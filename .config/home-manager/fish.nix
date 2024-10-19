@@ -89,10 +89,11 @@ bind '$' bind_dollar
     };
     shellAliases = {
       bc = "bc -l -q \"\$HOME/.bc\"";
+      et-cloud = "et cloud --terminal-path \"~/.nix-profile/bin/etterminal\" -c \"tmux\"";
       grep = "grep --color=auto";
       http = "python3 -m http.server";
       less = "less -R -n";
-      ls = "eza --across --git";
+      ls = "eza --group --git --group-directories-first --dereference";
       scp = "scp -C";
       tmux = "tmux new -As0";
       tree = "eza --tree --git";
