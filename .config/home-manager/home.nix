@@ -96,6 +96,7 @@ in {
       python310
       ripgrep
       rsync
+      scmpuff
       socat
       taskwarrior3
       taskwarrior-tui

@@ -7,6 +7,8 @@
     interactiveShellInit = "
 starship init fish | source
 fish_config theme choose \"Solarized Dark\"
+
+scmpuff init --aliases=false --shell=fish | source
     ";
     functions = {
       # Initialize directory to run a local nix-shell.
@@ -91,6 +93,7 @@ bind '$' bind_dollar
       bc = "bc -l -q \"\$HOME/.bc\"";
       et-cloud = "et cloud --terminal-path \"~/.nix-profile/bin/etterminal\" -c \"tmux\"";
       grep = "grep --color=auto";
+      gs = "scmpuff_status";
       http = "python3 -m http.server";
       less = "less -R -n";
       ls = "eza --group --git --group-directories-first --dereference";
