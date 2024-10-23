@@ -55,6 +55,11 @@ in {
   programs.eza.enable = true;
   programs.htop.enable = true;
   programs.jq.enable = true;
+  programs.scmpuff = {
+    enable = true;
+    # Disable default Git aliases, we explicitly add `gs` in `fish.nix`.
+    enableAliases = false;
+  };
 
   # Lazy Git?
 
@@ -96,7 +101,6 @@ in {
       python310
       ripgrep
       rsync
-      scmpuff
       socat
       taskwarrior3
       taskwarrior-tui

@@ -5,10 +5,7 @@
     loginShellInit = builtins.readFile fish/loginShellInit.fish;
     # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
-starship init fish | source
 fish_config theme choose \"Solarized Dark\"
-
-scmpuff init --aliases=false --shell=fish | source
     ";
     functions = {
       # Initialize directory to run a local nix-shell.
