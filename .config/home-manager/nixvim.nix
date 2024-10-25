@@ -3,6 +3,10 @@
     enable = true;
 
     colorschemes.gruvbox.enable = true;
+    # colorschemes.base16 = {
+    #   enable = true;
+    #   colorscheme = "gruvbox-dark-hard";
+    # };
 
     extraConfigLua = builtins.readFile neovim/nix.lua;
 
