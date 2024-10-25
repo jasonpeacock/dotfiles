@@ -3,7 +3,7 @@
     enable = true;
     config = {
       # pager = "less -FR";
-      theme = "Solarized (dark)";
+      theme = "gruvbox-dark";
       style = "plain";
     };
   };

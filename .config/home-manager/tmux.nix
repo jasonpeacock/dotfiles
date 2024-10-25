@@ -12,13 +12,13 @@
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
-      tmux-colors-solarized
+      gruvbox
       pain-control
     ];
 
     extraConfig = "
 # Theme configuration
-set -g @colors-solarized 'dark'
+set -g @tmux-gruvbox 'dark'
 
 # Set ability to capture on start and restore on exit window data when running an application
 setw -g alternate-screen on

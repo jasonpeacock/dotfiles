@@ -5,7 +5,7 @@
     loginShellInit = builtins.readFile fish/loginShellInit.fish;
     # interactiveShellInit = builtins.readFile fish/interactiveShellInit.fish;
     interactiveShellInit = "
-fish_config theme choose \"Solarized Dark\"
+theme_gruvbox dark soft
     ";
     functions = {
       # Initialize directory to run a local nix-shell.
@@ -107,6 +107,10 @@ bind '$' bind_dollar
       {
         name = "foreign-env";
         src = pkgs.fishPlugins.foreign-env.src;
+      }
+      {
+        name = "gruvbox";
+        src = pkgs.fishPlugins.gruvbox.src;
       }
       # Example of loading a plugin from source repo:
       # {

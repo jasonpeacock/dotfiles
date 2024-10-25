@@ -11,19 +11,18 @@ with import ./git/host.nix; {
     delta = {
       enable = false;
       options = {
-        dark = false;
+        dark = true;
         # Not sure why this isn't working - the terminal really is true color,
         # but it's showing too dark when rendered via Git.
         true-color = "never";
         line-numbers = true;
-        syntax-theme = "Solarized (dark)";
+        syntax-theme = "gruvbox-dark";
       };
     };
     # https://difftastic.wilfred.me.uk/
     difftastic = {
       enable = true;
-      background = "light"; # light dark
-      color = "auto"; # always auto never
+      background = "dark"; # light dark
       display = "side-by-side-show-both"; # side-by-side side-by-side-show-both inline
     };
     aliases = {
@@ -45,7 +44,7 @@ with import ./git/host.nix; {
         core = {
           editor = "nvim";
           # This conflicts with `delta` diff highlighter.
-          pager = "bat --style=plain --theme 'Solarized (dark)'";
+          pager = "bat --style=plain --theme 'gruvbox-dark'";
         };
         help = {
           autocorrect = 10;

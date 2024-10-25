@@ -2,7 +2,7 @@
   programs.nixvim = {
     enable = true;
 
-    # colorschemes.one.enable = true;
+    colorschemes.gruvbox.enable = true;
 
     extraConfigLua = builtins.readFile neovim/nix.lua;
 
@@ -34,7 +34,7 @@
         enable = true;
         settings = {
           powerline_fonts = 1;
-          theme = "solarized";
+          theme = "base16_gruvbox_dark_hard";
         };
       };
       comment.enable = true; # https://github.com/numtostr/comment.nvim/
@@ -125,16 +125,6 @@
       vim-better-whitespace # https://github.com/ntpeters/vim-better-whitespace
       vim-eunuch # https://github.com/tpope/vim-eunuch/
       vim-repeat # https://github.com/tpope/vim-repeat/
-      (pkgs.vimUtils.buildVimPlugin {
-        #https://github.com/maxmx03/solarized.nvim
-        name = "solarized";
-        src = pkgs.fetchFromGitHub {
-          owner = "maxmx03";
-          repo = "solarized.nvim";
-          rev = "b3a976585551d93370fbac3c662ae254724ba103";
-          hash = "sha256-5qZuXzt8727SiRcTyM/BoYU2rjo/9/m3zEb6+iQw9rU=";
-        };
-      })
     ];
 
     opts = {
