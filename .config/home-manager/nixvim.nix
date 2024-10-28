@@ -2,11 +2,11 @@
   programs.nixvim = {
     enable = true;
 
-    colorschemes.gruvbox.enable = true;
-    # colorschemes.base16 = {
-    #   enable = true;
-    #   colorscheme = "gruvbox-dark-hard";
-    # };
+    # colorschemes.gruvbox.enable = true;
+    colorschemes.base16 = {
+      enable = true;
+      colorscheme = "gruvbox-dark-soft";
+    };
 
     extraConfigLua = builtins.readFile neovim/nix.lua;
 
