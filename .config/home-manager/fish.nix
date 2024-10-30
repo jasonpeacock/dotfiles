@@ -93,7 +93,7 @@ bind '$' bind_dollar
       gs = "scmpuff_status";
       http = "python3 -m http.server";
       less = "less -R -n";
-      ls = "eza --group --git --group-directories-first --dereference";
+      ls = "eza --group --git --group-directories-first";
       scp = "scp -C";
       tmux = "tmux new -As0";
       tree = "eza --tree --git";

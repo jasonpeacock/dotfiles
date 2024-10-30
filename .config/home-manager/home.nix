@@ -73,6 +73,7 @@ in {
       autossh
       broot
       cookiecutter
+      corretto17 # Java (OpenJDK) from Amazon: https://aws.amazon.com/corretto
       curl
       dive
       docker
@@ -116,6 +117,7 @@ in {
       codespell # Spelling - https://github.com/codespell-project/codespell
       eslint_d # JS/TS/JSON - https://github.com/mantoni/eslint_d.js/
       isort # Python - https://pycqa.github.io/isort/
+      jdt-language-server # `jdtls`: https://github.com/eclipse-jdtls/eclipse.jdt.ls
       markdownlint-cli2 #Markdown - https://github.com/DavidAnson/markdownlint-cli2
       marksman # Markdown - https://github.com/artempyanykh/marksman
       mypy # Python - https://www.mypy-lang.org/

@@ -33,6 +33,10 @@
     extraPackages = with pkgs; [
     ];
 
+    extraFiles = {
+      "ftplugin".source = neovim/ftplugin;
+    };
+
     plugins = {
       airline = {
         enable = true;
@@ -73,6 +77,7 @@
         servers = {
           bashls.enable = true; # Bash - https://github.com/bash-lsp/bash-language-server
           eslint.enable = true; # JS/TS - https://github.com/hrsh7th/vscode-langservers-extracted
+          # See `nvim-jdtls` for Java LSP support.
           jsonls.enable = true; # JSON - https://github.com/hrsh7th/vscode-langservers-extracted
           lua_ls.enable = true; # Lua - https://github.com/luals/lua-language-server
           nil_ls.enable = true; # Nix - https://github.com/oxalica/nil
@@ -124,6 +129,7 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       camelcasemotion # https://github.com/bkad/camelcasemotion/
+      nvim-jdtls # https://github.com/mfussenegger/nvim-jdtls
       vim-abolish # https://github.com/tpope/vim-abolish/
       vim-airline-themes # https://github.com/vim-airline/vim-airline-themes/tree/master/autoload/airline/themes
       vim-better-whitespace # https://github.com/ntpeters/vim-better-whitespace
