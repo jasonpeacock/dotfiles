@@ -1,4 +1,4 @@
-<type>(scope):
+
 # Types: build ci chore docs feat fix perf refactor revert style test
 
 Problem:
@@ -7,4 +7,4 @@ Solution:
 
 Testing:
 
-issue:
+Issue:

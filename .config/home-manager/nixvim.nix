@@ -95,6 +95,7 @@
               enable = true;
               settings = {
                 args = ["$FILENAME"];
+                extra_args = ["--disable MD013 --"];
                 #extra_args = [ "--disable MD013 MD046 --" ];
               };
             };

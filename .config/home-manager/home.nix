@@ -70,7 +70,6 @@ in {
   home.packages = with pkgs;
     [
       #platformio
-      autossh
       broot
       cookiecutter
       corretto17 # Java (OpenJDK) from Amazon: https://aws.amazon.com/corretto
@@ -89,6 +88,7 @@ in {
       gitAndTools.git-extras
       gitAndTools.lefthook
       gitAndTools.tig
+      gitlint
       glow
       gping
       graphviz
