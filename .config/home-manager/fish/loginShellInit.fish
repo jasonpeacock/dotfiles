@@ -15,6 +15,8 @@ set -gx SHELL $HOME/.nix-profile/bin/fish
 # Set directory colors from `ls`
 set -gx LS_COLORS (vivid generate gruvbox-dark-soft)
 
+set -gx EDITOR nvim
+
 # Cargo/rust support for all hosts.
 fish_add_path $HOME/.cargo/bin
 

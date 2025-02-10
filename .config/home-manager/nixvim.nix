@@ -63,6 +63,7 @@
             markdown = ["markdownlint-cli2"];
             nix = ["alejandra"];
             python = ["isort" "black"];
+            rust = ["rustfmt"];
             sh = ["shfmt"];
             typescript = ["eslint_d"];
           };
@@ -80,9 +81,10 @@
           # See `nvim-jdtls` for Java LSP support.
           jsonls.enable = true; # JSON - https://github.com/hrsh7th/vscode-langservers-extracted
           lua_ls.enable = true; # Lua - https://github.com/luals/lua-language-server
+          marksman.enable = true; # Markdown - https://github.com/artempyanykh/marksman
           nil_ls.enable = true; # Nix - https://github.com/oxalica/nil
           ruff.enable = true; # Python - https://github.com/astral-sh/ruff
-          marksman.enable = true; # Markdown - https://github.com/artempyanykh/marksman
+          # See `rustaceanvim` below for Rust LSP
         };
       };
       lsp-lines.enable = true; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
@@ -103,7 +105,7 @@
         };
       };
       plantuml-syntax.enable = true;
-      vim-surround.enable = true; # https://github.com/tpope/vim-surround
+      rustaceanvim.enable = true; # Rust - https://github.com/mrcjkb/rustaceanvim
       tagbar.enable = true; # https://github.com/preservim/tagbar/
       telescope = {
         enable = true;
@@ -125,6 +127,7 @@
         enable = true;
         folding = true;
       };
+      vim-surround.enable = true; # https://github.com/tpope/vim-surround
       web-devicons.enable = true;
     };
 
