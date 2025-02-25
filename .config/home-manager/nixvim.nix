@@ -83,11 +83,13 @@
           lua_ls.enable = true; # Lua - https://github.com/luals/lua-language-server
           marksman.enable = true; # Markdown - https://github.com/artempyanykh/marksman
           nil_ls.enable = true; # Nix - https://github.com/oxalica/nil
+          # perlnavigator.enable = true; # Perl - https://github.com/bscan/PerlNavigator
           ruff.enable = true; # Python - https://github.com/astral-sh/ruff
           # See `rustaceanvim` below for Rust LSP
         };
       };
       lsp-lines.enable = true; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
+      nvim-ufo.enable = true; # https://github.com/kevinhwang91/nvim-ufo
       none-ls = {
         enable = true;
         enableLspFormat = false;
@@ -125,7 +127,7 @@
       treesitter = {
         # https://github.com/nvim-treesitter/nvim-treesitter/
         enable = true;
-        folding = true;
+        # folding = true; # using `nvim-ufo` instead
       };
       vim-surround.enable = true; # https://github.com/tpope/vim-surround
       web-devicons.enable = true;
@@ -144,7 +146,7 @@
     opts = {
       autoindent = true; # Always enable auto-indenting.
       backup = false; # Don't keep a backup file.
-      conceallevel = 1;
+      # conceallevel = 1; # Hide formatting characters (e.g. quotes around strings in JSON, or Markdown chars)
       encoding = "utf8"; # Set standard file encoding.
       errorbells = false; # Be quiet.
       formatoptions = "tcrq"; # Continue comments on new lines, default is: tcqj (:help fo-table)
@@ -171,7 +173,8 @@
 
       # Folding.
       foldenable = true;
-      foldcolumn = "2"; # Reserve space for the fold.
+      foldcolumn = "0"; # Reserve space for the fold. "auto:9" is pretty & fancy.
+      foldlevel = 99;
       foldlevelstart = 99; # All folds are open by default.
 
       # Searching.

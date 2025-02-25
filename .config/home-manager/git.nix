@@ -31,8 +31,15 @@ with import ./git/host.nix; {
       files = "diff-tree --name-status -r --no-commit-id";
     };
     # https://jvns.ca/blog/2024/02/16/popular-git-config-options/
+    # https://blog.gitbutler.com/how-git-core-devs-configure-git/
     extraConfig = pkgs.lib.mkMerge [
       {
+        branch = {
+          sort = "-committerdate";
+        };
+        column = {
+          ui = "auto";
+        };
         color = {
           ui = "auto";
         };
@@ -46,10 +53,17 @@ with import ./git/host.nix; {
           # This conflicts with `delta` diff highlighter.
           pager = "bat --style=plain --theme 'gruvbox-dark'";
         };
+        diff = {
+          algorithm = "histogram";
+          colorMoved = true;
+          mnemonicPrefix = true;
+          renames = true;
+        };
         help = {
-          autocorrect = 10;
+          autocorrect = "prompt";
         };
         fetch = {
+          all = true;
           prune = true;
           prunetags = true;
         };
@@ -60,8 +74,8 @@ with import ./git/host.nix; {
           conflictstyle = "zdiff3";
         };
         push = {
+          autoSetupRemote = true;
           followtags = true;
-          default = "simple";
         };
         pull = {
           rebase = true;
@@ -73,7 +87,11 @@ with import ./git/host.nix; {
           missingCommitsCheck = "error";
         };
         rerere = {
+          autoupdate = true;
           enabled = true;
+        };
+        tag = {
+          sort = "version:refname";
         };
       }
       gitExtraConfig

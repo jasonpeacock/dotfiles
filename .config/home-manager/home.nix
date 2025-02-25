@@ -83,17 +83,15 @@ in {
       exercism
       fd
       fswatch
-      git-remote-codecommit
-      # https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/version-management/git-and-tools
-      gitAndTools.git-extras
-      gitAndTools.lefthook
-      gitAndTools.tig
+      git-extras
       gitlint
       glow
       gping
       graphviz
       hyperfine
       jless
+      lazygit # TODO choose between this and `tig`
+      lefthook
       mise
       netcat-gnu
       plantuml
@@ -103,8 +101,7 @@ in {
       ripgrep
       rsync
       socat
-      taskwarrior3
-      taskwarrior-tui
+      tig # TODO choose between this and `lazygit`
       vhs
       watch
       wget
@@ -134,7 +131,6 @@ in {
     ++ lib.optionals stdenv.isLinux [
       can-utils
       sysstat
-      gping # fails to build on OSX
       checkmake # not available on Darwin
     ]
     ++ lib.optionals stdenv.isDarwin [
