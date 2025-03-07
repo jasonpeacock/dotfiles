@@ -31,6 +31,7 @@
     };
 
     extraPackages = with pkgs; [
+      lombok # required for `nvim-jdtls` LSP server for Java
     ];
 
     extraFiles = {

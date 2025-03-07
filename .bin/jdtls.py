@@ -107,10 +107,12 @@ def main(args):
     jdtls_base_path = Path(
         "/nix/store/smcs8wil4sdwn1lgfpir3yzbnfa6nmrc-jdt-language-server-1.39.0/share/java/jdtls/"
     )
+    lombok_jar_path = Path(
+        "/nix/store/hbf8b6y6d5fc805gxwwm28blbw93fall-lombok-1.18.34/share/java/lombok.jar"
+    )
     shared_config_path = get_shared_config_path(jdtls_base_path)
     jar_path = find_equinox_launcher(jdtls_base_path)
 
-    system = platform.system()
     exec_args = (
         [
             "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -120,6 +122,7 @@ def main(args):
             "-Dosgi.sharedConfiguration.area=" + shared_config_path,
             "-Dosgi.sharedConfiguration.area.readOnly=true",
             "-Dosgi.configuration.cascaded=true",
+            "-javaagent:" + lombok_jar_path.as_posix(),
             "-Xms1G",
             "--add-modules=ALL-SYSTEM",
             "--add-opens",

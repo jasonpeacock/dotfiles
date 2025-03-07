@@ -72,7 +72,7 @@ in {
       #platformio
       broot
       cookiecutter
-      corretto17 # Java (OpenJDK) from Amazon: https://aws.amazon.com/corretto
+      corretto21 # Java (OpenJDK) from Amazon: https://aws.amazon.com/corretto
       curl
       dive
       docker
@@ -94,6 +94,7 @@ in {
       lefthook
       mise
       netcat-gnu
+      nodejs_22
       plantuml
       procs
       # python310Custom
