@@ -94,6 +94,7 @@ bind '$' bind_dollar
       http = "python3 -m http.server";
       less = "less -R -n";
       ls = "eza --group --git --group-directories-first";
+      mwe = "mw && exit";
       scp = "scp -C";
       tmux = "tmux new -As0";
       tree = "eza --tree --git";
