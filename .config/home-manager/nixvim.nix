@@ -25,8 +25,8 @@
       strip_whitespace_on_save = 1;
     };
 
-    diagnostics = {
-      virtual_text = false; # Disabled per `lsp-lines` plugin recommendation.
+    diagnostic.settings = {
+      virtual_text = false; # Disabled per `lsp-lines/tiny-inline-diagnostic plugin recommendation.
       # virtual_lines = {only_current_line = true;}; # Only show diagnostic for current line.
     };
 
@@ -89,7 +89,7 @@
           # See `rustaceanvim` below for Rust LSP
         };
       };
-      lsp-lines.enable = true; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
+      lsp-lines.enable = false; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
       nvim-ufo.enable = true; # https://github.com/kevinhwang91/nvim-ufo
       none-ls = {
         enable = true;
@@ -122,6 +122,19 @@
           "<leader>fg" = "live_grep";
           "<leader>fb" = "buffers";
           "<leader>fh" = "help_tags";
+        };
+      };
+      tiny-inline-diagnostic = {
+        # https://github.com/rachartier/tiny-inline-diagnostic.nvim/
+        enable = true;
+        settings = {
+          preset = "powerline";
+          options = {
+            multilines = {
+              enabled = true;
+              always_show = true;
+            };
+          };
         };
       };
       todo-comments.enable = true; # https://github.com/folke/todo-comments.nvim

@@ -63,9 +63,11 @@ in {
 
   # Lazy Git?
 
-  home.stateVersion = "24.05";
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
+  home = {
+    stateVersion = "24.05";
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
+  };
 
   home.packages = with pkgs;
     [
@@ -84,6 +86,10 @@ in {
       fd
       fswatch
       git-extras
+      git-filter-repo
+      git-ps-rs # stacked commits
+      git-stack # stacked commits
+      git-spice # stacked commits
       gitlint
       glow
       gping
@@ -95,6 +101,7 @@ in {
       mise
       netcat-gnu
       nodejs_22
+      openssl.dev
       plantuml
       procs
       # python310Custom
@@ -102,7 +109,9 @@ in {
       ripgrep
       rsync
       socat
+      stgit # stacked commits
       tig # TODO choose between this and `lazygit`
+      usage
       vhs
       watch
       wget
