@@ -26,7 +26,7 @@
     };
 
     diagnostic.settings = {
-      virtual_text = false; # Disabled per `lsp-lines/tiny-inline-diagnostic plugin recommendation.
+      virtual_text = false; # Disabled per tiny-inline-diagnostic plugin recommendation.
       # virtual_lines = {only_current_line = true;}; # Only show diagnostic for current line.
     };
 
@@ -89,7 +89,6 @@
           # See `rustaceanvim` below for Rust LSP
         };
       };
-      lsp-lines.enable = false; # https://git.sr.ht/~whynothugo/lsp_lines.nvim
       nvim-ufo.enable = true; # https://github.com/kevinhwang91/nvim-ufo
       none-ls = {
         enable = true;
@@ -206,6 +205,18 @@
       background = "dark";
     };
 
+    # Make comments stand out & easier to read.
+    highlightOverride = {
+      Comment = {
+        fg = "LightRed";
+        italic = true;
+      };
+      TSComment = {
+        fg = "LightRed";
+        italic = true;
+      };
+    };
+
     autoCmd = [
       # Set shorter tabstops for some files.
       {
@@ -218,6 +229,12 @@
         command = "setlocal noexpandtab";
         event = "FileType";
         pattern = ["make"];
+      }
+      # BuilderHub docs are `rst`, set width to 100.
+      {
+        command = "setlocal textwidth=100 colorcolumn=100";
+        event = "FileType";
+        pattern = ["rst"];
       }
     ];
 
