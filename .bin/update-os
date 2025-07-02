@@ -18,4 +18,4 @@ fi
 echo -e "${summary}" >&2
 
 echo -e "[INFO]\tUpdating home-manager environment"
-home-manager switch
+home-manager switch --option sandbox false
