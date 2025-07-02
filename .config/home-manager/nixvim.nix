@@ -26,12 +26,12 @@
     };
 
     diagnostic.settings = {
-      virtual_text = false; # Disabled per tiny-inline-diagnostic plugin recommendation.
+      virtual_text = false; # Disabled per tiny-inline-diagnostic plug-in recommendation.
       # virtual_lines = {only_current_line = true;}; # Only show diagnostic for current line.
     };
 
     extraPackages = with pkgs; [
-      lombok # required for `nvim-jdtls` LSP server for Java
+      lombok # Required for `nvim-jdtls` LSP server for Java
     ];
 
     extraFiles = {
@@ -56,7 +56,7 @@
             lsp_format = "fallback";
           };
           formatters_by_ft = {
-            #"*" = ["codespell"];
+            # "*" = ["codespell"];
             cmake = ["cmake-format"];
             javascript = ["eslint_d"];
             json = ["jq"];
@@ -79,6 +79,7 @@
         servers = {
           bashls.enable = true; # Bash - https://github.com/bash-lsp/bash-language-server
           eslint.enable = true; # JS/TS - https://github.com/hrsh7th/vscode-langservers-extracted
+          harper_ls.enable = true; # Grammar in comments - https://github.com/Automattic/harper
           # See `nvim-jdtls` for Java LSP support.
           jsonls.enable = true; # JSON - https://github.com/hrsh7th/vscode-langservers-extracted
           lua_ls.enable = true; # Lua - https://github.com/luals/lua-language-server
@@ -162,10 +163,10 @@
       # conceallevel = 1; # Hide formatting characters (e.g. quotes around strings in JSON, or Markdown chars)
       encoding = "utf8"; # Set standard file encoding.
       errorbells = false; # Be quiet.
-      formatoptions = "tcrq"; # Continue comments on new lines, default is: tcqj (:help fo-table)
+      formatoptions = "tcrq"; # Continue comments on newlines, default is: tcqj (:help fo-table)
       mouse = "a"; # Enable the mouse.
       number = true; # Turn on line numbers.
-      # relativenumber = true;   # Show the line numbers as relative.
+      # relativenumber = true; # Show the line numbers as relative.
       showmatch = true; # Show matching brackets.
       showmode = false; # Statusline shows the mode itself, don't duplicate it.
       swapfile = false; # Don't use swap files.

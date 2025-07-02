@@ -88,6 +88,7 @@ bind '$' bind_dollar
     };
     shellAliases = {
       bc = "bc -l -q \"\$HOME/.bc\"";
+      cdp = "cd (pwd -P)";
       et-cloud = "et cloud --terminal-path \"~/.nix-profile/bin/etterminal\" -c \"tmux\"";
       grep = "grep --color=auto";
       gs = "scmpuff_status";
